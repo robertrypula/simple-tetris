@@ -69,5 +69,7 @@
     "webpack-dev-server": "^3.1.5",
     "wrapper-webpack-plugin": "^2.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "terminal-game-io": "^1.0.2"
+  }
 }
