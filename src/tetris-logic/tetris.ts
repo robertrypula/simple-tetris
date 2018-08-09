@@ -1,7 +1,9 @@
+// Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula/simple-tetris
+
 import {
   FrameHandler,
-  KeypressHandler,
-  TerminalGameIo
+  ITerminalGameIo,
+  KeypressHandler
 } from 'terminal-game-io';
 
 export const test = (): string => 'test';
@@ -20,7 +22,7 @@ function setCharAt(input: string, index: number, char: string): string {
   return input.substr(0, index) + char + input.substr(index + 1);
 }
 
-const keypressHandler: KeypressHandler = (time: number, keyName: string) => {
+export const keypressHandler: KeypressHandler = (instance: ITerminalGameIo, keyName: string) => {
   switch (keyName) {
     case 'down':
     case 'ArrowDown':
@@ -40,14 +42,14 @@ const keypressHandler: KeypressHandler = (time: number, keyName: string) => {
       break;
     case 'escape':
     case 'Escape':
-      terminalGameIo.exit();
+      instance.exit();
       break;
   }
 
-  frameHandler(time);
+  frameHandler(instance);
 };
 
-const frameHandler: FrameHandler = (time: number) => {
+export const frameHandler: FrameHandler = (instance: ITerminalGameIo) => {
   let index: number;
   let frameData =
     '<| . . . . . . . . . .|>' +
@@ -77,11 +79,9 @@ const frameHandler: FrameHandler = (time: number) => {
   frameData = setCharAt(frameData, index, '[');
   frameData = setCharAt(frameData, index + 1, ']');
 
-  terminalGameIo.drawFrame(
+  instance.drawFrame(
     frameData,
     2 * 10 + 2 * 2,
     22
   );
 };
-
-export const terminalGameIo = new TerminalGameIo(keypressHandler, frameHandler, 5);

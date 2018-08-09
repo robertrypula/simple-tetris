@@ -6,7 +6,16 @@
 [![dependencies Status](https://david-dm.org/robertrypula/simple-tetris/status.svg)](https://david-dm.org/robertrypula/simple-tetris)
 [![devDependencies Status](https://david-dm.org/robertrypula/simple-tetris/dev-status.svg)](https://david-dm.org/robertrypula/simple-tetris?type=dev)
 
-TODO write readme :)
+Commands after cloning:
+```
+npm run dev              # runs dev mode in terminal
+
+npm run dev-web          # runs dev mode in browser
+
+npm run build            # builds the package
+```
+
+TODO write real readme :)
 
 ## Licence
 

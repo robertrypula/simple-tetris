@@ -78,7 +78,7 @@ function fillDev(config) {
     compress: true,
     port: 8000,
     hot: false,
-    openPage: 'demo-web/index.html',
+    openPage: 'src/index.html',
     overlay: {
       warnings: true,
       errors: true
