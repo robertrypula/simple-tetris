@@ -1,9 +1,7 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula/terminal-game-io
 
-import { test } from './tetris';
-
-describe('Tetris', () => {
+describe('Reducers', () => {
   it('should work', () => {
-    expect(test()).toBe('test');
+    expect('test').toBe('test');
   });
 });
