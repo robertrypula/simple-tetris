@@ -7,20 +7,23 @@ import {
   KeypressHandler
 } from 'terminal-game-io';
 
-export class TerminalGameIoClient {
+export class TerminalGameIoRunner {
   protected terminalGameIo: ITerminalGameIo;
 
   constructor(domElementId: string = null) {
     this.terminalGameIo = createTerminalGameIo({
       domElementId,
-      fps: 10,
+      fps: 0.5,
       frameHandler: this.frameHandler,
       keypressHandler: this.keypressHandler
     });
   }
 
+  public triggerKeypress(keyName: string) {
+    // this.terminalGameIo.triggerKeypress(keyName);   // TODO uncomment when terminal-game-io v2.1.1 will be released
+  }
+
   protected frameHandler: FrameHandler = (instance: ITerminalGameIo) => {
-    // let index: number;
     const frameData =
       '<| . . . . . . . . . .|>' +
       '<| . . . . . . . . . .|>' +
@@ -44,10 +47,6 @@ export class TerminalGameIoClient {
       '<| . . . . . . . . . .|>' +
       '<|====================|>' +
       '  \\/\\/\\/\\/\\/\\/\\/\\/\\/\\/  ';
-
-    // index = posY * (2 * 10 + 2 * 2) + (2 + posX * 2);
-    // frameData = setCharAt(frameData, index, '[');
-    // frameData = setCharAt(frameData, index + 1, ']');
 
     instance.drawFrame(
       frameData,

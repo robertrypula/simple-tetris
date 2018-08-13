@@ -13,6 +13,16 @@
     .mobile-device-buttons:hover {
       background-color: rgba(0, 0, 0, 0.05);
     }
+    #simple-tetris {
+      text-align: center;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      color: #eaeaea;
+    }
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -37,21 +47,18 @@
   ></a>
 
   <script>
-    var simpleTetris;
+    var terminalGameIoRunner;
 
     function handleClick(event, keyName) {
       event.preventDefault();
-
-      if (simpleTetris) {
-        simpleTetris.triggerKeypress(keyName);
+      if (terminalGameIoRunner) {
+        terminalGameIoRunner.triggerKeypress(keyName);
       }
     }
 
     function run() {
       console.log(SimpleTetris);
-      // simpleTetris = SimpleTetris.createSimpleTetris({
-      //   domElementId: 'simple-tetris'
-      // });
+      terminalGameIoRunner = new SimpleTetris.TerminalGameIoRunner('simple-tetris');
     }
   </script>
   <!-- you can access distribution version via: <script src="https://unpkg.com/simple-tetris"></script> -->

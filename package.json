@@ -15,7 +15,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npm run clean && npm run test && npm run lint && npm run lint:tsfmt:verify && webpack --env.PRODUCTION && rimraf dist/tetris.d.ts",
-    "dev": "npm run clean && webpack --env.DEVELOPMENT && node dist/tetris.js",
+    "dev": "npm run clean && webpack --env.DEVELOPMENT && node dist/tetris.js run",
     "dev-web": "npm run clean && webpack-dev-server --env.DEVELOPMENT --open",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
