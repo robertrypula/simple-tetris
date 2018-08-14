@@ -4,3 +4,4 @@ export * from './actions/actions';
 export * from './game-loop';
 export * from './reducers/reducers';
 export * from './selectors/selectors';
+export * from './store';
