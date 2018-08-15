@@ -23,7 +23,7 @@ export class TerminalGameIoRunner {
   }
 
   public triggerKeypress(keyName: string) {
-    // this.terminalGameIo.triggerKeypress(keyName);   // TODO uncomment when terminal-game-io v2.1.1 will be released
+    this.terminalGameIo.triggerKeypress(keyName);   // TODO uncomment when terminal-game-io v2.1.1 will be released
   }
 
   protected frameHandler: FrameHandler = (instance: ITerminalGameIo) => {

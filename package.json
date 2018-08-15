@@ -77,6 +77,6 @@
     "wrapper-webpack-plugin": "^2.0.0"
   },
   "dependencies": {
-    "terminal-game-io": "^2.1.0"
+    "terminal-game-io": "^2.1.1"
   }
 }
