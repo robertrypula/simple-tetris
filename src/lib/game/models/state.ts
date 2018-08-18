@@ -1,14 +1,9 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula/simple-tetris
 
-export interface IState {
-  board: number[];
-  tetriminoCurrent: number[];
-  tetriminoCurrentX: number;
-  tetriminoCurrentY: number;
-}
+import { IState } from '../game.interface';
 
 export const initialState: IState = {
-  board: [ // getBoard(10, 20),
+  matrix: [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -30,12 +25,8 @@ export const initialState: IState = {
     1, 0, 0, 1, 1, 0, 0, 1, 1, 0,
     1, 1, 1, 1, 1, 0, 0, 1, 1, 0
   ],
-  tetriminoCurrent: [
-    1, 1, 1, 0,
-    0, 0, 1, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0
-  ],
-  tetriminoCurrentX: 3,
-  tetriminoCurrentY: 0
+  tetriminoIndex: 0,
+  tetriminoRotation: 0,
+  tetriminoX: 3,
+  tetriminoY: 0
 };

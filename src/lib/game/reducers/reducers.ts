@@ -1,34 +1,37 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula/simple-tetris
 
 import * as fromActions from '../actions/actions';
-import { IState } from '../models/state';
+import { MATRIX_SIZE_Y, TETRIMINO_ROTATIONS, TETRIMINO_SIZE_Y } from '../constants';
+import { IAction, IState, Reducer } from '../game.interface';
 
-export type Reducer = (state: IState, action: fromActions.IAction) => IState;
-
-export const reducer: Reducer = (state: IState, action: fromActions.IAction) => {
+export const reducer: Reducer = (state: IState, action: IAction) => {
   switch (action.type) {
-    case fromActions.MOVE_RIGHT:
+    case fromActions.ROTATE:
       state = {
         ...state,
-        tetriminoCurrentX: state.tetriminoCurrentX + 1
+        // TODO this is proof of concept
+        tetriminoRotation: (state.tetriminoRotation + 1) % TETRIMINO_ROTATIONS
       };
       break;
     case fromActions.MOVE_LEFT:
       state = {
         ...state,
-        tetriminoCurrentX: state.tetriminoCurrentX - 1
+        // TODO this is proof of concept
+        tetriminoX: state.tetriminoX - 1
       };
       break;
-    case fromActions.MOVE_DOWN:
+    case fromActions.MOVE_RIGHT:
       state = {
         ...state,
-        tetriminoCurrentY: state.tetriminoCurrentY + 1
+        // TODO this is proof of concept
+        tetriminoX: state.tetriminoX + 1
       };
       break;
-    case fromActions.MOVE_UP:
+    case fromActions.HARD_DROP:
       state = {
         ...state,
-        tetriminoCurrentY: state.tetriminoCurrentY - 1
+        // TODO this is proof of concept
+        tetriminoY: MATRIX_SIZE_Y - TETRIMINO_SIZE_Y
       };
       break;
   }

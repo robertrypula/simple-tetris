@@ -1,17 +1,7 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula/simple-tetris
 
-import { IAction } from './actions/actions';
-import { initialState, IState } from './models/state';
-import { Reducer } from './reducers/reducers';
-
-export interface IStore {
-  dispatch(action: IAction): void;
-  getState(): IState;
-}
-
-export interface IStoreStatic {
-  new(reducer: Reducer): IStore;
-}
+import { IAction, IState, IStore, Reducer } from './game.interface';
+import { initialState } from './models/state';
 
 export class Store implements IStore {
   protected state: IState;
