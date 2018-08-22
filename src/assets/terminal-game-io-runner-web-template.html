@@ -13,7 +13,7 @@
     .mobile-device-buttons:hover {
       background-color: rgba(0, 0, 0, 0.05);
     }
-    #simple-tetris {
+    #game-root {
       text-align: center;
     }
     * {
@@ -27,7 +27,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body onLoad="run()">
-  <pre id="simple-tetris"></pre>
+  <pre id="game-root"></pre>
 
   <a
     href="javascript:void(0)" onClick="handleClick(event, 'ClickDown')"
@@ -58,9 +58,9 @@
 
     function run() {
       console.log(SimpleTetris);
-      terminalGameIoRunner = new SimpleTetris.TerminalGameIoRunner('simple-tetris');
+      terminalGameIoRunner = new SimpleTetris.TerminalGameIoRunner('game-root');
     }
   </script>
-  <!-- you can access distribution version via: <script src="https://unpkg.com/simple-tetris"></script> -->
+  <!-- you can access distribution version via: <script src="https://unpkg.com/game-root"></script> -->
 </body>
 </html>

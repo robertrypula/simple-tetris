@@ -15,6 +15,12 @@ npm run dev-web          # runs dev mode in browser
 npm run build            # builds the package
 ```
 
+# TODO
+
+- assets to templates
+- terminal-game-io-runner-node
+- createStore factory that hides reducers
+
 TODO write real readme :)
 
 ## Licence

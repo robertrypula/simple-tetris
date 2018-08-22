@@ -14,8 +14,8 @@
   "author": "Robert Rypuła",
   "license": "MIT",
   "scripts": {
-    "build": "npm run clean && npm run test && npm run lint && npm run lint:tsfmt:verify && webpack --env.PRODUCTION && rimraf dist/tetris-runner.d.ts",
-    "dev": "npm run clean && webpack --env.DEVELOPMENT && node dist/tetris-runner.js run",
+    "build": "npm run clean && npm run test && npm run lint && npm run lint:tsfmt:verify && webpack --env.PRODUCTION && rimraf dist/terminal-game-io-runner.d.ts",
+    "dev": "npm run clean && webpack --env.DEVELOPMENT && node dist/terminal-game-io-runner.js run",
     "dev-web": "npm run clean && webpack-dev-server --env.DEVELOPMENT --open",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
