@@ -34,8 +34,8 @@ export const TETRIMINO_LIST: TetriminoList = [
     ],
     [
       _, _, _, _,      // rotation 2
-      _, _, _, _,
       X, X, X, X,
+      _, _, _, _,
       _, _, _, _
     ],
     [
@@ -54,22 +54,22 @@ export const TETRIMINO_LIST: TetriminoList = [
       _, _, _, _
     ],
     [
-      _, _, _, _,      // rotation 1 TODO prepare it
-      X, X, X, _,
-      _, _, X, _,
-      _, _, X, _
+      _, X, X, _,      // rotation 1
+      _, X, _, _,
+      _, X, _, _,
+      _, _, _, _
     ],
     [
-      _, _, _, _,      // rotation 2 TODO prepare it
+      X, _, _, _,      // rotation 2
       X, X, X, _,
-      _, _, X, _,
-      _, X, X, _
+      _, _, _, _,
+      _, _, _, _
     ],
     [
-      _, _, _, _,      // rotation 3 TODO prepare it
-      X, X, X, _,
-      _, _, X, _,
-      X, _, X, X
+      _, X, _, _,      // rotation 3
+      _, X, _, _,
+      X, X, _, _,
+      _, _, _, _
     ]
   ],
   [
@@ -81,22 +81,22 @@ export const TETRIMINO_LIST: TetriminoList = [
       _, _, _, _
     ],
     [
-      _, _, _, _,      // rotation 1 TODO prepare it
-      X, X, X, _,
-      X, _, X, _,
+      _, X, _, _,      // rotation 1
+      _, X, _, _,
+      _, X, X, _,
       _, _, _, _
     ],
     [
-      _, _, _, _,      // rotation 2 TODO prepare it
+      _, _, X, _,      // rotation 2
       X, X, X, _,
-      X, _, X, _,
-      _, _, X, _
+      _, _, _, _,
+      _, _, _, _
     ],
     [
-      _, _, _, _,      // rotation 3 TODO prepare it
-      X, X, X, _,
-      X, _, X, _,
-      _, _, X, X
+      X, X, _, _,      // rotation 3
+      _, X, _, _,
+      _, X, _, _,
+      _, _, _, _
     ]
   ],
   [
@@ -135,22 +135,22 @@ export const TETRIMINO_LIST: TetriminoList = [
       _, _, _, _
     ],
     [
-      _, _, _, _,      // rotation 1 TODO prepare it
+      _, X, _, _,      // rotation 1
       _, X, X, _,
-      X, X, X, _,
-      _, _, X, _
+      _, _, X, _,
+      _, _, _, _
     ],
     [
-      _, _, _, _,      // rotation 2 TODO prepare it
-      _, X, X, _,
-      X, X, X, _,
-      _, X, X, _
-    ],
-    [
-      _, _, _, _,      // rotation 3 TODO prepare it
-      _, X, X, _,
+      _, X, X, _,      // rotation 2
       X, X, _, _,
-      X, X, _, _
+      _, _, _, _,
+      _, _, _, _
+    ],
+    [
+      X, _, _, _,      // rotation 3
+      X, X, _, _,
+      _, X, _, _,
+      _, _, _, _
     ]
   ],
   [
