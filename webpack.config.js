@@ -57,11 +57,11 @@ function getConfig(env) {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        filename: 'terminal-game-io-runner-web.html',
+        filename: 'terminal-game-io-runner-browser.html',
         hash: true,
         minify: false,
-        template: './src/assets/terminal-game-io-runner-web-template.html',
-        excludeAssets: [/^terminal-game-io-runner.*.js/]
+        template: './src/templates/terminal-game-io-runner-browser.html',
+        excludeAssets: [/^dev.*.js/]
       }),
       new HtmlWebpackExcludeAssetsPlugin(),       // https://stackoverflow.com/a/50830422
       new webpack.DefinePlugin({
@@ -79,7 +79,7 @@ function fillDev(config) {
   config.mode = 'development';
   config.entry = {
     [`${packageName}-v${version}`]: './src/main.ts',
-    [`terminal-game-io-runner`]: './src/terminal-game-io-runner.ts'
+    [`dev`]: './src/dev.ts'
   };
 
   config.devtool = 'inline-source-map';
@@ -90,7 +90,7 @@ function fillDev(config) {
     compress: true,
     port: 8000,
     hot: false,
-    openPage: 'dist/terminal-game-io-runner-web.html',
+    openPage: 'dist/terminal-game-io-runner-browser.html',
     overlay: {
       warnings: true,
       errors: true
@@ -110,8 +110,8 @@ function fillProd(config) {
     new CopyWebpackPlugin(
       [
         {
-          from: path.resolve(__dirname) + '/src/assets/terminal-game-io-runner-vanilla.js',
-          to: path.resolve(__dirname) + '/dist/terminal-game-io-runner-vanilla.js',
+          from: path.resolve(__dirname) + '/src/templates/terminal-game-io-runner-node.js',
+          to: path.resolve(__dirname) + '/dist/terminal-game-io-runner-node.js',
           toType: 'file'
         }
       ]

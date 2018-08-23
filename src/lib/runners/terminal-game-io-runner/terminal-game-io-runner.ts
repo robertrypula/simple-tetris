@@ -7,25 +7,25 @@ import {
   KeypressHandler
 } from 'terminal-game-io';
 import {
+  createStore,
   fullMatrixSelector,
   gameLoopIteration,
+  IStore,
   KEY_CODE_HARD_DROP,
   KEY_CODE_LEFT,
   KEY_CODE_RIGHT,
   KEY_CODE_ROTATE,
   MATRIX_SIZE_X,
-  MATRIX_SIZE_Y,
-  reducer,
-  renderMatrixIntoAsciiFrame,
-  Store
+  MATRIX_SIZE_Y
 } from '../../game';
+import { renderMatrixIntoAsciiFrame } from '../../game/utils/utils'; // TODO consider adding it into public API
 
 export class TerminalGameIoRunner {
   protected terminalGameIo: ITerminalGameIo;
-  protected store: Store;
+  protected store: IStore;
 
   constructor(domElementId: string = null) {
-    this.store = new Store(reducer);
+    this.store = createStore();
     this.terminalGameIo = createTerminalGameIo({
       domElementId,
       fps: 0.5,

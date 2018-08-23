@@ -35,3 +35,5 @@ export interface IStore {
 export interface IStoreStatic {
   new(reducer: Reducer): IStore;
 }
+
+export type StoreFactory = () => IStore;

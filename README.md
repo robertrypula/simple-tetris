@@ -6,22 +6,41 @@
 [![dependencies Status](https://david-dm.org/robertrypula/simple-tetris/status.svg)](https://david-dm.org/robertrypula/simple-tetris)
 [![devDependencies Status](https://david-dm.org/robertrypula/simple-tetris/dev-status.svg)](https://david-dm.org/robertrypula/simple-tetris?type=dev)
 
-Commands after cloning:
+Simple tetris implementation based on some of the Redux concepts written from scratch. It provides game logic for your application.
+
+Web example available [here](http://rypula.pl/simple-tetris/terminal-game-io-runner-browser.html)
+
+## Installation
+
 ```
-npm run dev              # runs dev mode in terminal
-
-npm run dev-web          # runs dev mode in browser
-
-npm run build            # builds the package
+npm install simple-tetris
 ```
 
 # TODO
 
-- assets to templates
-- terminal-game-io-runner-node
-- createStore factory that hides reducers
+- [DONE] assets to templates
+- [DONE] rename terminal-game-io-runner to node and browser
+- [DONE] createStore factory that hides reducers
+- write real readme :)
+- ...
+- finish the game logic, currently it supports only moving the tetrimino by arrows and simple rotations
+- finish rotation database for all tetriminos
 
-TODO write real readme :)
+## Want to check this project in development mode?
+
+```
+git clone https://github.com/robertrypula/simple-tetris.git
+cd simple-tetris
+npm install
+
+npm run dev-node
+```
+
+This library can run also in the browser:
+
+```
+npm run dev-browser
+```
 
 ## Licence
 

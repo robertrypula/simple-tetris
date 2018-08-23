@@ -1,10 +1,9 @@
 {
   "name": "simple-tetris",
   "version": "1.1.0-rc",
-  "description": "Simple tetris implementation based on some of the redux concepts. It could be also easly ported to microcontroller ",
+  "description": "Simple tetris implementation based on some of the Redux concepts written from scratch. It provides game logic for your application.",
   "keywords": [
     "game",
-    "microcontroller",
     "nodejs",
     "redux tetris",
     "simple game",
@@ -14,9 +13,9 @@
   "author": "Robert Rypuła",
   "license": "MIT",
   "scripts": {
-    "build": "npm run clean && npm run test && npm run lint && npm run lint:tsfmt:verify && webpack --env.PRODUCTION && rimraf dist/terminal-game-io-runner.d.ts",
-    "dev": "npm run clean && webpack --env.DEVELOPMENT && node dist/terminal-game-io-runner.js run",
-    "dev-web": "npm run clean && webpack-dev-server --env.DEVELOPMENT --open",
+    "build": "npm run clean && npm run test && npm run lint && npm run lint:tsfmt:verify && webpack --env.PRODUCTION && rimraf dist/dev.d.ts",
+    "dev-node": "npm run clean && webpack --env.DEVELOPMENT && node dist/dev.js run",
+    "dev-browser": "npm run clean && webpack-dev-server --env.DEVELOPMENT --open",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
@@ -77,6 +76,6 @@
     "wrapper-webpack-plugin": "^2.0.0"
   },
   "dependencies": {
-    "terminal-game-io": "^2.1.1"
+    "terminal-game-io": "^2.1.2"
   }
 }
