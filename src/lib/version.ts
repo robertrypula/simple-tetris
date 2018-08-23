@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula/simple-tetris
+// Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
 export const version = '1.1.0-rc';
 export const author = 'Robert Rypuła';

@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula/simple-tetris
+// Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
 import { IAction, IState, IStore, Reducer, StoreFactory } from './game.interface';
 import { initialState } from './models/state';

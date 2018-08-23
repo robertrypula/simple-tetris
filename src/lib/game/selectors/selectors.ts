@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula/simple-tetris
+// Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
 import { MATRIX_SIZE_X, MATRIX_SIZE_Y, TETRIMINO_LIST, TETRIMINO_SIZE_X, TETRIMINO_SIZE_Y } from '../constants';
 import { IState, Matrix } from '../game.interface';
