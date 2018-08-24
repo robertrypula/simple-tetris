@@ -6,7 +6,7 @@
 [![dependencies Status](https://david-dm.org/robertrypula/simple-tetris/status.svg)](https://david-dm.org/robertrypula/simple-tetris)
 [![devDependencies Status](https://david-dm.org/robertrypula/simple-tetris/dev-status.svg)](https://david-dm.org/robertrypula/simple-tetris?type=dev)
 
-Tetris game implementation based on some of the Redux concepts written from scratch. It provides
+Tetris game implementation based on some of the Redux concepts written from scratch in TypeScript. It provides
 API that allows you to write your own Tetris application in few minutes.
 
 Playable browser example is available [here](http://rypula.pl/simple-tetris/terminal-game-io-runner-browser.html).

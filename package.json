@@ -1,7 +1,7 @@
 {
   "name": "simple-tetris",
   "version": "1.1.0-rc",
-  "description": "Tetris game implementation based on some of the Redux concepts written from scratch. It provides API that allows you to write your own Tetris application in few minutes.",
+  "description": "Tetris game implementation based on some of the Redux concepts written from scratch in TypeScript. It provides API that allows you to write your own Tetris application in few minutes.",
   "keywords": [
     "game",
     "nodejs",
@@ -9,6 +9,7 @@
     "simple game",
     "terminal game",
     "tetris logic",
+    "tetris typescript",
     "tetris"
   ],
   "author": "Robert Rypuła",

@@ -58,7 +58,9 @@
 
     function run() {
       console.log(SimpleTetris);
-      terminalGameIoRunner = new SimpleTetris.TerminalGameIoRunner('game-root');
+      terminalGameIoRunner = new SimpleTetris.TerminalGameIoRunner({
+        domElementId: 'game-root'
+      });
     }
   </script>
   <!-- you can access distribution version via: <script src="https://unpkg.com/game-root"></script> -->

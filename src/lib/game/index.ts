@@ -5,8 +5,6 @@ export {
   KEY_CODE_LEFT,
   KEY_CODE_RIGHT,
   KEY_CODE_ROTATE,
-  MATRIX_SIZE_X,
-  MATRIX_SIZE_Y,
   TETRIMINO_LIST,
   TETRIMINO_ROTATIONS,
   TETRIMINO_SIZE_X,
@@ -18,13 +16,14 @@ export {
 } from './game-loop-iteration';
 
 export {
-  Tetrimino,
-  TetriminoRotations,
-  TetriminoList,
-  Matrix,
   IState,
   IStore,
-  StoreFactory
+  IStoreOptions,
+  Matrix,
+  StoreFactory,
+  Tetrimino,
+  TetriminoList,
+  TetriminoRotations
 } from './game.interface';
 
 export {

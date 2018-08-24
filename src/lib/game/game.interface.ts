@@ -19,6 +19,8 @@ export interface IAction {
 
 export interface IState {
   matrix: Matrix;
+  matrixSizeX: number;
+  matrixSizeY: number;
   tetriminoIndex: number;
   tetriminoRotation: number;
   tetriminoX: number;
@@ -36,4 +38,9 @@ export interface IStoreStatic {
   new(reducer: Reducer): IStore;
 }
 
-export type StoreFactory = () => IStore;
+export interface IStoreOptions {
+  matrixSizeX: number;
+  matrixSizeY: number;
+}
+
+export type StoreFactory = (storeOptions?: IStoreOptions) => IStore;

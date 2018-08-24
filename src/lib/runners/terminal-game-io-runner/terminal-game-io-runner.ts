@@ -11,23 +11,34 @@ import {
   fullMatrixSelector,
   gameLoopIteration,
   IStore,
+  IStoreOptions,
   KEY_CODE_HARD_DROP,
   KEY_CODE_LEFT,
   KEY_CODE_RIGHT,
-  KEY_CODE_ROTATE,
-  MATRIX_SIZE_X,
-  MATRIX_SIZE_Y
+  KEY_CODE_ROTATE
 } from '../../game';
 import { renderMatrixIntoAsciiFrame } from '../../game/utils/utils'; // TODO consider adding it into public API
+
+interface ITerminalGameIoRunnerOptions {
+  domElementId: string;
+  storeOptions: IStoreOptions;
+}
+
+const defaultOptions: ITerminalGameIoRunnerOptions = {
+  domElementId: null,
+  storeOptions: null
+};
 
 export class TerminalGameIoRunner {
   protected terminalGameIo: ITerminalGameIo;
   protected store: IStore;
 
-  constructor(domElementId: string = null) {
-    this.store = createStore();
+  constructor(options: ITerminalGameIoRunnerOptions = defaultOptions) {
+    this.store = createStore(
+      options && options.storeOptions ? options.storeOptions : null
+    );
     this.terminalGameIo = createTerminalGameIo({
-      domElementId,
+      domElementId: options && options.domElementId ? options.domElementId : null,
       fps: 0.5,
       frameHandler: this.frameHandler,
       keypressHandler: this.keypressHandler
@@ -39,13 +50,14 @@ export class TerminalGameIoRunner {
   }
 
   protected frameHandler: FrameHandler = (instance: ITerminalGameIo) => {
-    const fullMatrix = fullMatrixSelector(this.store.getState());
+    const state = this.store.getState();
+    const fullMatrix = fullMatrixSelector(state);
     const frameData = renderMatrixIntoAsciiFrame(fullMatrix);
 
     instance.drawFrame(
       frameData,
-      2 + (2 * MATRIX_SIZE_X) + 2,         // TODO get rid of magic numbers
-      MATRIX_SIZE_Y + 2
+      2 + (2 * state.matrixSizeX) + 2,         // TODO get rid of magic numbers
+      state.matrixSizeY + 2
     );
   }
 

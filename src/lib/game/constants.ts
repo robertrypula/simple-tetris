@@ -7,9 +7,6 @@ export const KEY_CODE_LEFT = 1;
 export const KEY_CODE_RIGHT = 2;
 export const KEY_CODE_HARD_DROP = 3;
 
-export const MATRIX_SIZE_X = 10;
-export const MATRIX_SIZE_Y = 20;
-
 export const TETRIMINO_SIZE_X = 4;
 export const TETRIMINO_SIZE_Y = 4;
 export const TETRIMINO_ROTATIONS = 4;
