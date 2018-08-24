@@ -52,7 +52,7 @@ export class TerminalGameIoRunner {
   protected frameHandler: FrameHandler = (instance: ITerminalGameIo) => {
     const state = this.store.getState();
     const fullMatrix = fullMatrixSelector(state);
-    const frameData = renderMatrixIntoAsciiFrame(fullMatrix);
+    const frameData = renderMatrixIntoAsciiFrame(fullMatrix, state.matrixSizeX, state.matrixSizeY);
 
     instance.drawFrame(
       frameData,

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple tetris</title>
+  <style>
+    .mobile-device-buttons {
+      position: fixed;
+      display: block;
+      width: 33%;
+      height: 50%;
+    }
+    .mobile-device-buttons:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    #game-root {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 20px;
+      height: 40px;
+      outline: 1px solid gray;
+    }
+    #game-root > .block {
+      float: left;
+      width: 2px;
+      height: 2px;
+      border: 1px solid #ddd;
+    }
+    #game-root > .block.empty {
+      background-color: #eee;
+    }
+    #game-root > .block.filled {
+      background-color: #444;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body onLoad="run()">
+  <div id="game-root"></div>
+
+  <a
+    href="javascript:void(0)" onClick="handleClick(event, 'ClickDown')"
+    class="mobile-device-buttons" style="top: 50%; left: 33%;"
+  ></a>
+  <a
+    href="javascript:void(0)" onClick="handleClick(event, 'ClickUp')"
+    class="mobile-device-buttons" style="top: 0; left: 33%;"
+  ></a>
+  <a
+    href="javascript:void(0)" onClick="handleClick(event, 'ClickLeft')"
+    class="mobile-device-buttons" style="top: 50%; left: 0;"
+  ></a>
+  <a
+    href="javascript:void(0)" onClick="handleClick(event, 'ClickRight')"
+    class="mobile-device-buttons" style="top: 50%; left: 66%;"
+  ></a>
+
+  <script>
+    var store;
+
+    function handleClick(event, keyName) {
+      event.preventDefault();
+      if (terminalGameIoRunner) {
+        terminalGameIoRunner.triggerKeypress(keyName);
+      }
+    }
+
+    function render() {
+      var fullMatrix = SimpleTetris.fullMatrixSelector(store.getState());
+      var html = '';
+
+      for (var i = 0; i < fullMatrix.length; i++) {
+        html += fullMatrix[i]
+          ? '<div class="block filled"></div>'
+          : '<div class="block empty"></div>';
+      }
+
+      document.getElementById('game-root').innerHTML = html;
+    }
+
+    function run() {
+      store = new SimpleTetris.createStore();
+
+      render();
+      // SimpleTetris.gameLoopIteration(store, 0.0, keyCode);
+    }
+  </script>
+  <!-- you can access distribution version via: <script src="https://unpkg.com/game-root"></script> -->
+  <script type="text/javascript" src="simple-tetris-v1.1.0-rc.js?605db71ff1877fe95607"></script></body>
+</html>

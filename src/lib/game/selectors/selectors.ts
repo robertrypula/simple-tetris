@@ -1,15 +1,15 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { MATRIX_SIZE_X, MATRIX_SIZE_Y, TETRIMINO_LIST, TETRIMINO_SIZE_X, TETRIMINO_SIZE_Y } from '../constants';
+import { TETRIMINO_LIST, TETRIMINO_SIZE_X, TETRIMINO_SIZE_Y } from '../constants';
 import { IState, Matrix } from '../game.interface';
 
 export const fullMatrixSelector = (state: IState): Matrix => {
   const fullMatrix = [...state.matrix];
 
-  for (let y = 0; y < MATRIX_SIZE_Y; y++) {
-    for (let x = 0; x < MATRIX_SIZE_X; x++) {
+  for (let y = 0; y < state.matrixSizeY; y++) {
+    for (let x = 0; x < state.matrixSizeX; x++) {
       if (isBlockOccupiedByTetrimino(x, y)(state)) {
-        fullMatrix[y * MATRIX_SIZE_X + x] = 1;
+        fullMatrix[y * state.matrixSizeX + x] = 1;
       }
     }
   }

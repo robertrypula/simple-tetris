@@ -14,7 +14,6 @@ export type Matrix = number[];
 
 export interface IAction {
   type: string;
-  payload?: any;
 }
 
 export interface IState {
@@ -30,7 +29,7 @@ export interface IState {
 export type Reducer = (state: IState, action: IAction) => IState;
 
 export interface IStore {
-  dispatch(action: IAction): void;
+  dispatch<T extends IAction = IAction>(action: T): void;
   getState(): IState;
 }
 

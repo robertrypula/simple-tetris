@@ -1,9 +1,12 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { MATRIX_SIZE_X, MATRIX_SIZE_Y } from '../constants';
 import { Matrix } from '../game.interface';
 
-export const renderMatrixIntoAsciiFrame = (matrix: Matrix): string => {
+export const renderMatrixIntoAsciiFrame = (
+  matrix: Matrix,
+  matrixSizeX: number,
+  matrixSizeY: number
+): string => {
   const left = '<|';
   const right = '|>';
   const squareEmpty = ' .';
@@ -14,10 +17,10 @@ export const renderMatrixIntoAsciiFrame = (matrix: Matrix): string => {
   const bottomRight = '  ';
   let asciiFrame = '';
 
-  for (let y = 0; y < MATRIX_SIZE_Y; y++) {
+  for (let y = 0; y < matrixSizeY; y++) {
     asciiFrame += left;
-    for (let x = 0; x < MATRIX_SIZE_X; x++) {
-      asciiFrame += matrix[y * MATRIX_SIZE_X + x]
+    for (let x = 0; x < matrixSizeX; x++) {
+      asciiFrame += matrix[y * matrixSizeX + x]
         ? squareFilled
         : squareEmpty;
     }
@@ -25,13 +28,13 @@ export const renderMatrixIntoAsciiFrame = (matrix: Matrix): string => {
   }
 
   asciiFrame += left;
-  for (let x = 0; x < MATRIX_SIZE_X; x++) {
+  for (let x = 0; x < matrixSizeX; x++) {
     asciiFrame += bottom1;
   }
   asciiFrame += right;
 
   asciiFrame += bottomLeft;
-  for (let x = 0; x < MATRIX_SIZE_X; x++) {
+  for (let x = 0; x < matrixSizeX; x++) {
     asciiFrame += bottom2;
   }
   asciiFrame += bottomRight;
