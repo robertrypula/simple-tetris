@@ -1,6 +1,6 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { Matrix } from '../game.interface';
+import { Matrix } from '..';
 
 export const renderMatrixIntoAsciiFrame = (
   matrix: Matrix,

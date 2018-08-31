@@ -1,7 +1,12 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { TETRIMINO_LIST, TETRIMINO_SIZE_X, TETRIMINO_SIZE_Y } from '../constants';
-import { IState, Matrix } from '../game.interface';
+import {
+  IState,
+  Matrix,
+  TETRIMINO_LIST,
+  TETRIMINO_SIZE_X,
+  TETRIMINO_SIZE_Y
+} from '..';
 
 export const fullMatrixSelector = (state: IState): Matrix => {
   const fullMatrix = [...state.matrix];

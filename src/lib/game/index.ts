@@ -17,19 +17,21 @@ export {
 
 export {
   IState,
-  IStore,
-  IStoreOptions,
   Matrix,
-  StoreFactory,
   Tetrimino,
   TetriminoList,
   TetriminoRotations
-} from './game.interface';
+} from './models/state.model';
+
+export {
+  IStore
+} from './models/store.model';
 
 export {
   fullMatrixSelector
-} from './selectors/selectors';
+} from './selectors/game.selectors';
 
 export {
+  ICreateStoreOptions,
   createStore
-} from './store';
+} from './create-store';

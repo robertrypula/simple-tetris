@@ -5,16 +5,12 @@ export type Tetrimino = [
   boolean, boolean, boolean, boolean,
   boolean, boolean, boolean, boolean,
   boolean, boolean, boolean, boolean
-];
+  ];
 
 export type TetriminoRotations = [Tetrimino, Tetrimino, Tetrimino, Tetrimino];
 export type TetriminoList = TetriminoRotations[];
 
 export type Matrix = number[];
-
-export interface IAction {
-  type: string;
-}
 
 export interface IState {
   matrix: Matrix;
@@ -26,20 +22,12 @@ export interface IState {
   tetriminoY: number;
 }
 
-export type Reducer = (state: IState, action: IAction) => IState;
-
-export interface IStore {
-  dispatch(action: IAction): void;
-  getState(): IState;
-}
-
-export interface IStoreStatic {
-  new(reducer: Reducer): IStore;
-}
-
-export interface IStoreOptions {
-  matrixSizeX: number;
-  matrixSizeY: number;
-}
-
-export type StoreFactory = (storeOptions?: IStoreOptions) => IStore;
+export const initialState: IState = {
+  matrix: [],
+  matrixSizeX: null,
+  matrixSizeY: null,
+  tetriminoIndex: 0,
+  tetriminoRotation: 0,
+  tetriminoX: 0,           // TODO it will be different on other matrix sizes
+  tetriminoY: 0
+};

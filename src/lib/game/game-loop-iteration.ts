@@ -1,6 +1,6 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import * as fromActions from './actions/actions';
+import * as fromActions from './actions/game.actions';
 import {
   KEY_CODE_HARD_DROP,
   KEY_CODE_LEFT,
