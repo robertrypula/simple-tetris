@@ -38,6 +38,7 @@ export type ActionsUnion =
   IMoveRightAction |
   IRotateAction;
 
+// -----------------------------------------
 
 export const hardDrop = (): IHardDropAction => {
   return {

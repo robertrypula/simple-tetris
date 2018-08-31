@@ -5,7 +5,7 @@ export type Tetrimino = [
   boolean, boolean, boolean, boolean,
   boolean, boolean, boolean, boolean,
   boolean, boolean, boolean, boolean
-  ];
+];
 
 export type TetriminoRotations = [Tetrimino, Tetrimino, Tetrimino, Tetrimino];
 export type TetriminoList = TetriminoRotations[];

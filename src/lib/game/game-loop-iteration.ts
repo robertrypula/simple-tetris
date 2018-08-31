@@ -1,5 +1,6 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
+import { IStore } from '..';
 import * as fromActions from './actions/game.actions';
 import {
   KEY_CODE_HARD_DROP,
@@ -7,7 +8,6 @@ import {
   KEY_CODE_RIGHT,
   KEY_CODE_ROTATE
 } from './constants';
-import { IStore } from './game.interface';
 
 export const gameLoopIteration = (
   store: IStore,

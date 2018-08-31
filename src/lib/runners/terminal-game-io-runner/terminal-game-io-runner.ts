@@ -10,8 +10,8 @@ import {
   createStore,
   fullMatrixSelector,
   gameLoopIteration,
+  ICreateStoreOptions,
   IStore,
-  IStoreOptions,
   KEY_CODE_HARD_DROP,
   KEY_CODE_LEFT,
   KEY_CODE_RIGHT,
@@ -20,13 +20,13 @@ import {
 import { renderMatrixIntoAsciiFrame } from '../../game/utils/utils'; // TODO consider adding it into public API
 
 interface ITerminalGameIoRunnerOptions {
+  createStoreOptions: ICreateStoreOptions;
   domElementId: string;
-  storeOptions: IStoreOptions;
 }
 
 const defaultOptions: ITerminalGameIoRunnerOptions = {
-  domElementId: null,
-  storeOptions: null
+  createStoreOptions: null,
+  domElementId: null
 };
 
 export class TerminalGameIoRunner {
@@ -35,7 +35,7 @@ export class TerminalGameIoRunner {
 
   constructor(options: ITerminalGameIoRunnerOptions = defaultOptions) {
     this.store = createStore(
-      options && options.storeOptions ? options.storeOptions : null
+      options && options.createStoreOptions ? options.createStoreOptions : null
     );
     this.terminalGameIo = createTerminalGameIo({
       domElementId: options && options.domElementId ? options.domElementId : null,

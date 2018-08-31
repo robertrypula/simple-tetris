@@ -1,7 +1,7 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import * as fromActions from '../actions/game.actions';
 import { IState, TETRIMINO_ROTATIONS } from '..';
+import * as fromActions from '../actions/game.actions';
 import { TETRIMINO_SIZE_Y } from '../constants';
 import { Reducer } from '../models/store.model';
 
