@@ -1,6 +1,6 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { TetriminoList } from './models/state.model';
+import { TetriminoList } from './models/tetrimino.model';
 
 export const KEY_CODE_ROTATE = 0;
 export const KEY_CODE_LEFT = 1;
