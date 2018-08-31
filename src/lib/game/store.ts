@@ -10,14 +10,9 @@ export class Store implements IStore {
 
   public constructor(
     protected reducer: Reducer,
-    protected storeOptions: IStoreOptions
+    preloadedState: IState
   ) {
-    this.state = initialState;
-
-    // TODO remove it from here!!!!!!!!!!!!!!!!!!!
-    this.dispatch(
-      initializeMatrix(this.storeOptions.matrixSizeX, this.storeOptions.matrixSizeY)
-    );
+    this.state = preloadedState;
   }
 
   public dispatch<T extends IAction = IAction>(action: T) {
@@ -29,6 +24,14 @@ export class Store implements IStore {
   }
 }
 
-export const createStore: StoreFactory = (storeOptions: IStoreOptions = defaultStoreOptions) => {
-  return new Store(fromReducers.reducer, storeOptions);
+export const createStore: StoreFactory = (
+  storeOptions: IStoreOptions = defaultStoreOptions
+): IStore => {
+  const store = new Store(fromReducers.reducer, initialState);
+
+  store.dispatch(
+    initializeMatrix(storeOptions.matrixSizeX, storeOptions.matrixSizeY)
+  );
+
+  return store;
 };

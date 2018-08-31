@@ -29,7 +29,7 @@ export interface IState {
 export type Reducer = (state: IState, action: IAction) => IState;
 
 export interface IStore {
-  dispatch<T extends IAction = IAction>(action: T): void;
+  dispatch(action: IAction): void;
   getState(): IState;
 }
 
