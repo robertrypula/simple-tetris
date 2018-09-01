@@ -8,8 +8,8 @@ export const INITIALIZE_MATRIX = 'INITIALIZE_MATRIX';
 
 export interface IInitializeMatrixAction extends IAction {
   payload: {
-    matrixSizeX: number,
-    matrixSizeY: number
+    sizeX: number,
+    sizeY: number
   };
 }
 
@@ -20,11 +20,11 @@ export type MatrixActionsUnion =
 
 // -----------------------------------------
 
-export const initializeMatrix = (matrixSizeX: number, matrixSizeY: number): IInitializeMatrixAction => {
+export const initializeMatrix = (sizeX: number, sizeY: number): IInitializeMatrixAction => {
   return {
     payload: {
-      matrixSizeX,
-      matrixSizeY
+      sizeX,
+      sizeY
     },
     type: INITIALIZE_MATRIX
   };

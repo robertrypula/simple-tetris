@@ -1,7 +1,7 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
 import { IStore } from '..';
-import * as fromActions from './actions/game.actions';
+import * as fromTetriminoActions from './actions/tetrimino.actions';
 import {
   KEY_CODE_HARD_DROP,
   KEY_CODE_LEFT,
@@ -16,16 +16,16 @@ export const gameLoopIteration = (
 ): void => {
   switch (keyCode) {
     case KEY_CODE_ROTATE:
-      store.dispatch(fromActions.rotate());
+      store.dispatch(fromTetriminoActions.rotate());
       break;
     case KEY_CODE_LEFT:
-      store.dispatch(fromActions.moveLeft());
+      store.dispatch(fromTetriminoActions.moveLeft());
       break;
     case KEY_CODE_RIGHT:
-      store.dispatch(fromActions.moveRight());
+      store.dispatch(fromTetriminoActions.moveRight());
       break;
     case KEY_CODE_HARD_DROP:
-      store.dispatch(fromActions.hardDrop());
+      store.dispatch(fromTetriminoActions.hardDrop(store.getState().matrix.sizeY));
       break;
   }
 };

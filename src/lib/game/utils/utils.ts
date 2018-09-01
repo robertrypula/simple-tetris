@@ -1,11 +1,25 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { Matrix } from '..';
+export const getRandomInt = (min: number, max: number): number => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+export const generateBlocks = (sizeX: number, sizeY: number, fillWith: number = 0): number[] => {
+  const blocks = [];
+
+  for (let y = 0; y < sizeY; y++) {
+    for (let x = 0; x < sizeX; x++) {
+      blocks.push(fillWith);
+    }
+  }
+
+  return blocks;
+};
 
 export const renderMatrixIntoAsciiFrame = (
-  matrix: Matrix,
-  matrixSizeX: number,
-  matrixSizeY: number
+  matrix: number[],
+  sizeX: number,
+  sizeY: number
 ): string => {
   const left = '<|';
   const right = '|>';
@@ -17,10 +31,10 @@ export const renderMatrixIntoAsciiFrame = (
   const bottomRight = '  ';
   let asciiFrame = '';
 
-  for (let y = 0; y < matrixSizeY; y++) {
+  for (let y = 0; y < sizeY; y++) {
     asciiFrame += left;
-    for (let x = 0; x < matrixSizeX; x++) {
-      asciiFrame += matrix[y * matrixSizeX + x]
+    for (let x = 0; x < sizeX; x++) {
+      asciiFrame += matrix[y * sizeX + x]
         ? squareFilled
         : squareEmpty;
     }
@@ -28,13 +42,13 @@ export const renderMatrixIntoAsciiFrame = (
   }
 
   asciiFrame += left;
-  for (let x = 0; x < matrixSizeX; x++) {
+  for (let x = 0; x < sizeX; x++) {
     asciiFrame += bottom1;
   }
   asciiFrame += right;
 
   asciiFrame += bottomLeft;
-  for (let x = 0; x < matrixSizeX; x++) {
+  for (let x = 0; x < sizeX; x++) {
     asciiFrame += bottom2;
   }
   asciiFrame += bottomRight;

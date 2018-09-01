@@ -1,9 +1,12 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { initializeMatrix } from './actions/game.actions';
+import { initializeMatrix } from './actions/matrix.actions';
+import { initNew } from './actions/tetrimino.actions';
+import { TETRIMINO_LIST } from './constants';
 import { initialState } from './models/state.model';
 import { IStore, Store } from './models/store.model';
 import * as fromReducers from './reducers/game.reducer';
+import { getRandomInt } from './utils/utils';
 
 export interface ICreateStoreOptions {
   matrixSizeX: number;
@@ -28,6 +31,10 @@ export const createStore: StoreFactory = (
 
   store.dispatch(
     initializeMatrix(createStoreOptions.matrixSizeX, createStoreOptions.matrixSizeY)
+  );
+
+  store.dispatch(
+    initNew(getRandomInt(0, TETRIMINO_LIST.length - 1), store.getState().matrix.sizeX)
   );
 
   return store;

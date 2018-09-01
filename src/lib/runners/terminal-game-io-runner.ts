@@ -16,8 +16,8 @@ import {
   KEY_CODE_LEFT,
   KEY_CODE_RIGHT,
   KEY_CODE_ROTATE
-} from '../../game';
-import { renderMatrixIntoAsciiFrame } from '../../game/utils/utils'; // TODO consider adding it into public API
+} from '../game';
+import { renderMatrixIntoAsciiFrame } from '../game/utils/utils'; // TODO consider adding it into public API
 
 interface ITerminalGameIoRunnerOptions {
   createStoreOptions: ICreateStoreOptions;
@@ -52,12 +52,12 @@ export class TerminalGameIoRunner {
   protected frameHandler: FrameHandler = (instance: ITerminalGameIo) => {
     const state = this.store.getState();
     const fullMatrix = fullMatrixSelector(state);
-    const frameData = renderMatrixIntoAsciiFrame(fullMatrix, state.matrixSizeX, state.matrixSizeY);
+    const frameData = renderMatrixIntoAsciiFrame(fullMatrix, state.matrix.sizeX, state.matrix.sizeY);
 
     instance.drawFrame(
       frameData,
-      2 + (2 * state.matrixSizeX) + 2,         // TODO get rid of magic numbers
-      state.matrixSizeY + 2
+      2 + (2 * state.matrix.sizeX) + 2,         // TODO get rid of magic numbers
+      state.matrix.sizeY + 2
     );
   }
 

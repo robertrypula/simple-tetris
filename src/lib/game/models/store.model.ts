@@ -6,7 +6,7 @@ export interface IAction {
   type: string;
 }
 
-export type Reducer<T> = (state: T, action: IAction) => IState;
+export type Reducer<T> = (state: T, action: IAction) => T;
 
 export interface IStore {
   dispatch(action: IAction): void;
@@ -14,14 +14,14 @@ export interface IStore {
 }
 
 export interface IStoreStatic {
-  new(reducer: Reducer<IStore>): IStore;
+  new(reducer: Reducer<IState>): IStore;
 }
 
 export class Store implements IStore {
   protected state: IState;
 
   public constructor(
-    protected reducer: Reducer<IStore>,
+    protected reducer: Reducer<IState>,
     preloadedState: IState
   ) {
     this.state = preloadedState;

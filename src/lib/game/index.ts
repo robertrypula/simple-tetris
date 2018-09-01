@@ -16,12 +16,18 @@ export {
 } from './game-loop-iteration';
 
 export {
-  IState,
-  Matrix,
+  IState
+} from './models/state.model';
+
+export {
   Tetrimino,
   TetriminoList,
   TetriminoRotations
-} from './models/state.model';
+} from './models/tetrimino.model';
+
+export {
+
+} from './models/matrix.model';
 
 export {
   IStore
