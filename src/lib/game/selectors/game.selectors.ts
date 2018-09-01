@@ -7,13 +7,14 @@ import {
   TETRIMINO_SIZE_Y
 } from '..';
 
-export const fullMatrixSelector = (state: IState): number[] => {
+export const effectiveMatrixBlocksSelector = (state: IState): number[] => {
+  const { sizeX, sizeY } = state.matrix;
   const fullMatrix = [...state.matrix.blocks];
 
-  for (let y = 0; y < state.matrix.sizeY; y++) {
-    for (let x = 0; x < state.matrix.sizeX; x++) {
+  for (let y = 0; y < sizeY; y++) {
+    for (let x = 0; x < sizeX; x++) {
       if (isBlockOccupiedByTetrimino(x, y)(state)) {
-        fullMatrix[y * state.matrix.sizeX + x] = 1;
+        fullMatrix[y * sizeX + x] = 1;
       }
     }
   }

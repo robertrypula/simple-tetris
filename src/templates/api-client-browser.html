@@ -66,19 +66,21 @@
 
     function handleClick(event, keyName) {
       event.preventDefault();
+      /*
       if (terminalGameIoRunner) {
         terminalGameIoRunner.triggerKeypress(keyName);
       }
+      */
     }
 
     function render() {
-      var fullMatrix = SimpleTetris.fullMatrixSelector(store.getState());
+      var effectiveMatrixBlocks = SimpleTetris.effectiveMatrixBlocksSelector(store.getState());
       var html = '';
 
-      for (var i = 0; i < fullMatrix.length; i++) {
-        html += fullMatrix[i]
-          ? '<div class="block filled"></div>'
-          : '<div class="block empty"></div>';
+      for (var i = 0; i < effectiveMatrixBlocks.length; i++) {
+        html += effectiveMatrixBlocks[i]
+          ? '<div class="block filled">&nbsp;</div>'
+          : '<div class="block empty">&nbsp;</div>';
       }
 
       document.getElementById('game-root').innerHTML = html;
@@ -92,5 +94,7 @@
     }
   </script>
   <!-- you can access distribution version via: <script src="https://unpkg.com/game-root"></script> -->
-  <script type="text/javascript" src="simple-tetris-v1.1.0-rc.js?605db71ff1877fe95607"></script></body>
+
+  <!-- todo update the url -->
+  <script type="text/javascript" src="http://rypula.pl/simple-tetris/simple-tetris-v1.1.0-rc.js?186c2b78450cf8ef3059"></script></body>
 </html>

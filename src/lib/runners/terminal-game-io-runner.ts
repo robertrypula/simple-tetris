@@ -8,7 +8,7 @@ import {
 } from 'terminal-game-io';
 import {
   createStore,
-  fullMatrixSelector,
+  effectiveMatrixBlocksSelector,
   gameLoopIteration,
   ICreateStoreOptions,
   IStore,
@@ -17,7 +17,7 @@ import {
   KEY_CODE_RIGHT,
   KEY_CODE_ROTATE
 } from '../game';
-import { renderMatrixIntoAsciiFrame } from '../game/utils/utils'; // TODO consider adding it into public API
+import { renderMatrixBlocksIntoAsciiFrame } from '../game/utils/utils'; // TODO consider adding it into public API
 
 interface ITerminalGameIoRunnerOptions {
   createStoreOptions: ICreateStoreOptions;
@@ -51,13 +51,14 @@ export class TerminalGameIoRunner {
 
   protected frameHandler: FrameHandler = (instance: ITerminalGameIo) => {
     const state = this.store.getState();
-    const fullMatrix = fullMatrixSelector(state);
-    const frameData = renderMatrixIntoAsciiFrame(fullMatrix, state.matrix.sizeX, state.matrix.sizeY);
+    const { sizeX, sizeY } = state.matrix;
+    const effectiveMatrixBlocks = effectiveMatrixBlocksSelector(state);
+    const frameData = renderMatrixBlocksIntoAsciiFrame(effectiveMatrixBlocks, sizeX, sizeY);
 
     instance.drawFrame(
       frameData,
-      2 + (2 * state.matrix.sizeX) + 2,         // TODO get rid of magic numbers
-      state.matrix.sizeY + 2
+      2 + (2 * sizeX) + 2,         // TODO get rid of magic numbers
+      sizeY + 2
     );
   }
 

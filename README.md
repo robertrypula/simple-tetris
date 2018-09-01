@@ -10,7 +10,8 @@ Tetris game implementation based on some of the Redux concepts written from scra
 API that allows you to write your own Tetris application in few minutes.
 
 Playable browser example is available [here](http://rypula.pl/simple-tetris/terminal-game-io-runner-browser.html).
-It uses my other library ([terminal-game-io](https://github.com/robertrypula/terminal-game-io)) as a wrapper
+
+This project uses my other library ([terminal-game-io](https://github.com/robertrypula/terminal-game-io)) as a wrapper
 to simplify basic input and output.
 
 It you still want to implement your own Tetris game you can use simple-tetris API. For the details 
@@ -29,6 +30,7 @@ npm install simple-tetris
 - [DONE] createStore factory that hides reducers
 - [DONE] finish rotation database for all tetriminos
 - [DONE] project setup based on terminal-game-io wrapper
+- [DONE in 1.1.0] split store into matrix and tetrimino sections
 - [DONE in 1.1.0] moving the tetrimino by arrows and simple rotations
 - detecting collisions both with borders and other blocks (probably in 1.2.x)
 - implement hard drop and integrate it with collision detection (probably in 1.3.x)

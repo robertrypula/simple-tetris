@@ -16,8 +16,8 @@ export const generateBlocks = (sizeX: number, sizeY: number, fillWith: number = 
   return blocks;
 };
 
-export const renderMatrixIntoAsciiFrame = (
-  matrix: number[],
+export const renderMatrixBlocksIntoAsciiFrame = (
+  blocks: number[],
   sizeX: number,
   sizeY: number
 ): string => {
@@ -34,7 +34,7 @@ export const renderMatrixIntoAsciiFrame = (
   for (let y = 0; y < sizeY; y++) {
     asciiFrame += left;
     for (let x = 0; x < sizeX; x++) {
-      asciiFrame += matrix[y * sizeX + x]
+      asciiFrame += blocks[y * sizeX + x]
         ? squareFilled
         : squareEmpty;
     }

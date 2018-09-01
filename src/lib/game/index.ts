@@ -22,11 +22,12 @@ export {
 export {
   Tetrimino,
   TetriminoList,
-  TetriminoRotations
+  TetriminoRotations,
+  ITetrimino
 } from './models/tetrimino.model';
 
 export {
-
+  IMatrix
 } from './models/matrix.model';
 
 export {
@@ -34,7 +35,7 @@ export {
 } from './models/store.model';
 
 export {
-  fullMatrixSelector
+  effectiveMatrixBlocksSelector
 } from './selectors/game.selectors';
 
 export {
