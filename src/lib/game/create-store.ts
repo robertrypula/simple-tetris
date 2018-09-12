@@ -4,31 +4,25 @@ import { InitializeMatrixAction } from './actions/matrix.actions';
 import { InitNewAction } from './actions/tetrimino.actions';
 import { DEFAULT_MATRIX_SIZE_X, DEFAULT_MATRIX_SIZE_Y, TETRIMINO_LIST } from './constants';
 import { initialState, IState } from './models/state.model';
-import * as fromReducers from './reducers/game.reducer';
-import { IStore, Store } from './simple-redux';
+import { rootReducer } from './reducers/root.reducer';
+import { Store as SimpleReduxStore } from './simple-redux';
 import { getRandomInt } from './utils/utils';
 
-export type GameStore = IStore<IState>;
+export type Store = SimpleReduxStore<IState>;
 
 export interface ICreateStoreOptions {
   matrixSizeX: number;
   matrixSizeY: number;
 }
 
-export type StoreFactory = (createStoreOptions?: ICreateStoreOptions) => GameStore;
+export type StoreFactory = (options?: ICreateStoreOptions) => Store;
 
-export const createStore: StoreFactory = (
-  createStoreOptions?: ICreateStoreOptions
-): GameStore => {
-  const store: GameStore = new Store<IState>(fromReducers.reducer, initialState);
+export const createStore: StoreFactory = (options?: ICreateStoreOptions): Store => {
+  const store: Store = new SimpleReduxStore<IState>(rootReducer, initialState);
 
   store.dispatch(new InitializeMatrixAction({
-    sizeX: createStoreOptions && createStoreOptions.matrixSizeX
-      ? createStoreOptions.matrixSizeX
-      : DEFAULT_MATRIX_SIZE_X,
-    sizeY: createStoreOptions && createStoreOptions.matrixSizeY
-      ? createStoreOptions.matrixSizeY
-      : DEFAULT_MATRIX_SIZE_Y
+    sizeX: options && options.matrixSizeX ? options.matrixSizeX : DEFAULT_MATRIX_SIZE_X,
+    sizeY: options && options.matrixSizeY ? options.matrixSizeY : DEFAULT_MATRIX_SIZE_Y
   }));
 
   store.dispatch(new InitNewAction({

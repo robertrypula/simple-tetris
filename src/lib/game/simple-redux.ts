@@ -10,12 +10,7 @@ export interface IReducerMap<S> {
   [key: string]: Reducer<S>;
 }
 
-export interface IStore<S> {
-  dispatch(action: IAction): void;
-  getState(): S;
-}
-
-export class Store<S> implements IStore<S> {
+export class Store<S> {
   protected state: S;
 
   public constructor(

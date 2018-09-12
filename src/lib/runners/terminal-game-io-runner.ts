@@ -7,30 +7,20 @@ import {
   KeypressHandler
 } from 'terminal-game-io';
 
-import {
-  createStore,
-  gameLoopIteration,
-  GameStore,
-  ICreateStoreOptions,
-  KEY_CODE_HARD_DROP,
-  KEY_CODE_LEFT,
-  KEY_CODE_RIGHT,
-  KEY_CODE_ROTATE,
-  matrixBlocksToRenderSelector
-} from '../game';
+import * as fromGame from '../game';
 import { renderMatrixBlocksIntoAsciiFrame } from '../game/utils/utils'; // TODO consider adding it into public API
 
-interface ITerminalGameIoRunnerOptions {
-  createStoreOptions: ICreateStoreOptions;
+export interface ITerminalGameIoRunnerOptions {
+  createStoreOptions: fromGame.ICreateStoreOptions;
   domElementId: string;
 }
 
 export class TerminalGameIoRunner {
   protected terminalGameIo: ITerminalGameIo;
-  protected store: GameStore;
+  protected store: fromGame.Store;
 
   constructor(options?: ITerminalGameIoRunnerOptions) {
-    this.store = createStore(
+    this.store = fromGame.createStore(
       options && options.createStoreOptions ? options.createStoreOptions : null
     );
     this.terminalGameIo = createTerminalGameIo({
@@ -46,9 +36,9 @@ export class TerminalGameIoRunner {
   }
 
   protected frameHandler: FrameHandler = (instance: ITerminalGameIo) => {
-    const state = this.store.getState();
+    const state: fromGame.IState = this.store.getState();
     const { sizeX, sizeY } = state.matrix;
-    const matrixBlocksToRender = matrixBlocksToRenderSelector(state);
+    const matrixBlocksToRender = fromGame.matrixBlocksToRenderSelector(state);
     const frameData = renderMatrixBlocksIntoAsciiFrame(matrixBlocksToRender, sizeX, sizeY);
 
     instance.drawFrame(
@@ -66,25 +56,25 @@ export class TerminalGameIoRunner {
       case 'Up':
       case 'ArrowUp':
       case 'ClickUp':
-        keyCode = KEY_CODE_ROTATE;
+        keyCode = fromGame.KEY_CODE_ROTATE;
         break;
       case 'left':
       case 'Left':
       case 'ArrowLeft':
       case 'ClickLeft':
-        keyCode = KEY_CODE_LEFT;
+        keyCode = fromGame.KEY_CODE_LEFT;
         break;
       case 'right':
       case 'Right':
       case 'ArrowRight':
       case 'ClickRight':
-        keyCode = KEY_CODE_RIGHT;
+        keyCode = fromGame.KEY_CODE_RIGHT;
         break;
       case 'down':
       case 'Down':
       case 'ArrowDown':
       case 'ClickDown':
-        keyCode = KEY_CODE_HARD_DROP;
+        keyCode = fromGame.KEY_CODE_HARD_DROP;
         break;
       case 'escape':
       case 'Esc':
@@ -93,7 +83,7 @@ export class TerminalGameIoRunner {
         break;
     }
 
-    gameLoopIteration(this.store, this.terminalGameIo.getTime(), keyCode);
+    fromGame.gameLoopIteration(this.store, this.terminalGameIo.getTime(), keyCode);
 
     this.frameHandler(instance);
   }

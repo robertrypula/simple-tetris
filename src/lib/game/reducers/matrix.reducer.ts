@@ -2,7 +2,7 @@
 
 import { IMatrix } from '..';
 import * as fromMarixActions from '../actions/matrix.actions';
-import { DEVELOPMENT_MATRIX_20_10 } from '../constants';
+import { DEFAULT_MATRIX_SIZE_X, DEFAULT_MATRIX_SIZE_Y, DEVELOPMENT_MATRIX_20_10 } from '../constants';
 import { IReducerMap, Reducer } from '../simple-redux';
 import { generateBlocks } from '../utils/utils';
 
@@ -11,7 +11,7 @@ const initializeMatrix = (state: IMatrix, action: fromMarixActions.InitializeMat
 
   return {
     ...state,
-    blocks: (sizeX === 10 && sizeY === 20)
+    blocks: (sizeX === DEFAULT_MATRIX_SIZE_X && sizeY === DEFAULT_MATRIX_SIZE_Y)
       ? [...DEVELOPMENT_MATRIX_20_10]
       : generateBlocks(sizeX, sizeY),
     sizeX,

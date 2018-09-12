@@ -7,10 +7,10 @@ import {
   KEY_CODE_RIGHT,
   KEY_CODE_ROTATE
 } from './constants';
-import { GameStore } from './create-store';
+import { Store } from './create-store';
 
 export const gameLoopIteration = (
-  store: GameStore,
+  store: Store,
   time: number,
   keyCode: number
 ): void => {

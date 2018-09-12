@@ -1,14 +1,14 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import * as fromMatrixModel from './matrix.model';
-import * as fromTetriminoModel from './tetrimino.model';
+import { IMatrix, initialMatrix } from './matrix.model';
+import { initialTetrimino, ITetrimino } from './tetrimino.model';
 
 export interface IState {
-  matrix: fromMatrixModel.IMatrix;
-  tetrimino: fromTetriminoModel.ITetrimino;
+  matrix: IMatrix;
+  tetrimino: ITetrimino;
 }
 
 export const initialState: IState = {
-  matrix: fromMatrixModel.initialMatrix,
-  tetrimino: fromTetriminoModel.initialTetrimino
+  matrix: initialMatrix,
+  tetrimino: initialTetrimino
 };

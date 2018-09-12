@@ -16,5 +16,5 @@ export {
 export {
   ICreateStoreOptions,
   createStore,
-  GameStore
+  Store
 } from './create-store';
