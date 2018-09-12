@@ -46,19 +46,19 @@
   <div id="game-root"></div>
 
   <a
-    href="javascript:void(0)" onClick="handleClick(event, 2)"
+    href="javascript:void(0)" onClick="handleClick(event, SimpleTetris.KEY_CODE_HARD_DROP)"
     class="mobile-device-buttons" style="top: 50%; left: 33%;"
   ></a>
   <a
-    href="javascript:void(0)" onClick="handleClick(event, 0)"
+    href="javascript:void(0)" onClick="handleClick(event, SimpleTetris.KEY_CODE_ROTATE)"
     class="mobile-device-buttons" style="top: 0; left: 33%;"
   ></a>
   <a
-    href="javascript:void(0)" onClick="handleClick(event, 3)"
+    href="javascript:void(0)" onClick="handleClick(event, SimpleTetris.KEY_CODE_LEFT)"
     class="mobile-device-buttons" style="top: 50%; left: 0;"
   ></a>
   <a
-    href="javascript:void(0)" onClick="handleClick(event, 1)"
+    href="javascript:void(0)" onClick="handleClick(event, SimpleTetris.KEY_CODE_RIGHT)"
     class="mobile-device-buttons" style="top: 50%; left: 66%;"
   ></a>
 
@@ -74,11 +74,11 @@
     }
 
     function render() {
-      var effectiveMatrixBlocks = SimpleTetris.effectiveMatrixBlocksSelector(store.getState());
+      var matrixBlocksToRender = SimpleTetris.matrixBlocksToRenderSelector(store.getState());
       var html = '';
 
-      for (var i = 0; i < effectiveMatrixBlocks.length; i++) {
-        html += effectiveMatrixBlocks[i]
+      for (var i = 0; i < matrixBlocksToRender.length; i++) {
+        html += matrixBlocksToRender[i]
           ? '<div class="block filled">&nbsp;</div>'
           : '<div class="block empty">&nbsp;</div>';
       }

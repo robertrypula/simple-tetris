@@ -3,7 +3,7 @@
 import { IState } from '..';
 import { MatrixActionsUnion } from '../actions/matrix.actions';
 import { TetriminoActionsUnion } from '../actions/tetrimino.actions';
-import { Reducer } from '../models/store.model';
+import { Reducer } from '../simple-redux';
 import { matrixReducer } from './matrix.reducer';
 import { tetriminoReducer } from './tetrimino.reducer';
 

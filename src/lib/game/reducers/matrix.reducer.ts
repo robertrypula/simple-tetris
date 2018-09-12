@@ -1,34 +1,10 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
+import { IMatrix } from '..';
 import * as fromMarixActions from '../actions/matrix.actions';
-import { IMatrix } from '../models/matrix.model';
-import { Reducer } from '../models/store.model';
+import { DEVELOPMENT_MATRIX_20_10 } from '../constants';
+import { IReducerMap, Reducer } from '../simple-redux';
 import { generateBlocks } from '../utils/utils';
-
-const _ = 0;
-const X = 1;
-const testMatrixBlocks10x20 = [          // only for developement
-  _, _, _, _, _, _, _, _, _, _,
-  _, _, _, _, _, _, _, _, _, _,
-  _, _, _, _, _, _, _, _, _, _,
-  _, _, _, _, _, _, _, _, _, _,
-  _, _, _, _, _, _, _, _, _, _,
-  _, _, _, _, _, _, _, _, _, _,
-  _, _, _, _, _, _, _, _, _, _,
-  _, _, _, _, _, _, _, _, _, _,
-  _, _, X, _, _, _, _, _, _, _,
-  _, _, X, _, X, X, _, _, _, _,
-  _, _, X, X, X, _, _, _, _, _,
-  _, X, X, X, _, _, _, _, _, _,
-  X, X, _, _, _, _, _, _, _, _,
-  X, X, _, _, _, _, _, _, _, _,
-  X, _, _, _, _, _, _, _, _, _,
-  X, _, _, _, _, _, X, _, _, _,
-  X, X, _, _, _, _, X, X, X, X,
-  X, _, _, _, X, X, X, _, X, _,
-  _, _, _, _, X, _, X, X, X, X,
-  _, _, _, X, X, _, _, X, X, X
-];
 
 const initializeMatrix = (state: IMatrix, action: fromMarixActions.InitializeMatrixAction): IMatrix => {
   const { sizeX, sizeY } = action.payload;
@@ -36,7 +12,7 @@ const initializeMatrix = (state: IMatrix, action: fromMarixActions.InitializeMat
   return {
     ...state,
     blocks: (sizeX === 10 && sizeY === 20)
-      ? [...testMatrixBlocks10x20]
+      ? [...DEVELOPMENT_MATRIX_20_10]
       : generateBlocks(sizeX, sizeY),
     sizeX,
     sizeY
@@ -47,10 +23,10 @@ export const matrixReducer: Reducer<IMatrix> = (
   state: IMatrix,
   action: fromMarixActions.MatrixActionsUnion
 ): IMatrix => {
-  switch (action.type) {
-    case fromMarixActions.INITIALIZE_MATRIX:
-      return initializeMatrix(state, action as fromMarixActions.InitializeMatrixAction);
-  }
+  const reducerMap: IReducerMap<IMatrix> = {
+    [fromMarixActions.INITIALIZE_MATRIX]: initializeMatrix
+  };
+  const reducer = reducerMap[action.type];
 
-  return state;
+  return reducer ? reducer(state, action) : state;
 };

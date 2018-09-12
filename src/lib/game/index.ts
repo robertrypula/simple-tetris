@@ -1,44 +1,20 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
+export { gameLoopIteration } from './game-loop-iteration';
+export { IMatrix } from './models/matrix.model';
+export { IState } from './models/state.model';
+export { ITetrimino } from './models/tetrimino.model';
+export { matrixBlocksToRenderSelector } from './selectors/game.selectors';
+
 export {
   KEY_CODE_HARD_DROP,
   KEY_CODE_LEFT,
   KEY_CODE_RIGHT,
-  KEY_CODE_ROTATE,
-  TETRIMINO_LIST,
-  TETRIMINO_ROTATIONS,
-  TETRIMINO_SIZE_X,
-  TETRIMINO_SIZE_Y
+  KEY_CODE_ROTATE
 } from './constants';
 
 export {
-  gameLoopIteration
-} from './game-loop-iteration';
-
-export {
-  IState
-} from './models/state.model';
-
-export {
-  Tetrimino,
-  TetriminoList,
-  TetriminoRotations,
-  ITetrimino
-} from './models/tetrimino.model';
-
-export {
-  IMatrix
-} from './models/matrix.model';
-
-export {
-  IStore
-} from './models/store.model';
-
-export {
-  effectiveMatrixBlocksSelector
-} from './selectors/game.selectors';
-
-export {
   ICreateStoreOptions,
-  createStore
+  createStore,
+  GameStore
 } from './create-store';

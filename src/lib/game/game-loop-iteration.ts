@@ -1,6 +1,5 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { IStore } from '..';
 import * as fromTetriminoActions from './actions/tetrimino.actions';
 import {
   KEY_CODE_HARD_DROP,
@@ -8,9 +7,10 @@ import {
   KEY_CODE_RIGHT,
   KEY_CODE_ROTATE
 } from './constants';
+import { GameStore } from './create-store';
 
 export const gameLoopIteration = (
-  store: IStore,
+  store: GameStore,
   time: number,
   keyCode: number
 ): void => {

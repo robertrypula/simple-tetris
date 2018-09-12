@@ -2,6 +2,9 @@
 
 import { TetriminoList } from './models/tetrimino.model';
 
+export const DEFAULT_MATRIX_SIZE_X = 10;
+export const DEFAULT_MATRIX_SIZE_Y = 20;
+
 export const KEY_CODE_ROTATE = 0;
 export const KEY_CODE_LEFT = 1;
 export const KEY_CODE_RIGHT = 2;
@@ -205,3 +208,26 @@ export const TETRIMINO_LIST: TetriminoList = [
     ]
   ]
 ];
+
+export const DEVELOPMENT_MATRIX_20_10: number[] = [ // TODO delete at the end
+  _, _, _, _, _, _, _, _, _, _,
+  _, _, _, _, _, _, _, _, _, _,
+  _, _, _, _, _, _, _, _, _, _,
+  _, _, _, _, _, _, _, _, _, _,
+  _, _, _, _, _, _, _, _, _, _,
+  _, _, _, _, _, _, _, _, _, _,
+  _, _, _, _, _, _, _, _, _, _,
+  _, _, _, _, _, _, _, _, _, _,
+  _, _, X, _, _, _, _, _, _, _,
+  _, _, X, _, X, X, _, _, _, _,
+  _, _, X, X, X, _, _, _, _, _,
+  _, X, X, X, _, _, _, _, _, _,
+  X, X, _, _, _, _, _, _, _, _,
+  X, X, _, _, _, _, _, _, _, _,
+  X, _, _, _, _, _, _, _, _, _,
+  X, _, _, _, _, _, X, _, _, _,
+  X, X, _, _, _, _, X, X, X, X,
+  X, _, _, _, X, X, X, _, X, _,
+  _, _, _, _, X, _, X, X, X, X,
+  _, _, _, X, X, _, _, X, X, X
+].map((item) => item ? 1 : 0);

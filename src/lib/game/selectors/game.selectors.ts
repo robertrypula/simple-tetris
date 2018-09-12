@@ -1,13 +1,13 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
+import { IState } from '..';
 import {
-  IState,
   TETRIMINO_LIST,
   TETRIMINO_SIZE_X,
   TETRIMINO_SIZE_Y
-} from '..';
+} from '../constants';
 
-export const effectiveMatrixBlocksSelector = (state: IState): number[] => {
+export const matrixBlocksToRenderSelector = (state: IState): number[] => {
   const { sizeX, sizeY } = state.matrix;
   const fullMatrix = [...state.matrix.blocks];
 

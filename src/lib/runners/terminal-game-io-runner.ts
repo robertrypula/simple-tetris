@@ -6,16 +6,17 @@ import {
   ITerminalGameIo,
   KeypressHandler
 } from 'terminal-game-io';
+
 import {
   createStore,
-  effectiveMatrixBlocksSelector,
   gameLoopIteration,
+  GameStore,
   ICreateStoreOptions,
-  IStore,
   KEY_CODE_HARD_DROP,
   KEY_CODE_LEFT,
   KEY_CODE_RIGHT,
-  KEY_CODE_ROTATE
+  KEY_CODE_ROTATE,
+  matrixBlocksToRenderSelector
 } from '../game';
 import { renderMatrixBlocksIntoAsciiFrame } from '../game/utils/utils'; // TODO consider adding it into public API
 
@@ -24,16 +25,11 @@ interface ITerminalGameIoRunnerOptions {
   domElementId: string;
 }
 
-const defaultOptions: ITerminalGameIoRunnerOptions = {
-  createStoreOptions: null,
-  domElementId: null
-};
-
 export class TerminalGameIoRunner {
   protected terminalGameIo: ITerminalGameIo;
-  protected store: IStore;
+  protected store: GameStore;
 
-  constructor(options: ITerminalGameIoRunnerOptions = defaultOptions) {
+  constructor(options?: ITerminalGameIoRunnerOptions) {
     this.store = createStore(
       options && options.createStoreOptions ? options.createStoreOptions : null
     );
@@ -52,8 +48,8 @@ export class TerminalGameIoRunner {
   protected frameHandler: FrameHandler = (instance: ITerminalGameIo) => {
     const state = this.store.getState();
     const { sizeX, sizeY } = state.matrix;
-    const effectiveMatrixBlocks = effectiveMatrixBlocksSelector(state);
-    const frameData = renderMatrixBlocksIntoAsciiFrame(effectiveMatrixBlocks, sizeX, sizeY);
+    const matrixBlocksToRender = matrixBlocksToRenderSelector(state);
+    const frameData = renderMatrixBlocksIntoAsciiFrame(matrixBlocksToRender, sizeX, sizeY);
 
     instance.drawFrame(
       frameData,

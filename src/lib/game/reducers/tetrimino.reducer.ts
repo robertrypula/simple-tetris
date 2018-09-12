@@ -1,9 +1,9 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { TETRIMINO_ROTATIONS, TETRIMINO_SIZE_X } from '..';
+import { ITetrimino } from '..';
 import * as fromTetriminoActions from '../actions/tetrimino.actions';
-import { Reducer } from '../models/store.model';
-import { ITetrimino } from '../models/tetrimino.model';
+import { TETRIMINO_ROTATIONS, TETRIMINO_SIZE_X } from '../constants';
+import { IReducerMap, Reducer } from '../simple-redux';
 
 const hardDrop = (state: ITetrimino, action: fromTetriminoActions.HardDropAction): ITetrimino => {
   return {
@@ -48,22 +48,14 @@ export const tetriminoReducer: Reducer<ITetrimino> = (
   state: ITetrimino,
   action: fromTetriminoActions.TetriminoActionsUnion
 ): ITetrimino => {
-  switch (action.type) {
-    case fromTetriminoActions.HARD_DROP:
-      return hardDrop(state, action as fromTetriminoActions.HardDropAction);
+  const reducerMap: IReducerMap<ITetrimino> = {
+    [fromTetriminoActions.HARD_DROP]: hardDrop,
+    [fromTetriminoActions.INIT_NEW]: initNew,
+    [fromTetriminoActions.MOVE_LEFT]: moveLeft,
+    [fromTetriminoActions.MOVE_RIGHT]: moveRight,
+    [fromTetriminoActions.ROTATE]: rotate
+  };
+  const reducer = reducerMap[action.type];
 
-    case fromTetriminoActions.INIT_NEW:
-      return initNew(state, action as fromTetriminoActions.InitNewAction);
-
-    case fromTetriminoActions.MOVE_LEFT:
-      return moveLeft(state, action as fromTetriminoActions.MoveLeftAction);
-
-    case fromTetriminoActions.MOVE_RIGHT:
-      return moveRight(state, action as fromTetriminoActions.MoveRightAction);
-
-    case fromTetriminoActions.ROTATE:
-      return rotate(state, action as fromTetriminoActions.RotateAction);
-  }
-
-  return state;
+  return reducer ? reducer(state, action) : state;
 };
