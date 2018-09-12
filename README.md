@@ -9,7 +9,7 @@
 Tetris game implementation based on some of the Redux concepts written from scratch in TypeScript. It provides
 API that allows you to write your own Tetris application in few minutes.
 
-Playable browser example is available [here](http://rypula.pl/simple-tetris/terminal-game-io-runner-browser.html).
+Playable browser example is available [here](http://rypula.pl/simple-tetris/ascii-runner-browser.html).
 
 This project uses my other library ([terminal-game-io](https://github.com/robertrypula/terminal-game-io)) as a wrapper
 to simplify basic input and output.

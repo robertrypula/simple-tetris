@@ -2,6 +2,6 @@
 
 const SimpleTetris =
   require('./simple-tetris-v1.1.0-rc.js');  // in your application replace it to: require('simple-tetris');
-const TerminalGameIoRunner = SimpleTetris.TerminalGameIoRunner;
+const AsciiRunner = SimpleTetris.AsciiRunner;
 
-let terminalGameIoRunner = new TerminalGameIoRunner();
+let asciiRunner = new AsciiRunner();

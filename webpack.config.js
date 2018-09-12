@@ -57,10 +57,10 @@ function getConfig(env) {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        filename: 'terminal-game-io-runner-browser.html',
+        filename: 'ascii-runner-browser.html',
         hash: true,
         minify: false,
-        template: './src/templates/terminal-game-io-runner-browser.html',
+        template: './src/templates/ascii-runner-browser.html',
         excludeAssets: [/^dev.*.js/]
       }),
       new HtmlWebpackExcludeAssetsPlugin(),       // https://stackoverflow.com/a/50830422
@@ -90,7 +90,7 @@ function fillDev(config) {
     compress: true,
     port: 8000,
     hot: false,
-    openPage: 'dist/terminal-game-io-runner-browser.html',
+    openPage: 'dist/ascii-runner-browser.html',
     overlay: {
       warnings: true,
       errors: true
@@ -110,8 +110,8 @@ function fillProd(config) {
     new CopyWebpackPlugin(
       [
         {
-          from: path.resolve(__dirname) + '/src/templates/terminal-game-io-runner-node.js',
-          to: path.resolve(__dirname) + '/dist/terminal-game-io-runner-node.js',
+          from: path.resolve(__dirname) + '/src/templates/ascii-runner-node.js',
+          to: path.resolve(__dirname) + '/dist/ascii-runner-node.js',
           toType: 'file'
         }
       ]

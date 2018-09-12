@@ -47,22 +47,22 @@
   ></a>
 
   <script>
-    var terminalGameIoRunner;
+    var asciiRunner;
 
     function handleClick(event, keyName) {
       event.preventDefault();
-      if (terminalGameIoRunner) {
-        terminalGameIoRunner.triggerKeypress(keyName);
+      if (asciiRunner) {
+        asciiRunner.triggerKeypress(keyName);
       }
     }
 
     function run() {
       console.log(SimpleTetris);
-      terminalGameIoRunner = new SimpleTetris.TerminalGameIoRunner({
+      asciiRunner = new SimpleTetris.AsciiRunner({
         domElementId: 'game-root'
       });
     }
   </script>
-  <!-- you can access distribution version via: <script src="https://unpkg.com/game-root"></script> -->
+  <!-- you can access distribution version via: <script src="https://unpkg.com/simple-tetris"></script> -->
 </body>
 </html>

@@ -2,10 +2,10 @@
 
 import { argv, isNode } from 'terminal-game-io';
 
-import { TerminalGameIoRunner } from './lib';
+import { AsciiRunner } from './lib';
 
-let terminalGameIoRunner: TerminalGameIoRunner;
+let asciiRunner: AsciiRunner;
 
 if (isNode && argv.length > 2 && argv[2] === 'run') {
-  terminalGameIoRunner = new TerminalGameIoRunner();
+  asciiRunner = new AsciiRunner();
 }
