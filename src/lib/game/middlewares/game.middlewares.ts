@@ -4,7 +4,7 @@ import { InitializeMatrixAction } from '../actions/matrix.actions';
 import { InitNewAction } from '../actions/tetrimino.actions';
 import { TETRIMINO_LIST } from '../constants';
 import { Store } from '../store';
-import { getRandomInt } from '../utils/utils';
+import { getRandomInt } from '../utilities';
 
 export class InitializeMiddleware {
   public constructor(

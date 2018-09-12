@@ -4,7 +4,7 @@ import { IMatrix } from '..';
 import * as fromMarixActions from '../actions/matrix.actions';
 import { DEFAULT_MATRIX_SIZE_X, DEFAULT_MATRIX_SIZE_Y, DEVELOPMENT_MATRIX_20_10 } from '../constants';
 import { IReducerMap, Reducer } from '../simple-redux';
-import { generateBlocks } from '../utils/utils';
+import { generateBlocks } from '../utilities';
 
 const initializeMatrix = (state: IMatrix, action: fromMarixActions.InitializeMatrixAction): IMatrix => {
   const { sizeX, sizeY } = action.payload;

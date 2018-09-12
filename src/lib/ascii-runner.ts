@@ -2,8 +2,8 @@
 
 import { createTerminalGameIo, ITerminalGameIo } from 'terminal-game-io';
 
-import * as fromGame from '../game';
-import { renderMatrixBlocksIntoAsciiFrame } from '../game/utils/utils'; // TODO consider adding it into public API
+import { IAsciiFrame, render } from './ascii-renderer';
+import * as fromGame from './game';
 
 export interface IAsciiRunnerOptions {
   createStoreOptions: fromGame.ICreateStoreOptions;
@@ -21,8 +21,12 @@ export class AsciiRunner {
     this.terminalGameIo = createTerminalGameIo({
       domElementId: options && options.domElementId ? options.domElementId : null,
       fps: 0.5,
-      frameHandler: (instance: ITerminalGameIo) => this.frameHandler(instance),
-      keypressHandler: (instance: ITerminalGameIo, keyName: string) => this.keypressHandler(instance, keyName)
+      frameHandler: (instance: ITerminalGameIo) => {
+        return this.frameHandler(instance);
+      },
+      keypressHandler: (instance: ITerminalGameIo, keyName: string) => {
+        return this.keypressHandler(instance, keyName);
+      }
     });
   }
 
@@ -31,16 +35,9 @@ export class AsciiRunner {
   }
 
   protected frameHandler(instance: ITerminalGameIo) {
-    const state: fromGame.IState = this.store.getState();
-    const { sizeX, sizeY } = state.matrix;
-    const matrixBlocksToRender = fromGame.matrixBlocksToRenderSelector(state);
-    const frameData = renderMatrixBlocksIntoAsciiFrame(matrixBlocksToRender, sizeX, sizeY);
+    const asciiFrame: IAsciiFrame = render(this.store.getState());
 
-    instance.drawFrame(
-      frameData,
-      2 + (2 * sizeX) + 2,         // TODO get rid of magic numbers
-      sizeY + 2
-    );
+    instance.drawFrame(asciiFrame.data, asciiFrame.width, asciiFrame.height);
   }
 
   protected keypressHandler(instance: ITerminalGameIo, keyName: string) {

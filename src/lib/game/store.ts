@@ -6,7 +6,7 @@ import { DEFAULT_MATRIX_SIZE_X, DEFAULT_MATRIX_SIZE_Y, TETRIMINO_LIST } from './
 import { initialState, IState } from './models/state.model';
 import { stateReducer } from './reducers/state.reducer';
 import { Store as SimpleReduxStore } from './simple-redux';
-import { getRandomInt } from './utils/utils';
+import { getRandomInt } from './utilities';
 
 export type Store = SimpleReduxStore<IState>;
 
