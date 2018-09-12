@@ -8,73 +8,40 @@ export const MOVE_LEFT = 'MOVE_LEFT';
 export const MOVE_RIGHT = 'MOVE_RIGHT';
 export const ROTATE = 'ROTATE';
 
-// -----------------------------------------
-
-export interface IHardDropAction extends IAction {
-  payload: {
-    matrixSizeY: number
-  };
+export class HardDropAction implements IAction {
+  public readonly type = HARD_DROP;
+  constructor(
+    public payload: {
+      matrixSizeY: number
+    }
+  ) {}
 }
 
-export interface IInitNewAction extends IAction {
-  payload: {
-    index: number,
-    matrixSizeX: number
-  };
+export class InitNewAction implements IAction {
+  public readonly type = INIT_NEW;
+  constructor(
+    public payload: {
+      index: number,
+      matrixSizeX: number
+    }
+  ) {}
 }
 
-/*tslint:disable-next-line*/
-export interface IMoveLeftAction extends IAction { }
+export class MoveLeftAction implements IAction {
+  public readonly type = MOVE_LEFT;
+}
 
-/*tslint:disable-next-line*/
-export interface IMoveRightAction extends IAction { }
+export class MoveRightAction implements IAction {
+  public readonly type = MOVE_RIGHT;
+}
 
-/*tslint:disable-next-line*/
-export interface IRotateAction extends IAction { }
-
-// -----------------------------------------
+export class RotateAction implements IAction {
+  public readonly type = ROTATE;
+}
 
 export type TetriminoActionsUnion =
-  IHardDropAction |
-  IMoveLeftAction |
-  IMoveRightAction |
-  IRotateAction;
-
-// -----------------------------------------
-
-export const hardDrop = (matrixSizeY: number): IHardDropAction => {
-  return {
-    payload: {
-      matrixSizeY
-    },
-    type: HARD_DROP
-  };
-};
-
-export const initNew = (index: number, matrixSizeX: number): IInitNewAction => {
-  return {
-    payload: {
-      index,
-      matrixSizeX
-    },
-    type: INIT_NEW
-  };
-};
-
-export const moveLeft = (): IMoveLeftAction => {
-  return {
-    type: MOVE_LEFT
-  };
-};
-
-export const moveRight = (): IMoveRightAction => {
-  return {
-    type: MOVE_RIGHT
-  };
-};
-
-export const rotate = (): IRotateAction => {
-  return {
-    type: ROTATE
-  };
-};
+  HardDropAction |
+  InitNewAction |
+  MoveLeftAction |
+  MoveRightAction |
+  RotateAction;

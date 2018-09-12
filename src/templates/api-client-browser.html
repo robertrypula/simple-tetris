@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>Simple tetris</title>
   <style>
+    body {
+      background-color: #96a488;
+    }
     .mobile-device-buttons {
       position: fixed;
       display: block;
@@ -14,24 +17,22 @@
       background-color: rgba(0, 0, 0, 0.05);
     }
     #game-root {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      width: 20px;
-      height: 40px;
-      outline: 1px solid gray;
+      margin: 0 auto;
+      width: 250px;
+      height: 500px;
+      outline: 1px solid #3b4128;
     }
     #game-root > .block {
       float: left;
-      width: 2px;
-      height: 2px;
-      border: 1px solid #ddd;
+      width: 25px;
+      height: 25px;
+      border: 1px solid #96a488;
     }
     #game-root > .block.empty {
-      background-color: #eee;
+      background-color: #909c7c;
     }
     #game-root > .block.filled {
-      background-color: #444;
+      background-color: #3b4128;
     }
     * {
       margin: 0;
@@ -45,32 +46,31 @@
   <div id="game-root"></div>
 
   <a
-    href="javascript:void(0)" onClick="handleClick(event, 'ClickDown')"
+    href="javascript:void(0)" onClick="handleClick(event, 2)"
     class="mobile-device-buttons" style="top: 50%; left: 33%;"
   ></a>
   <a
-    href="javascript:void(0)" onClick="handleClick(event, 'ClickUp')"
+    href="javascript:void(0)" onClick="handleClick(event, 0)"
     class="mobile-device-buttons" style="top: 0; left: 33%;"
   ></a>
   <a
-    href="javascript:void(0)" onClick="handleClick(event, 'ClickLeft')"
+    href="javascript:void(0)" onClick="handleClick(event, 3)"
     class="mobile-device-buttons" style="top: 50%; left: 0;"
   ></a>
   <a
-    href="javascript:void(0)" onClick="handleClick(event, 'ClickRight')"
+    href="javascript:void(0)" onClick="handleClick(event, 1)"
     class="mobile-device-buttons" style="top: 50%; left: 66%;"
   ></a>
 
   <script>
     var store;
 
-    function handleClick(event, keyName) {
+    function handleClick(event, keyCode) {
       event.preventDefault();
-      /*
-      if (terminalGameIoRunner) {
-        terminalGameIoRunner.triggerKeypress(keyName);
+      if (store) {
+        SimpleTetris.gameLoopIteration(store, 0.0, keyCode);
+        render();
       }
-      */
     }
 
     function render() {
@@ -88,9 +88,7 @@
 
     function run() {
       store = new SimpleTetris.createStore();
-
       render();
-      // SimpleTetris.gameLoopIteration(store, 0.0, keyCode);
     }
   </script>
   <!-- you can access distribution version via: <script src="https://unpkg.com/game-root"></script> -->

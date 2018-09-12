@@ -1,7 +1,7 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { initializeMatrix } from './actions/matrix.actions';
-import { initNew } from './actions/tetrimino.actions';
+import { InitializeMatrixAction } from './actions/matrix.actions';
+import { InitNewAction } from './actions/tetrimino.actions';
 import { TETRIMINO_LIST } from './constants';
 import { initialState } from './models/state.model';
 import { IStore, Store } from './models/store.model';
@@ -29,13 +29,15 @@ export const createStore: StoreFactory = (
     ? createStoreOptions
     : defaultStoreOptions;
 
-  store.dispatch(
-    initializeMatrix(createStoreOptions.matrixSizeX, createStoreOptions.matrixSizeY)
-  );
+  store.dispatch(new InitializeMatrixAction({
+    sizeX: createStoreOptions.matrixSizeX,
+    sizeY: createStoreOptions.matrixSizeY
+  }));
 
-  store.dispatch(
-    initNew(getRandomInt(0, TETRIMINO_LIST.length - 1), store.getState().matrix.sizeX)
-  );
+  store.dispatch(new InitNewAction({
+    index: getRandomInt(0, TETRIMINO_LIST.length - 1),
+    matrixSizeX: store.getState().matrix.sizeX
+  }));
 
   return store;
 };

@@ -16,16 +16,18 @@ export const gameLoopIteration = (
 ): void => {
   switch (keyCode) {
     case KEY_CODE_ROTATE:
-      store.dispatch(fromTetriminoActions.rotate());
+      store.dispatch(new fromTetriminoActions.RotateAction());
       break;
     case KEY_CODE_LEFT:
-      store.dispatch(fromTetriminoActions.moveLeft());
+      store.dispatch(new fromTetriminoActions.MoveLeftAction());
       break;
     case KEY_CODE_RIGHT:
-      store.dispatch(fromTetriminoActions.moveRight());
+      store.dispatch(new fromTetriminoActions.MoveRightAction());
       break;
     case KEY_CODE_HARD_DROP:
-      store.dispatch(fromTetriminoActions.hardDrop(store.getState().matrix.sizeY));
+      store.dispatch(new fromTetriminoActions.HardDropAction({
+        matrixSizeY: store.getState().matrix.sizeY
+      }));
       break;
   }
 };

@@ -30,7 +30,7 @@ const testMatrixBlocks10x20 = [          // only for developement
   _, _, _, X, X, _, _, X, X, X
 ];
 
-const initializeMatrix = (state: IMatrix, action: fromMarixActions.IInitializeMatrixAction): IMatrix => {
+const initializeMatrix = (state: IMatrix, action: fromMarixActions.InitializeMatrixAction): IMatrix => {
   const { sizeX, sizeY } = action.payload;
 
   return {
@@ -49,7 +49,7 @@ export const matrixReducer: Reducer<IMatrix> = (
 ): IMatrix => {
   switch (action.type) {
     case fromMarixActions.INITIALIZE_MATRIX:
-      return initializeMatrix(state, action as fromMarixActions.IInitializeMatrixAction);
+      return initializeMatrix(state, action as fromMarixActions.InitializeMatrixAction);
   }
 
   return state;
