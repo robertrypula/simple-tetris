@@ -7,7 +7,7 @@ import { Reducer } from '../simple-redux';
 import { matrixReducer } from './matrix.reducer';
 import { tetriminoReducer } from './tetrimino.reducer';
 
-export const rootReducer: Reducer<IState> = (
+export const stateReducer: Reducer<IState> = (
   state: IState,
   action: MatrixActionsUnion | TetriminoActionsUnion
 ): IState => {

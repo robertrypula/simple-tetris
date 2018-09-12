@@ -17,4 +17,4 @@ export {
   ICreateStoreOptions,
   createStore,
   Store
-} from './create-store';
+} from './store';
