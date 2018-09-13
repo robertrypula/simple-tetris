@@ -6,16 +6,18 @@
 [![dependencies Status](https://david-dm.org/robertrypula/simple-tetris/status.svg)](https://david-dm.org/robertrypula/simple-tetris)
 [![devDependencies Status](https://david-dm.org/robertrypula/simple-tetris/dev-status.svg)](https://david-dm.org/robertrypula/simple-tetris?type=dev)
 
-Tetris game implementation based on some of the Redux concepts written from scratch in TypeScript. It provides
-API that allows you to write your own Tetris application in few minutes.
+This package provides API that allows you to easily create clones of the 
+Tetris game. It handles game core - your role is to write the UI. Library
+was inspired by Redux and was written from scratch in TypeScript.
 
-Playable browser example is available [here](http://rypula.pl/simple-tetris/ascii-runner-browser.html).
+*NOTE:* This project is still not finished. More details in the TODO section below.
 
-This project uses my other library ([terminal-game-io](https://github.com/robertrypula/terminal-game-io)) as a wrapper
-to simplify basic input and output.
+API client example available on [CodeSandbox.io](https://codesandbox.io/s/l9o0lmm607)
 
-It you still want to implement your own Tetris game you can use simple-tetris API. For the details 
-please visit example hosted on [CodeSandbox.io](https://codesandbox.io/s/l9o0lmm607)
+Library is shipped with ASCII runner - a simple way of bootstrapping Tetris game without the need of using 
+the API. Browser example is available [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/ascii-runner-browser.html).
+ASCII runner uses my other library ([terminal-game-io](https://github.com/robertrypula/terminal-game-io)) 
+that simplifies basic input and output of the text based games.
 
 ## Installation
 
@@ -23,25 +25,36 @@ please visit example hosted on [CodeSandbox.io](https://codesandbox.io/s/l9o0lmm
 npm install simple-tetris
 ```
 
-# TODO
+## TODO
 
-- [DONE] assets to templates
-- [DONE] rename terminal-game-io-runner to node and browser
-- [DONE] createStore factory that hides reducers
-- [DONE] finish rotation database for all tetriminos
-- [DONE] project setup based on terminal-game-io wrapper
-- [DONE in 1.1.0] split store into matrix and tetrimino sections
-- [DONE in 1.1.0] moving the tetrimino by arrows and simple rotations
 - detecting collisions both with borders and other blocks (probably in 1.2.x)
 - implement hard drop and integrate it with collision detection (probably in 1.3.x)
 - move tetrimino one line down after given interval (probably in 1.4.x) 
 - when tetrimino will hit the 'ground' trigger new tetrimino (probably in 1.5.x)
 - detect and remove completely filled lines (probably in 1.6.x)
-- detect game over (probably in 1.7.x)
+- detect game over / pause game (probably in 1.7.x)
 - more?
 - ...   
 - extend the readme
 - ...
+
+## Changelog
+
+### 1.1.0 - 13 September 2018
+
+- rename 'assets' directory to 'templates'
+- rename suffix of terminal-game-io-runner-* to node and browser
+- createStore factory that hides reducers
+- finish rotation database for all tetriminos
+- project setup based on terminal-game-io wrapper
+- split store into matrix and tetrimino sections
+- moving the tetrimino by arrows and simple rotations
+- let actions dispatch own actions and check store state
+- finalization of the project structure that will be used across all 1.x.x versions
+
+### 1.0.0 - 06 August 2018
+
+- initial version of the project, nothing more than the PoC
 
 ## Want to check this project in development mode?
 

@@ -15,19 +15,15 @@ export const render = (state: fromGame.IState): IAsciiFrame => {
   return renderMatrix(matrixBlocksToRender, sizeX, sizeY);
 };
 
-const renderMatrix = (
-  blocks: number[],
-  sizeX: number,
-  sizeY: number
-): IAsciiFrame => {
+const renderMatrix = (blocks: number[], sizeX: number, sizeY: number): IAsciiFrame => {
   const left = '<|';
   const right = '|>';
   const squareEmpty = ' .';
   const squareFilled = '[]';
-  const bottom1 = '==';
-  const bottom2 = '\\/';
-  const bottomLeft = '  ';
-  const bottomRight = '  ';
+  const bottomRows = [
+    [left, '==', right],
+    ['  ', '\\/', '  ']
+  ];
   let data = '';
 
   for (let y = 0; y < sizeY; y++) {
@@ -38,21 +34,17 @@ const renderMatrix = (
     data += right;
   }
 
-  data += left;
-  for (let x = 0; x < sizeX; x++) {
-    data += bottom1;
-  }
-  data += right;
-
-  data += bottomLeft;
-  for (let x = 0; x < sizeX; x++) {
-    data += bottom2;
-  }
-  data += bottomRight;
+  bottomRows.forEach((row) => {
+    data += row[0];
+    for (let x = 0; x < sizeX; x++) {
+      data += row[1];
+    }
+    data += row[2];
+  });
 
   return {
     data,
-    height: sizeY + 2,
-    width: 2 + (2 * sizeX) + 2
+    height: sizeY + bottomRows.length,
+    width: left.length + (squareEmpty.length * sizeX) + right.length
   };
 };

@@ -1,13 +1,14 @@
 {
   "name": "simple-tetris",
   "version": "1.1.0-rc",
-  "description": "Tetris game implementation based on some of the Redux concepts written from scratch in TypeScript. It provides API that allows you to write your own Tetris application in few minutes.",
+  "description": "This package provides API that allows you to easily create clones of the Tetris game. It handles game core - your role is to write the UI. Library was inspired by Redux and was written from scratch in TypeScript.",
   "keywords": [
     "game",
     "nodejs",
     "redux tetris",
     "simple game",
     "terminal game",
+    "tetris game core",
     "tetris logic",
     "tetris typescript",
     "tetris"

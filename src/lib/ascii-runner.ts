@@ -2,7 +2,7 @@
 
 import { createTerminalGameIo, ITerminalGameIo } from 'terminal-game-io';
 
-import { IAsciiFrame, render } from './ascii-renderer';
+import { render } from './ascii-renderer';
 import * as fromGame from './game';
 
 export interface IAsciiRunnerOptions {
@@ -15,9 +15,21 @@ export class AsciiRunner {
   protected store: fromGame.Store;
 
   constructor(options?: IAsciiRunnerOptions) {
+    this.initializeStore(options);
+    this.initializeTerminalGameIo(options);
+  }
+
+  public triggerKeypress(keyName: string) {
+    this.terminalGameIo.triggerKeypress(keyName);
+  }
+
+  protected initializeStore(options: IAsciiRunnerOptions) {
     this.store = fromGame.createStore(
       options && options.createStoreOptions ? options.createStoreOptions : null
     );
+  }
+
+  protected initializeTerminalGameIo(options: IAsciiRunnerOptions) {
     this.terminalGameIo = createTerminalGameIo({
       domElementId: options && options.domElementId ? options.domElementId : null,
       fps: 0.5,
@@ -30,14 +42,10 @@ export class AsciiRunner {
     });
   }
 
-  public triggerKeypress(keyName: string) {
-    this.terminalGameIo.triggerKeypress(keyName);
-  }
-
   protected frameHandler(instance: ITerminalGameIo) {
-    const asciiFrame: IAsciiFrame = render(this.store.getState());
+    const { data, width, height } = render(this.store.getState());
 
-    instance.drawFrame(asciiFrame.data, asciiFrame.width, asciiFrame.height);
+    instance.drawFrame(data, width, height);
   }
 
   protected keypressHandler(instance: ITerminalGameIo, keyName: string) {

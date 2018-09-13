@@ -8,6 +8,7 @@ export const INITIALIZE_MATRIX = 'INITIALIZE_MATRIX';
 
 export class InitializeMatrixAction implements IAction {
   public readonly type = INITIALIZE_MATRIX;
+
   public constructor(
     public payload: {
       sizeX: number,

@@ -12,7 +12,8 @@ export const ROTATE = 'ROTATE';
 
 export class HardDropAction implements IAction {
   public readonly type = HARD_DROP;
-  constructor(
+
+  public constructor(
     public payload: {
       matrixSizeY: number
     }
@@ -21,7 +22,8 @@ export class HardDropAction implements IAction {
 
 export class InitNewAction implements IAction {
   public readonly type = INIT_NEW;
-  constructor(
+
+  public constructor(
     public payload: {
       index: number,
       matrixSizeX: number
