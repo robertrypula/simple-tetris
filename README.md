@@ -10,9 +10,9 @@ This package provides API that allows you to easily create clones of the
 Tetris game. It handles game core - your role is to write the UI. Library
 was inspired by Redux and was written from scratch in TypeScript.
 
-*NOTE:* This project is still not finished. More details in the TODO section below.
+**NOTE:** This project is still not finished. More details in the TODO section below.
 
-API client example available on [CodeSandbox.io](https://codesandbox.io/s/l9o0lmm607)
+Code example of the simple API client is available on [CodeSandbox.io](https://codesandbox.io/s/l9o0lmm607)
 
 Library is shipped with ASCII runner - a simple way of bootstrapping Tetris game without the need of using 
 the API. Browser example is available [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/ascii-runner-browser.html).
