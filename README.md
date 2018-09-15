@@ -40,6 +40,12 @@ npm install simple-tetris
 
 ## Changelog
 
+### 1.1.1 - ?? September 2018
+- adds dedicated 'GameLoopIteration' type that solves the problem in the *.d.ts file used by older typescript compilers
+- [TODO] version upgrade of uglifyjs-webpack-plugin (1.3.0 -> 2.0.0)
+- [TODO] version upgrade of terminal-game-io (2.1.2 -> 2.1.3)
+- [TODO] thanks to the new version of terminal-game-io all externals could be removed ('process' and 'readline')
+
 ### 1.1.0 - 13 September 2018
 
 - rename 'assets' directory to 'templates'
