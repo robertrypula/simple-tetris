@@ -1,6 +1,5 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-export { gameLoopIteration } from './game-loop-iteration';
 export { IMatrix } from './models/matrix.model';
 export { IState } from './models/state.model';
 export { ITetrimino } from './models/tetrimino.model';
@@ -14,7 +13,13 @@ export {
 } from './constants';
 
 export {
-  ICreateStoreOptions,
+  gameLoopIteration,
+  GameLoopIteration
+} from './game-loop-iteration';
+
+export {
   createStore,
-  Store
+  ICreateStoreOptions,
+  Store,
+  StoreFactory
 } from './store';

@@ -5,14 +5,14 @@ import { TetriminoList } from './models/tetrimino.model';
 export const DEFAULT_MATRIX_SIZE_X = 10;
 export const DEFAULT_MATRIX_SIZE_Y = 20;
 
-export const KEY_CODE_ROTATE = 0;
+export const KEY_CODE_HARD_DROP = 0;
 export const KEY_CODE_LEFT = 1;
 export const KEY_CODE_RIGHT = 2;
-export const KEY_CODE_HARD_DROP = 3;
+export const KEY_CODE_ROTATE = 3;
 
+export const TETRIMINO_ROTATIONS = 4;
 export const TETRIMINO_SIZE_X = 4;
 export const TETRIMINO_SIZE_Y = 4;
-export const TETRIMINO_ROTATIONS = 4;
 
 const _ = false;
 const X = true;
