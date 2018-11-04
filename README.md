@@ -25,7 +25,9 @@ that simplifies basic input and output of the text based games.
 npm install simple-tetris
 ```
 
-## TODO
+## Changelog
+
+### Still TODO
 
 - detecting collisions both with borders and other blocks (probably in 1.2.x)
 - implement hard drop and integrate it with collision detection (probably in 1.3.x)
@@ -38,13 +40,11 @@ npm install simple-tetris
 - extend the readme
 - ...
 
-## Changelog
-
-### 1.1.1 - ?? September 2018
+### 1.1.1 - ?? November 2018
 - adds dedicated 'GameLoopIteration' type that solves the problem in the *.d.ts file used by older typescript compilers
-- [TODO] version upgrade of uglifyjs-webpack-plugin (1.3.0 -> 2.0.0)
-- [TODO] version upgrade of terminal-game-io (2.1.2 -> 2.1.3)
-- [TODO] thanks to the new version of terminal-game-io all externals could be removed ('process' and 'readline')
+- version upgrade of terminal-game-io (2.1.2 -> 3.1.0)
+  - thanks to the new version of terminal-game-io all externals could be removed ('process' and 'readline')
+- [TODO] updates in readme
 
 ### 1.1.0 - 13 September 2018
 

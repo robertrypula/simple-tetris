@@ -7,6 +7,7 @@
     "nodejs",
     "redux tetris",
     "simple game",
+    "simple tetris",
     "terminal game",
     "tetris core",
     "tetris game core",
@@ -19,7 +20,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npm run clean && npm run test && npm run lint && npm run lint:tsfmt:verify && webpack --env.PRODUCTION && rimraf dist/dev.d.ts",
-    "dev-node": "npm run clean && webpack --env.DEVELOPMENT && node dist/dev.js run",
+    "dev-node": "npm run clean && webpack --env.DEVELOPMENT && node dist/dev.js",
     "dev-browser": "npm run clean && webpack-dev-server --env.DEVELOPMENT --open",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
