@@ -33,22 +33,18 @@ export class AsciiRunner {
     this.terminalGameIo = createTerminalGameIo({
       domElementId: options && options.domElementId ? options.domElementId : null,
       fps: 0.5,
-      frameHandler: (instance: ITerminalGameIo) => {
-        return this.frameHandler(instance);
-      },
-      keypressHandler: (instance: ITerminalGameIo, keyName: string) => {
-        return this.keypressHandler(instance, keyName);
-      }
+      frameHandler: this.frameHandler.bind(this),
+      keypressHandler: this.keypressHandler.bind(this)
     });
   }
 
-  protected frameHandler(instance: ITerminalGameIo) {
+  protected frameHandler(instance: ITerminalGameIo): void {
     const { data, width, height } = render(this.store.getState());
 
     instance.drawFrame(data, width, height);
   }
 
-  protected keypressHandler(instance: ITerminalGameIo, keyName: string) {
+  protected keypressHandler(instance: ITerminalGameIo, keyName: string): void {
     let keyCode: number = null;
 
     switch (keyName) {

@@ -51,10 +51,6 @@ function getConfig(env) {
       path: path.resolve(__dirname, 'dist'),
       globalObject: 'this'
     },
-    externals: {
-      process: 'process',
-      readline: 'readline'
-    },
     plugins: [
       new HtmlWebpackPlugin({
         filename: 'ascii-runner-browser.html',
