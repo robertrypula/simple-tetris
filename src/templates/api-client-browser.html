@@ -5,39 +5,70 @@
   <title>Simple tetris</title>
   <style>
     body {
-      background-color: #96a488;
+      background-color: #758c7a;
     }
-    .mobile-device-buttons {
-      position: fixed;
-      display: block;
-      width: 33%;
-      height: 50%;
-    }
-    .mobile-device-buttons:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     #game-root {
       margin: 0 auto;
       width: 250px;
       height: 500px;
-      outline: 1px solid #3b4128;
+      outline: 3px solid #061006;
     }
     #game-root > .block {
       float: left;
       width: 25px;
       height: 25px;
       border: 1px solid #96a488;
+      background-color: #3b4128;
+      position: relative;
+    }
+    #game-root > .block:before {
+      content: ' ';
+      top: 3px;
+      bottom: 3px;
+      left: 3px;
+      right: 3px;
+      position: absolute;
+      border: 3px solid;
     }
     #game-root > .block.empty {
-      background-color: #909c7c;
+      background-color: #63796c;
+    }
+    #game-root > .block.empty:before {
+      background-color: #63796c;
+      border-color: #758c7a; /* TODO fix it */
     }
     #game-root > .block.filled {
-      background-color: #3b4128;
+      background-color: #061006;
     }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    #game-root > .block.filled:before {
+      border-color: #758c7a; /* TODO fix it */
+    }
+    .mobile-device-buttons {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .mobile-device-buttons button {
+      position: fixed;
+      display: block;
+      width: 33%;
+      height: 50%;
+      border: none;
+      outline: none;
+      background: none;
+      cursor: pointer;
+    }
+    .mobile-device-buttons button:hover {
+      background-color: rgba(0, 0, 0, 0.05);
     }
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,22 +76,12 @@
 <body onLoad="run()">
   <div id="game-root"></div>
 
-  <a
-    href="javascript:void(0)" onClick="handleClick(event, SimpleTetris.KEY_CODE_HARD_DROP)"
-    class="mobile-device-buttons" style="top: 50%; left: 33%;"
-  ></a>
-  <a
-    href="javascript:void(0)" onClick="handleClick(event, SimpleTetris.KEY_CODE_ROTATE)"
-    class="mobile-device-buttons" style="top: 0; left: 33%;"
-  ></a>
-  <a
-    href="javascript:void(0)" onClick="handleClick(event, SimpleTetris.KEY_CODE_LEFT)"
-    class="mobile-device-buttons" style="top: 50%; left: 0;"
-  ></a>
-  <a
-    href="javascript:void(0)" onClick="handleClick(event, SimpleTetris.KEY_CODE_RIGHT)"
-    class="mobile-device-buttons" style="top: 50%; left: 66%;"
-  ></a>
+  <div class="mobile-device-buttons">
+    <button onClick="handleClick(event, SimpleTetris.KEY_CODE_HARD_DROP)" style="top: 50%; left: 33%;"></button>
+    <button onClick="handleClick(event, SimpleTetris.KEY_CODE_ROTATE)" style="top: 0; left: 33%;"></button>
+    <button onClick="handleClick(event, SimpleTetris.KEY_CODE_LEFT)" style="top: 50%; left: 0;"></button>
+    <button onClick="handleClick(event, SimpleTetris.KEY_CODE_RIGHT)" style="top: 50%; left: 66%;"></button>
+  </div>
 
   <script>
     var store;
@@ -88,6 +109,14 @@
 
     function run() {
       store = new SimpleTetris.createStore();
+      document.addEventListener('keydown', (event) => {
+        switch ((event.key + '').toUpperCase()) {
+          case 'W': handleClick(event, SimpleTetris.KEY_CODE_ROTATE); break;
+          case 'S': handleClick(event, SimpleTetris.KEY_CODE_HARD_DROP); break;
+          case 'A': handleClick(event, SimpleTetris.KEY_CODE_LEFT); break;
+          case 'D': handleClick(event, SimpleTetris.KEY_CODE_RIGHT); break;
+        }
+      });
       render();
     }
   </script>
