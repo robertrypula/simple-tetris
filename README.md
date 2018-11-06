@@ -12,7 +12,7 @@ was inspired by Redux and was written from scratch in TypeScript.
 
 **NOTE:** This project is still not finished. More details in the TODO section below.
 
-:image here:
+[![Api client browser](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)
 
 You can check playable version [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/api-client-browser.html) (use WSAD keys on Desktop or on-screen buttons on Mobile devices)
 
@@ -91,7 +91,7 @@ It works in terminal as well:
 npm install simple-tetris && echo "const st = new require('simple-tetris').AsciiRunner()" >> "index.js" && node index.js
 ```
 
-:image:
+[![Ascii runner node](https://cdn.rypula.pl/simple-tetris/ascii-runner-node.gif)](https://cdn.rypula.pl/simple-tetris/ascii-runner-node.gif)
 
 ASCII runner uses my other library ([terminal-game-io](https://github.com/robertrypula/terminal-game-io)) 
 that simplifies basic input and output of the text based games.
