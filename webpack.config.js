@@ -104,6 +104,11 @@ function fillProd(config) {
           from: path.resolve(__dirname) + '/src/templates/ascii-runner-node.js',
           to: path.resolve(__dirname) + '/dist/ascii-runner-node.js',
           toType: 'file'
+        },
+        {
+          from: path.resolve(__dirname) + '/src/templates/api-client-browser.html',
+          to: path.resolve(__dirname) + '/dist/api-client-browser.html',
+          toType: 'file'
         }
       ]
     )

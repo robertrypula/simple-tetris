@@ -79,19 +79,15 @@ If you just want to play the game and don't want to use any API you can simply u
 
 Browser example is available [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/ascii-runner-browser.html).
 
-You can transform any browser tab into Tetris game. Just paste the following code it into the browser address bar:
-```
-```
-
-:image:
+[![Ascii Runner browser](https://cdn.rypula.pl/simple-tetris/ascii-runner-browser.gif)](https://cdn.rypula.pl/simple-tetris/ascii-runner-browser.gif)
 
 It works in terminal as well:
 
 ```
-npm install simple-tetris && echo "const st = new require('simple-tetris').AsciiRunner()" >> "index.js" && node index.js
+npm install simple-tetris && node node_modules/simple-tetris/dist/ascii-runner-node.js
 ```
 
-[![Ascii runner node](https://cdn.rypula.pl/simple-tetris/ascii-runner-node.gif)](https://cdn.rypula.pl/simple-tetris/ascii-runner-node.gif)
+[![Ascii Runner node](https://cdn.rypula.pl/simple-tetris/ascii-runner-node.gif)](https://cdn.rypula.pl/simple-tetris/ascii-runner-node.gif)
 
 ASCII runner uses my other library ([terminal-game-io](https://github.com/robertrypula/terminal-game-io)) 
 that simplifies basic input and output of the text based games.
