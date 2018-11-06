@@ -12,12 +12,60 @@ was inspired by Redux and was written from scratch in TypeScript.
 
 **NOTE:** This project is still not finished. More details in the TODO section below.
 
-Code example of the simple API client is available on [CodeSandbox.io](https://codesandbox.io/s/l9o0lmm607)
+:image here:
 
-Library is shipped with ASCII runner - a simple way of bootstrapping Tetris game without the need of using 
-the API. Browser example is available [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/ascii-runner-browser.html).
-ASCII runner uses my other library ([terminal-game-io](https://github.com/robertrypula/terminal-game-io)) 
-that simplifies basic input and output of the text based games.
+You can check playable version [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/api-client-browser.html) (use WSAD keys on Desktop or on-screen buttons on Mobile devices)
+
+Simplest code example
+
+```javascript
+// TODO finish it
+var store;
+
+function handleClick(event, keyCode) {
+  event.preventDefault();
+  if (store) {
+    SimpleTetris.gameLoopIteration(store, 0.0, keyCode);
+    render();
+  }
+}
+
+function render() {
+  var matrixBlocksToRender = SimpleTetris.matrixBlocksToRenderSelector(store.getState());
+  var html = '';
+
+  for (var i = 0; i < matrixBlocksToRender.length; i++) {
+    html += matrixBlocksToRender[i]
+      ? '<div class="block filled">&nbsp;</div>'
+      : '<div class="block empty">&nbsp;</div>';
+  }
+
+  document.getElementById('game-root').innerHTML = html;
+}
+
+function initializeKeyboardEvents() {
+  document.addEventListener('keydown', (event) => {
+    switch ((event.key + '').toUpperCase()) {
+      case 'W': handleClick(event, SimpleTetris.KEY_CODE_ROTATE); break;
+      case 'S': handleClick(event, SimpleTetris.KEY_CODE_HARD_DROP); break;
+      case 'A': handleClick(event, SimpleTetris.KEY_CODE_LEFT); break;
+      case 'D': handleClick(event, SimpleTetris.KEY_CODE_RIGHT); break;
+    }
+  });
+}
+
+function run() {
+  store = new SimpleTetris.createStore();
+
+  initializeKeyboardEvents();
+  render();
+}
+```
+
+Interactive code examples:
+- Clean JavaScript simplest (TODO provide link)
+- Clean JavaScript nice looking with mobile support (TODO provide link)
+- Angular 6 (TODO provide link)
 
 ## Installation
 
@@ -25,11 +73,33 @@ that simplifies basic input and output of the text based games.
 npm install simple-tetris
 ```
 
+## Ascii Runner alternative
+
+If you just want to play the game and don't want to use any API you can simply use build-in Ascii Runner.
+
+Browser example is available [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/ascii-runner-browser.html).
+
+You can transform any browser tab into Tetris game. Just paste the following code it into the browser address bar:
+```
+```
+
+:image:
+
+It works in terminal as well:
+
+```
+npm install simple-tetris && echo "const st = new require('simple-tetris').AsciiRunner()" >> "index.js" && node index.js
+```
+
+:image:
+
+ASCII runner uses my other library ([terminal-game-io](https://github.com/robertrypula/terminal-game-io)) 
+that simplifies basic input and output of the text based games.
+
 ## Changelog
 
 ### Still TODO
-
-- detecting collisions both with borders and other blocks (probably in 1.2.x)
+- collision detection both with borders and other blocks (probably in 1.2.x)
 - implement hard drop and integrate it with collision detection (probably in 1.3.x)
 - move tetrimino one line down after given interval (probably in 1.4.x) 
 - when tetrimino will hit the 'ground' trigger new tetrimino (probably in 1.5.x)
@@ -37,7 +107,7 @@ npm install simple-tetris
 - detect game over / pause game (probably in 1.7.x)
 - more?
 - ...   
-- extend the readme
+- extend the readme?
 - ...
 
 ### 1.1.1 - ?? November 2018
@@ -46,7 +116,6 @@ npm install simple-tetris
 - [TODO] updates in readme
 
 ### 1.1.0 - 13 September 2018
-
 - rename 'assets' directory to 'templates'
 - rename suffix of terminal-game-io-runner-* to node and browser
 - createStore factory that hides reducers
@@ -58,10 +127,11 @@ npm install simple-tetris
 - finalization of the project structure that will be used across all 1.x.x versions
 
 ### 1.0.0 - 06 August 2018
-
 - initial version of the project, nothing more than the PoC
 
 ## Want to check this project in development mode?
+
+Development mode is using Ascii Runner supported by `terminal-game-io` library.
 
 ```
 git clone https://github.com/robertrypula/simple-tetris.git
@@ -71,7 +141,7 @@ npm install
 npm run dev-browser
 ```
 
-You can also play Tetris directly in the terminal! It works even via the SSH connections.
+You can develop and play Tetris directly in the terminal. It works even via the SSH connections.
 
 ```
 npm run dev-node

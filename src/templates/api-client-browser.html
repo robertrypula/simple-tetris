@@ -107,8 +107,7 @@
       document.getElementById('game-root').innerHTML = html;
     }
 
-    function run() {
-      store = new SimpleTetris.createStore();
+    function initializeKeyboardEvents() {
       document.addEventListener('keydown', (event) => {
         switch ((event.key + '').toUpperCase()) {
           case 'W': handleClick(event, SimpleTetris.KEY_CODE_ROTATE); break;
@@ -117,6 +116,12 @@
           case 'D': handleClick(event, SimpleTetris.KEY_CODE_RIGHT); break;
         }
       });
+    }
+
+    function run() {
+      store = new SimpleTetris.createStore();
+
+      initializeKeyboardEvents();
       render();
     }
   </script>
