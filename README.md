@@ -18,7 +18,7 @@ You can check playable version [here](https://cdn.rypula.pl/simple-tetris/v1.1.0
 
 Simplest code example (TODO finish it)
 
-```javascript
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
