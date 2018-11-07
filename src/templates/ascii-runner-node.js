@@ -3,4 +3,4 @@
 const SimpleTetris =
   require('./simple-tetris-v1.1.1-rc.js');  // in your application replace it to: require('simple-tetris');
 
-let asciiRunner = new SimpleTetris.AsciiRunner();
+const asciiRunner = new SimpleTetris.AsciiRunner();

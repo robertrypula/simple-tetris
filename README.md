@@ -16,50 +16,79 @@ was inspired by Redux and was written from scratch in TypeScript.
 
 You can check playable version [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/api-client-browser.html) (use WSAD keys on Desktop or on-screen buttons on Mobile devices)
 
-Simplest code example
+Simplest code example (TODO finish it)
 
 ```javascript
-// TODO finish it
-var store;
-
-function handleClick(event, keyCode) {
-  event.preventDefault();
-  if (store) {
-    SimpleTetris.gameLoopIteration(store, 0.0, keyCode);
-    render();
-  }
-}
-
-function render() {
-  var matrixBlocksToRender = SimpleTetris.matrixBlocksToRenderSelector(store.getState());
-  var html = '';
-
-  for (var i = 0; i < matrixBlocksToRender.length; i++) {
-    html += matrixBlocksToRender[i]
-      ? '<div class="block filled">&nbsp;</div>'
-      : '<div class="block empty">&nbsp;</div>';
-  }
-
-  document.getElementById('game-root').innerHTML = html;
-}
-
-function initializeKeyboardEvents() {
-  document.addEventListener('keydown', (event) => {
-    switch ((event.key + '').toUpperCase()) {
-      case 'W': handleClick(event, SimpleTetris.KEY_CODE_ROTATE); break;
-      case 'S': handleClick(event, SimpleTetris.KEY_CODE_HARD_DROP); break;
-      case 'A': handleClick(event, SimpleTetris.KEY_CODE_LEFT); break;
-      case 'D': handleClick(event, SimpleTetris.KEY_CODE_RIGHT); break;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple tetris - simplest example</title>
+  <style>
+    #game-root {
+      height: 480px;
+      margin-bottom: 8px;
+      width: 240px;
     }
-  });
-}
+    #game-root > div {
+      background-color: lightgray;
+      border: 1px solid white;
+      box-sizing: border-box;
+      float: left;
+      height: 24px;
+      width: 24px;
+    }
+    #game-root > div.filled { background-color: gray; }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body onLoad="run()">
+  <div id="game-root"></div>
 
-function run() {
-  store = new SimpleTetris.createStore();
+  <button onClick="handleEvent(SimpleTetris.KEY_CODE_LEFT);">left</button>
+  <button onClick="handleEvent(SimpleTetris.KEY_CODE_RIGHT);">right</button>
+  <button onClick="handleEvent(SimpleTetris.KEY_CODE_HARD_DROP);">down</button>
+  <button onClick="handleEvent(SimpleTetris.KEY_CODE_ROTATE);">rotate</button>
 
-  initializeKeyboardEvents();
-  render();
-}
+  <script>
+    var store;
+
+    function handleEvent(keyCode) {
+      if (store) {
+        SimpleTetris.gameLoopIteration(store, 0.0, keyCode);
+        render();
+      }
+    }
+
+    function render() {
+      var matrixBlocksToRender = SimpleTetris.matrixBlocksToRenderSelector(store.getState());
+      var html = '';
+
+      for (var i = 0; i < matrixBlocksToRender.length; i++) {
+        html += matrixBlocksToRender[i] ? '<div class="filled"></div>' : '<div></div>';
+      }
+      document.getElementById('game-root').innerHTML = html;
+    }
+
+    function keydownHandler(event) {
+      switch ((event.key + '').toUpperCase()) {
+        case 'W': handleEvent(SimpleTetris.KEY_CODE_ROTATE); break;
+        case 'S': handleEvent(SimpleTetris.KEY_CODE_HARD_DROP); break;
+        case 'A': handleEvent(SimpleTetris.KEY_CODE_LEFT); break;
+        case 'D': handleEvent(SimpleTetris.KEY_CODE_RIGHT); break;
+      }
+    }
+
+    function run() {
+      store = new SimpleTetris.createStore();
+
+      document.addEventListener('keydown', keydownHandler);
+      render();
+    }
+  </script>
+  <script src="https://cdn.rypula.pl/simple-tetris/v1.1.0/simple-tetris-v1.1.1-rc.js"></script>
+</body>
+</html>
 ```
 
 Interactive code examples:
@@ -79,6 +108,14 @@ If you just want to play the game and don't want to use any API you can simply u
 
 Browser example is available [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/ascii-runner-browser.html).
 
+```
+<pre id="root"></pre>
+<script src="https://cdn.rypula.pl/simple-tetris/v1.1.0/simple-tetris-v1.1.1-rc.js"></script>
+<script>
+  var asciiRunner = new SimpleTetris.AsciiRunner();
+</script>
+```
+
 [![Ascii Runner browser](https://cdn.rypula.pl/simple-tetris/ascii-runner-browser.gif)](https://cdn.rypula.pl/simple-tetris/ascii-runner-browser.gif)
 
 It works in terminal as well:
@@ -88,6 +125,12 @@ npm install simple-tetris && node node_modules/simple-tetris/dist/ascii-runner-n
 ```
 
 [![Ascii Runner node](https://cdn.rypula.pl/simple-tetris/ascii-runner-node.gif)](https://cdn.rypula.pl/simple-tetris/ascii-runner-node.gif)
+
+Content of the `ascii-runner-node.js` is as simple as:
+
+```
+let asciiRunner = new require('simple-tetris').AsciiRunner();
+```
 
 ASCII runner uses my other library ([terminal-game-io](https://github.com/robertrypula/terminal-game-io)) 
 that simplifies basic input and output of the text based games.
