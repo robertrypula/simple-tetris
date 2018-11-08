@@ -16,7 +16,7 @@ was inspired by Redux and was written from scratch in TypeScript.
 
 You can check playable version [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/api-client-browser.html) (use WSAD keys on Desktop or on-screen buttons on Mobile devices)
 
-Simplest code example (TODO finish it)
+Simplest code example:
 
 ```html
 <!DOCTYPE html>
@@ -70,23 +70,12 @@ Simplest code example (TODO finish it)
       document.getElementById('game-root').innerHTML = html;
     }
 
-    function keydownHandler(event) {
-      switch ((event.key + '').toUpperCase()) {
-        case 'W': handleEvent(SimpleTetris.KEY_CODE_ROTATE); break;
-        case 'S': handleEvent(SimpleTetris.KEY_CODE_HARD_DROP); break;
-        case 'A': handleEvent(SimpleTetris.KEY_CODE_LEFT); break;
-        case 'D': handleEvent(SimpleTetris.KEY_CODE_RIGHT); break;
-      }
-    }
-
     function run() {
       store = new SimpleTetris.createStore();
-
-      document.addEventListener('keydown', keydownHandler);
       render();
     }
   </script>
-  <script src="https://cdn.rypula.pl/simple-tetris/v1.1.0/simple-tetris-v1.1.1-rc.js"></script>
+  <script src="https://unpkg.com/simple-tetris"></script>
 </body>
 </html>
 ```
@@ -110,7 +99,7 @@ Browser example is available [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/a
 
 ```
 <pre id="root"></pre>
-<script src="https://cdn.rypula.pl/simple-tetris/v1.1.0/simple-tetris-v1.1.1-rc.js"></script>
+<script src="https://unpkg.com/simple-tetris"></script>
 <script>
   var asciiRunner = new SimpleTetris.AsciiRunner();
 </script>

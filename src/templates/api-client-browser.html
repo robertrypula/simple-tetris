@@ -5,13 +5,7 @@
   <title>Simple tetris</title>
   <style>
     body {
-      background-color: #758c7a; /* TODO refactor it to not copy the same color */
-      padding-top: 5px;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      background-color: #758c7a; /* TODO refactor it to not copy the same color multiple times */
     }
     #game-root {
       height: 500px;
@@ -19,16 +13,18 @@
       outline: 3px solid #061006;
       width: 250px;
     }
-    #game-root > .block {
-      background-color: #3b4128;
-      border: 1px solid #96a488;
+    #game-root > div {
+      background-color: #63796c;
+      border: 1px solid #758c7a;
+      box-sizing: border-box;
       float: left;
       height: 25px;
       position: relative;
       width: 25px;
     }
-    #game-root > .block:before {
-      border: 3px solid;
+    #game-root > div:before {
+      background-color: #63796c;
+      border: 3px solid #758c7a;  /* TODO refactor it to not copy the same color multiple times */
       bottom: 3px;
       content: ' ';
       left: 3px;
@@ -36,18 +32,12 @@
       right: 3px;
       top: 3px;
     }
-    #game-root > .block.empty {
-      background-color: #63796c;
-    }
-    #game-root > .block.empty:before {
-      background-color: #63796c;
-      border-color: #758c7a; /* TODO refactor it to not copy the same color */
-    }
-    #game-root > .block.filled {
+    #game-root > div.filled {
       background-color: #061006;
     }
-    #game-root > .block.filled:before {
-      border-color: #758c7a; /* TODO refactor it to not copy the same color */
+    #game-root > div.filled:before {
+      background-color: #061006;
+      border-color: #758c7a; /* TODO refactor it to not copy the same color multiple times */
     }
     .mobile-device-buttons {
       bottom: 0;
@@ -101,34 +91,27 @@
       var html = '';
 
       for (var i = 0; i < matrixBlocksToRender.length; i++) {
-        html += matrixBlocksToRender[i]
-          ? '<div class="block filled">&nbsp;</div>'
-          : '<div class="block empty">&nbsp;</div>';
+        html += matrixBlocksToRender[i] ? '<div class="filled"></div>' : '<div></div>';
       }
-
       document.getElementById('game-root').innerHTML = html;
     }
 
-    function initializeKeyboardEvents() {
-      document.addEventListener('keydown', (event) => {
-        switch ((event.key + '').toUpperCase()) {
-          case 'W': handleEvent(SimpleTetris.KEY_CODE_ROTATE); break;
-          case 'S': handleEvent(SimpleTetris.KEY_CODE_HARD_DROP); break;
-          case 'A': handleEvent(SimpleTetris.KEY_CODE_LEFT); break;
-          case 'D': handleEvent(SimpleTetris.KEY_CODE_RIGHT); break;
-        }
-      });
+    function keydownHandler(event) {
+      switch ((event.key + '').toUpperCase()) {
+        case 'W': handleEvent(SimpleTetris.KEY_CODE_ROTATE); break;
+        case 'S': handleEvent(SimpleTetris.KEY_CODE_HARD_DROP); break;
+        case 'A': handleEvent(SimpleTetris.KEY_CODE_LEFT); break;
+        case 'D': handleEvent(SimpleTetris.KEY_CODE_RIGHT); break;
+      }
     }
 
     function run() {
       store = new SimpleTetris.createStore();
-
-      initializeKeyboardEvents();
+      document.addEventListener('keydown', keydownHandler);
       render();
     }
   </script>
-  <!-- you can access distribution version via: <script src="https://unpkg.com/simple-tetris"></script> -->
-  <!-- todo update the url -->
+  <!--<script src="https://unpkg.com/simple-tetris"></script>-->
   <script src="https://cdn.rypula.pl/simple-tetris/v1.1.0/simple-tetris-v1.1.1-rc.js"></script>
 </body>
 </html>
