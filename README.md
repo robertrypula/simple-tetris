@@ -23,7 +23,7 @@ Simplest code example:
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Simple tetris - simplest example</title>
+  <title>Simple Tetris - Simplest example</title>
   <style>
     #game-root {
       height: 480px;
@@ -54,10 +54,8 @@ Simplest code example:
     var store;
 
     function handleEvent(keyCode) {
-      if (store) {
-        SimpleTetris.gameLoopIteration(store, 0.0, keyCode);
-        render();
-      }
+      SimpleTetris.gameLoopIteration(store, 0.0, keyCode);
+      render();
     }
 
     function render() {
@@ -81,9 +79,9 @@ Simplest code example:
 ```
 
 Interactive code examples:
-- Clean JavaScript simplest (TODO provide link)
-- Clean JavaScript nice looking with mobile support (TODO provide link)
-- Angular 6 (TODO provide link)
+- Clean JavaScript simplest example [here](https://stackblitz.com/edit/simple-tetris-js-simplest?file=index.html)
+- Clean JavaScript full example with mobile support [here](https://stackblitz.com/edit/simple-tetris-js-full?file=index.html)
+- Angular 7 example [here](https://stackblitz.com/edit/simple-tetris-angular?file=src%2Fapp%2Fapp.component.html)
 
 ## Installation
 
@@ -95,9 +93,9 @@ npm install simple-tetris
 
 If you just want to play the game and don't want to use any API you can simply use build-in Ascii Runner.
 
-Browser example is available [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/ascii-runner-browser.html).
+Playable browser example available [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/ascii-runner-browser.html) (use Arrows on Desktop or on-screen buttons on Mobile devices).
 
-```
+```html
 <pre id="root"></pre>
 <script src="https://unpkg.com/simple-tetris"></script>
 <script>
@@ -117,8 +115,9 @@ npm install simple-tetris && node node_modules/simple-tetris/dist/ascii-runner-n
 
 Content of the `ascii-runner-node.js` is as simple as:
 
-```
-let asciiRunner = new require('simple-tetris').AsciiRunner();
+```javascript
+const SimpleTetris = require('simple-tetris');
+const asciiRunner = new SimpleTetris.AsciiRunner();
 ```
 
 ASCII runner uses my other library ([terminal-game-io](https://github.com/robertrypula/terminal-game-io)) 

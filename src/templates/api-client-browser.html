@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Simple tetris</title>
+  <title>Simple Tetris - API client full example</title>
   <style>
     body {
-      background-color: #758c7a; /* TODO refactor it to not copy the same color multiple times */
+      background-color: #758c7a;
     }
     #game-root {
       height: 500px;
@@ -24,7 +24,7 @@
     }
     #game-root > div:before {
       background-color: #63796c;
-      border: 3px solid #758c7a;  /* TODO refactor it to not copy the same color multiple times */
+      border: 3px solid #758c7a;
       bottom: 3px;
       content: ' ';
       left: 3px;
@@ -37,16 +37,14 @@
     }
     #game-root > div.filled:before {
       background-color: #061006;
-      border-color: #758c7a; /* TODO refactor it to not copy the same color multiple times */
+      border-color: #758c7a;
     }
     .mobile-device-buttons {
       bottom: 0;
-      height: 100%;
       left: 0;
       position: fixed;
       right: 0;
       top: 0;
-      width: 100%;
     }
     .mobile-device-buttons button {
       background: none;
@@ -54,9 +52,11 @@
       cursor: pointer;
       display: block;
       height: 50%;
+      margin: 0;
       outline: none;
-      position: fixed;
-      width: 33%;
+      padding: 0;
+      position: absolute;
+      width: 33.333%;
     }
     .mobile-device-buttons button:hover {
       background-color: rgba(0, 0, 0, 0.05);
@@ -68,20 +68,16 @@
   <div id="game-root"></div>
 
   <div class="mobile-device-buttons">
-    <button onClick="handleEvent(SimpleTetris.KEY_CODE_HARD_DROP)" style="top: 50%; left: 33%;"></button>
-    <button onClick="handleEvent(SimpleTetris.KEY_CODE_ROTATE)" style="top: 0; left: 33%;"></button>
+    <button onClick="handleEvent(SimpleTetris.KEY_CODE_HARD_DROP)" style="top: 50%; left: 33.333%;"></button>
+    <button onClick="handleEvent(SimpleTetris.KEY_CODE_ROTATE)" style="top: 0; left: 33.333%;"></button>
     <button onClick="handleEvent(SimpleTetris.KEY_CODE_LEFT)" style="top: 50%; left: 0;"></button>
-    <button onClick="handleEvent(SimpleTetris.KEY_CODE_RIGHT)" style="top: 50%; left: 66%;"></button>
+    <button onClick="handleEvent(SimpleTetris.KEY_CODE_RIGHT)" style="top: 50%; left: 66.666%;"></button>
   </div>
 
   <script>
     var store;
 
     function handleEvent(keyCode) {
-      if (!store) {
-        return;
-      }
-
       SimpleTetris.gameLoopIteration(store, 0.0, keyCode);
       render();
     }
@@ -111,7 +107,6 @@
       render();
     }
   </script>
-  <!--<script src="https://unpkg.com/simple-tetris"></script>-->
-  <script src="https://cdn.rypula.pl/simple-tetris/v1.1.0/simple-tetris-v1.1.1-rc.js"></script>
+  <script src="https://unpkg.com/simple-tetris"></script>
 </body>
 </html>

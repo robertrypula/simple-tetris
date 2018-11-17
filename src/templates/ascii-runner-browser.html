@@ -2,23 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Simple tetris</title>
+  <title>Simple Tetris - ASCII Runner</title>
   <style>
     body {
       background-color: #f4f4f4;
     }
-    * {
-      margin: 0;
-      padding: 0;
-    }
     .mobile-device-buttons {
       bottom: 0;
-      height: 100%;
       left: 0;
       position: fixed;
       right: 0;
       top: 0;
-      width: 100%;
     }
     .mobile-device-buttons button {
       background: none;
@@ -26,9 +20,11 @@
       cursor: pointer;
       display: block;
       height: 50%;
+      margin: 0;
       outline: none;
-      position: fixed;
-      width: 33%;
+      padding: 0;
+      position: absolute;
+      width: 33.333%;
     }
     .mobile-device-buttons button:hover {
       background-color: rgba(0, 0, 0, 0.05);
@@ -43,10 +39,10 @@
   <pre id="game-root"></pre>
 
   <div class="mobile-device-buttons">
-    <button onClick="handleEvent('ArrowDown')" style="top: 50%; left: 33%;"></button>
-    <button onClick="handleEvent('ArrowUp')" style="top: 0; left: 33%;"></button>
+    <button onClick="handleEvent('ArrowDown')" style="top: 50%; left: 33.333%;"></button>
+    <button onClick="handleEvent('ArrowUp')" style="top: 0; left: 33.333%;"></button>
     <button onClick="handleEvent('ArrowLeft')" style="top: 50%; left: 0;"></button>
-    <button onClick="handleEvent('ArrowRight')" style="top: 50%; left: 66%;"></button>
+    <button onClick="handleEvent('ArrowRight')" style="top: 50%; left: 66.666%;"></button>
   </div>
 
   <script>
