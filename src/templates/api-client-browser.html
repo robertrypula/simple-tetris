@@ -61,13 +61,16 @@
     .mobile-device-buttons button:hover {
       background-color: rgba(0, 0, 0, 0.05);
     }
+    .hidden {
+      display: none;
+    }
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body onLoad="run()">
   <div id="game-root"></div>
 
-  <div class="mobile-device-buttons">
+  <div class="mobile-device-buttons hidden">
     <button onClick="handleEvent(SimpleTetris.KEY_CODE_HARD_DROP)" style="top: 50%; left: 33.333%;"></button>
     <button onClick="handleEvent(SimpleTetris.KEY_CODE_ROTATE)" style="top: 0; left: 33.333%;"></button>
     <button onClick="handleEvent(SimpleTetris.KEY_CODE_LEFT)" style="top: 50%; left: 0;"></button>
@@ -75,21 +78,36 @@
   </div>
 
   <script>
+    var previousBlocks;
     var store;
 
     function handleEvent(keyCode) {
       SimpleTetris.gameLoopIteration(store, 0.0, keyCode);
-      render();
+      requestAnimationFrame(render);
     }
 
     function render() {
-      var matrixBlocksToRender = SimpleTetris.matrixBlocksToRenderSelector(store.getState());
+      var blocks = SimpleTetris.matrixBlocksToRenderSelector(store.getState());
+      var domElement;
       var html = '';
+      var i;
 
-      for (var i = 0; i < matrixBlocksToRender.length; i++) {
-        html += matrixBlocksToRender[i] ? '<div class="filled"></div>' : '<div></div>';
+      if (!previousBlocks) {
+        for (i = 0; i < blocks.length; i++) {
+          html += blocks[i] ? '<div class="filled"></div>' : '<div></div>';
+        }
+        document.getElementById('game-root').innerHTML = html;
+      } else {
+        for (i = 0; i < blocks.length; i++) {
+          if (blocks[i] !== previousBlocks[i]) {
+            domElement = document.querySelector('#game-root > div:nth-child(' + (i + 1) + ')');
+            blocks[i]
+              ? domElement.classList.add('filled')
+              : domElement.classList.remove('filled');
+          }
+        }
       }
-      document.getElementById('game-root').innerHTML = html;
+      previousBlocks = blocks;
     }
 
     function keydownHandler(event) {
@@ -104,9 +122,11 @@
     function run() {
       store = new SimpleTetris.createStore();
       document.addEventListener('keydown', keydownHandler);
-      render();
+      requestAnimationFrame(render);
+      document.querySelector('.mobile-device-buttons').classList.remove('hidden');
     }
   </script>
-  <script src="https://unpkg.com/simple-tetris"></script>
+  <!--<script src="https://unpkg.com/simple-tetris"></script>-->
+  <script src="https://cdn.rypula.pl/simple-tetris/v1.1.0/simple-tetris-v1.1.1.js"></script>
 </body>
 </html>
