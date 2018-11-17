@@ -81,7 +81,7 @@ Simplest code example:
 Interactive code examples:
 - Clean JavaScript simplest example [here](https://stackblitz.com/edit/simple-tetris-js-simplest?file=index.html)
 - Clean JavaScript full example with mobile support [here](https://stackblitz.com/edit/simple-tetris-js-full?file=index.html)
-- Angular 7 example [here](https://stackblitz.com/edit/simple-tetris-angular?file=src%2Fapp%2Fapp.component.html)
+- **Angular 7** example [here](https://stackblitz.com/edit/simple-tetris-angular?file=src%2Fapp%2Fapp.component.html)
 
 ## Installation
 
