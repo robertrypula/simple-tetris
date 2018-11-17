@@ -137,10 +137,13 @@ that simplifies basic input and output of the text based games.
 - extend the readme?
 - ...
 
-### 1.1.1 - ?? November 2018
+### 1.1.1 - 18 November 2018
 - adds dedicated 'GameLoopIteration' type that solves the problem in the *.d.ts file used by older typescript compilers
 - version upgrade of terminal-game-io (2.1.2 -> 3.1.0) - thanks to the new version of terminal-game-io all externals could be removed ('process' and 'readline')
-- [TODO] updates in readme
+- npm keywords update
+- big update in examples (external stackblitz examples, internal API client example)
+- big update in readme (code examples, animated gifs)
+- simple-tetris is finally easy to import in any other project
 
 ### 1.1.0 - 13 September 2018
 - rename 'assets' directory to 'templates'
