@@ -14,7 +14,7 @@ was inspired by Redux and was written from scratch in TypeScript.
 
 [![Api client browser](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)
 
-You can check playable version [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/api-client-browser.html) (use WSAD keys on Desktop or on-screen buttons on Mobile devices)
+You can check playable version [here](https://cdn.rypula.pl/simple-tetris/v1.2.0-rc/api-client-browser.html) (use WSAD keys on Desktop or on-screen buttons on Mobile devices)
 
 Simplest code example:
 
@@ -93,7 +93,7 @@ npm install simple-tetris
 
 If you just want to play the game and don't want to use any API you can simply use build-in Ascii Runner.
 
-Playable browser example available [here](https://cdn.rypula.pl/simple-tetris/v1.1.0/ascii-runner-browser.html) (use Arrows on Desktop or on-screen buttons on Mobile devices).
+Playable browser example available [here](https://cdn.rypula.pl/simple-tetris/v1.2.0-rc/ascii-runner-browser.html) (use Arrows on Desktop or on-screen buttons on Mobile devices).
 
 ```html
 <pre id="root"></pre>
