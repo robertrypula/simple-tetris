@@ -126,7 +126,6 @@ that simplifies basic input and output of the text based games.
 ## Changelog
 
 ### Still TODO
-- collision detection both with borders and other blocks (probably in 1.2.x)
 - implement hard drop and integrate it with collision detection (probably in 1.3.x)
 - move tetrimino one line down after given interval (probably in 1.4.x) 
 - when tetrimino will hit the 'ground' trigger new tetrimino (probably in 1.5.x)
@@ -136,6 +135,10 @@ that simplifies basic input and output of the text based games.
 - ...   
 - extend the readme?
 - ...
+
+### 1.2.0 - ?? November 2018
+- [todo] fix keyName parameter usage in ascii-runner.ts
+- [todo] collision detection both with borders and other blocks
 
 ### 1.1.1 - 18 November 2018
 - adds dedicated 'GameLoopIteration' type that solves the problem in the *.d.ts file used by older typescript compilers
