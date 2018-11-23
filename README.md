@@ -14,7 +14,7 @@ was inspired by Redux and was written from scratch in TypeScript.
 
 [![Api client browser](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)
 
-You can check playable version [here](https://cdn.rypula.pl/simple-tetris/v1.2.0-rc/api-client-browser.html) (use WSAD keys on Desktop or on-screen buttons on Mobile devices)
+[Play online](https://cdn.rypula.pl/simple-tetris/v1.2.0-rc/api-client-browser.html) - use WSAD keys on Desktop or on-screen buttons on Mobile devices.
 
 Simplest code example:
 
@@ -81,7 +81,7 @@ Simplest code example:
 Interactive code examples:
 - Clean JavaScript simplest example [here](https://stackblitz.com/edit/simple-tetris-js-simplest?file=index.html)
 - Clean JavaScript full example with mobile support [here](https://stackblitz.com/edit/simple-tetris-js-full?file=index.html)
-- **Angular 7** example [here](https://stackblitz.com/edit/simple-tetris-angular?file=src%2Fapp%2Fapp.component.html)
+- **Angular 7** example [here](https://stackblitz.com/edit/simple-tetris-angular?file=src%2Fapp%2Fsimple-tetris%2Fsimple-tetris.component.ts)
 
 ## Installation
 
@@ -93,7 +93,7 @@ npm install simple-tetris
 
 If you just want to play the game and don't want to use any API you can simply use build-in Ascii Runner.
 
-Playable browser example available [here](https://cdn.rypula.pl/simple-tetris/v1.2.0-rc/ascii-runner-browser.html) (use Arrows on Desktop or on-screen buttons on Mobile devices).
+[Play online](https://cdn.rypula.pl/simple-tetris/v1.2.0-rc/ascii-runner-browser.html) - use Arrows on Desktop or on-screen buttons on Mobile devices.
 
 ```html
 <pre id="root"></pre>
@@ -133,12 +133,13 @@ that simplifies basic input and output of the text based games.
 - detect game over / pause game (probably in 1.7.x)
 - more?
 - ...   
-- extend the readme?
+- add separate Enum for Keys and remove KEY_CODE_* constants
 - ...
 
 ### 1.2.0 - ?? November 2018
 - [todo] fix keyName parameter usage in ascii-runner.ts
 - [todo] collision detection both with borders and other blocks
+- [todo] bugfix for terminal-game-io dependency issue
 
 ### 1.1.1 - 18 November 2018
 - adds dedicated 'GameLoopIteration' type that solves the problem in the *.d.ts file used by older typescript compilers
