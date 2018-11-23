@@ -126,20 +126,21 @@ that simplifies basic input and output of the text based games.
 ## Changelog
 
 ### Still TODO
-- implement hard drop and integrate it with collision detection (probably in 1.3.x)
-- move tetrimino one line down after given interval (probably in 1.4.x) 
-- when tetrimino will hit the 'ground' trigger new tetrimino (probably in 1.5.x)
-- detect and remove completely filled lines (probably in 1.6.x)
-- detect game over / pause game (probably in 1.7.x)
-- more?
+- implement hard drop and integrate it with collision detection (probably in **1.3.x**)
+- move tetrimino one line down after given interval (probably in **1.4.x**) 
+- when tetrimino will hit the 'ground' trigger new tetrimino (probably in **1.5.x**)
+- detect and remove completely filled lines (probably in **1.6.x**)
+- detect game over / pause game (probably in **1.7.x**)
+- (?) more like scores, next piece etc.
 - ...   
-- add separate Enum for Keys and remove KEY_CODE_* constants
+- add separate Enum for Keys and remove KEY_CODE_* constants (breaking change, probably in **2.0.0**)
+- (?) remove `terminal-game-io` from typescript definitions of _src/lib/ascii-runner.ts_ file and move this lib back to devDeps (breaking change, probably in **2.0.0**)
 - ...
 
 ### 1.2.0 - ?? November 2018
 - [todo] fix keyName parameter usage in ascii-runner.ts
 - [todo] collision detection both with borders and other blocks
-- [todo] bugfix for terminal-game-io dependency issue
+- bugfix for terminal-game-io dependency issue
 
 ### 1.1.1 - 18 November 2018
 - adds dedicated 'GameLoopIteration' type that solves the problem in the *.d.ts file used by older typescript compilers
