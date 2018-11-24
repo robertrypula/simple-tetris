@@ -1,6 +1,6 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { createTerminalGameIo, ITerminalGameIo } from 'terminal-game-io';
+import { createTerminalGameIo, ITerminalGameIo, Key, KeyName } from 'terminal-game-io';
 
 import { render } from './ascii-renderer';
 import * as fromGame from './game';
@@ -14,22 +14,22 @@ export class AsciiRunner {
   protected terminalGameIo: ITerminalGameIo;
   protected store: fromGame.Store;
 
-  constructor(options?: IAsciiRunnerOptions) {
+  public constructor(options?: IAsciiRunnerOptions) {
     this.initializeStore(options);
     this.initializeTerminalGameIo(options);
   }
 
-  public triggerKeypress(keyName: string) {
+  public triggerKeypress(keyName: string): void {
     this.terminalGameIo.triggerKeypress(keyName);
   }
 
-  protected initializeStore(options: IAsciiRunnerOptions) {
+  protected initializeStore(options: IAsciiRunnerOptions): void {
     this.store = fromGame.createStore(
       options && options.createStoreOptions ? options.createStoreOptions : null
     );
   }
 
-  protected initializeTerminalGameIo(options: IAsciiRunnerOptions) {
+  protected initializeTerminalGameIo(options: IAsciiRunnerOptions): void {
     this.terminalGameIo = createTerminalGameIo({
       domElementId: options && options.domElementId ? options.domElementId : null,
       fps: 0.5,
@@ -44,37 +44,23 @@ export class AsciiRunner {
     instance.drawFrame(data, width, height);
   }
 
-  protected keypressHandler(instance: ITerminalGameIo, keyName: string): void {
+  protected keypressHandler(instance: ITerminalGameIo, keyName: KeyName): void {
     let keyCode: number = null;
 
     switch (keyName) {
-      case 'up':
-      case 'Up':
-      case 'ArrowUp':
-      case 'ClickUp':
+      case Key.ArrowUp:
         keyCode = fromGame.KEY_CODE_ROTATE;
         break;
-      case 'left':
-      case 'Left':
-      case 'ArrowLeft':
-      case 'ClickLeft':
+      case Key.ArrowLeft:
         keyCode = fromGame.KEY_CODE_LEFT;
         break;
-      case 'right':
-      case 'Right':
-      case 'ArrowRight':
-      case 'ClickRight':
+      case Key.ArrowRight:
         keyCode = fromGame.KEY_CODE_RIGHT;
         break;
-      case 'down':
-      case 'Down':
-      case 'ArrowDown':
-      case 'ClickDown':
+      case Key.ArrowDown:
         keyCode = fromGame.KEY_CODE_HARD_DROP;
         break;
-      case 'escape':
-      case 'Esc':
-      case 'Escape':
+      case Key.Escape:
         instance.exit();
         break;
     }

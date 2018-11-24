@@ -138,9 +138,9 @@ that simplifies basic input and output of the text based games.
 - ...
 
 ### 1.2.0 - ?? November 2018
-- [todo] fix keyName parameter usage in ascii-runner.ts
 - [todo] collision detection both with borders and other blocks
-- bugfix for terminal-game-io dependency issue
+- bugfix related to keyName parameter usage in ascii-runner.ts
+- bugfix related to terminal-game-io dependency issue
 
 ### 1.1.1 - 18 November 2018
 - adds dedicated 'GameLoopIteration' type that solves the problem in the *.d.ts file used by older typescript compilers
