@@ -1,11 +1,32 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
 import { IState } from '..';
-import {
-  TETRIMINO_LIST,
-  TETRIMINO_SIZE_X,
-  TETRIMINO_SIZE_Y
-} from '../constants';
+import * as fromConstants from '../constants';
+
+export const isAbleToMoveSelector = (x: number, y: number) => {
+  return (state: IState): boolean => {
+    return true;
+  };
+};
+
+export const isAbleToRotateSelector =
+  (state: IState): boolean => {
+    return true;
+  };
+
+export const isBlockOccupiedByTetriminoSelector = (x: number, y: number) => {
+  return (state: IState): boolean => {
+    const tetrimino = fromConstants.TETRIMINO_LIST[state.tetrimino.index][state.tetrimino.rotation];
+    const xInTetrimino = x - state.tetrimino.x;
+    const yInTetrimino = y - state.tetrimino.y;
+
+    return (
+      xInTetrimino >= 0 && xInTetrimino < fromConstants.TETRIMINO_SIZE_X &&
+      yInTetrimino >= 0 && yInTetrimino < fromConstants.TETRIMINO_SIZE_Y &&
+      tetrimino[yInTetrimino * fromConstants.TETRIMINO_SIZE_X + xInTetrimino]
+    );
+  };
+};
 
 export const matrixBlocksToRenderSelector = (state: IState): number[] => {
   const { sizeX, sizeY } = state.matrix;
@@ -13,25 +34,11 @@ export const matrixBlocksToRenderSelector = (state: IState): number[] => {
 
   for (let y = 0; y < sizeY; y++) {
     for (let x = 0; x < sizeX; x++) {
-      if (isBlockOccupiedByTetrimino(x, y)(state)) {
+      if (isBlockOccupiedByTetriminoSelector(x, y)(state)) {
         fullMatrix[y * sizeX + x] = 1;
       }
     }
   }
 
   return fullMatrix;
-};
-
-export const isBlockOccupiedByTetrimino = (x: number, y: number) => {
-  return (state: IState): boolean => {
-    const tetrimino = TETRIMINO_LIST[state.tetrimino.index][state.tetrimino.rotation];
-    const xInTetrimino = x - state.tetrimino.x;
-    const yInTetrimino = y - state.tetrimino.y;
-
-    return (
-      xInTetrimino >= 0 && xInTetrimino < TETRIMINO_SIZE_X &&
-      yInTetrimino >= 0 && yInTetrimino < TETRIMINO_SIZE_Y &&
-      tetrimino[yInTetrimino * TETRIMINO_SIZE_X + xInTetrimino]
-    );
-  };
 };

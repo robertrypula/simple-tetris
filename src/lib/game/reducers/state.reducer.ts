@@ -3,12 +3,13 @@
 import { IState } from '..';
 import { MatrixActionsUnion } from '../actions/matrix.actions';
 import { TetriminoActionsUnion } from '../actions/tetrimino.actions';
+import { initialState } from '../models/state.model';
 import { Reducer } from '../simple-redux';
 import { matrixReducer } from './matrix.reducer';
 import { tetriminoReducer } from './tetrimino.reducer';
 
 export const stateReducer: Reducer<IState> = (
-  state: IState,
+  state: IState = initialState,
   action: MatrixActionsUnion | TetriminoActionsUnion
 ): IState => {
   return {

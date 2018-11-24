@@ -4,8 +4,8 @@ import { TETRIMINO_LIST } from '../constants';
 import { IThunkAction } from '../simple-redux';
 import { Store } from '../store';
 import { getRandomInt } from '../utilities';
-import { InitializeMatrixAction } from './matrix.actions';
-import { InitNewAction } from './tetrimino.actions';
+import * as fromMatrixActions from './matrix.actions';
+import * as fromTetriminoActions from './tetrimino.actions';
 
 export const INITIALIZE_GAME_ACTION = 'INITIALIZE_GAME_ACTION';
 
@@ -24,12 +24,12 @@ export class InitializeGameAction implements IThunkAction<Store> {
   public executeThunk(store: Store): void {
     const { matrixSizeX, matrixSizeY } = this.payload;
 
-    store.dispatch(new InitializeMatrixAction({
+    store.dispatch(new fromMatrixActions.InitializeMatrixAction({
       sizeX: matrixSizeX,
       sizeY: matrixSizeY
     }));
 
-    store.dispatch(new InitNewAction({
+    store.dispatch(new fromTetriminoActions.InitNewAction({
       index: getRandomInt(0, TETRIMINO_LIST.length - 1),
       matrixSizeX
     }));
