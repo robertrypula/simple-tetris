@@ -36,10 +36,9 @@ export class SimpleStore<S> {
   protected state: S;
 
   public constructor(
-    protected reducer: Reducer<S>,
-    preloadedState: S
+    protected reducer: Reducer<S>
   ) {
-    this.state = preloadedState;
+    this.dispatch({ type: undefined });
   }
 
   public dispatch(action: IAction | IThunkAction<SimpleStore<S>>) {

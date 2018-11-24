@@ -12,9 +12,9 @@ was inspired by Redux and was written from scratch in TypeScript.
 
 **NOTE:** This project is still not finished. More details in the TODO section below.
 
-[![Api client browser](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)
-
 [Play online](https://cdn.rypula.pl/simple-tetris/v1.2.0-rc/api-client-browser.html) - use WSAD keys on Desktop or on-screen buttons on Mobile devices.
+
+[![Api client browser](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)
 
 Simplest code example:
 
@@ -131,14 +131,22 @@ that simplifies basic input and output of the text based games.
 - when tetrimino will hit the 'ground' trigger new tetrimino (probably in **1.5.x**)
 - detect and remove completely filled lines (probably in **1.6.x**)
 - detect game over / pause game (probably in **1.7.x**)
-- (?) more like scores, next piece etc.
 - ...   
-- add separate Enum for Keys and remove KEY_CODE_* constants (breaking change, probably in **2.0.0**)
 - (?) remove `terminal-game-io` from typescript definitions of _src/lib/ascii-runner.ts_ file and move this lib back to devDeps (breaking change, probably in **2.0.0**)
+- updates in interfaces like TetriminoRotation, TetriminoType instead of index, etc (breaking change, probably in **2.0.0**)
+- add separate Enum for Keys and remove KEY_CODE_* constants (breaking change, probably in **2.0.0**)
+- soft drop (probably in **2.x.x**)
+- remove completely filled line 'blink' effect (probably in **2.x.x**)
+- block colors (probably in **2.x.x**)
+- score (probably in **2.x.x**)
+- next piece preview (probably in **2.x.x**)
 - ...
 
 ### 1.2.0 - ?? November 2018
 - [todo] collision detection both with borders and other blocks
+- updates in internal 'Simple Redux' implementation
+- tetriminos now rotates clockwise
+- fields in IAsciiRunnerOptions are now optional
 - bugfix related to keyName parameter usage in ascii-runner.ts
 - bugfix related to terminal-game-io dependency issue
 

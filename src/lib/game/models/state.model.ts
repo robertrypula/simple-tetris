@@ -1,7 +1,7 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import { IMatrix, initialMatrix } from './matrix.model';
-import { initialTetrimino, ITetrimino } from './tetrimino.model';
+import { IMatrix } from './matrix.model';
+import { ITetrimino } from './tetrimino.model';
 
 export interface IState {
   matrix: IMatrix;
@@ -9,6 +9,6 @@ export interface IState {
 }
 
 export const initialState: IState = {
-  matrix: initialMatrix,
-  tetrimino: initialTetrimino
+  matrix: undefined,
+  tetrimino: undefined
 };

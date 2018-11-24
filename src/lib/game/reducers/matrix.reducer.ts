@@ -3,6 +3,7 @@
 import { IMatrix } from '..';
 import * as fromMarixActions from '../actions/matrix.actions';
 import { DEFAULT_MATRIX_SIZE_X, DEFAULT_MATRIX_SIZE_Y, DEVELOPMENT_MATRIX_20_10 } from '../constants';
+import { initialMatrix } from '../models/matrix.model';
 import { IReducerMap, Reducer } from '../simple-redux';
 import { generateBlocks } from '../utilities';
 
@@ -20,7 +21,7 @@ const initializeMatrix = (state: IMatrix, action: fromMarixActions.InitializeMat
 };
 
 export const matrixReducer: Reducer<IMatrix> = (
-  state: IMatrix,
+  state: IMatrix = initialMatrix,
   action: fromMarixActions.MatrixActionsUnion
 ): IMatrix => {
   const reducerMap: IReducerMap<IMatrix> = {
