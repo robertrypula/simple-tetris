@@ -1,12 +1,7 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
-import * as fromTetriminoActions from './actions/tetrimino.actions';
-import {
-  KEY_CODE_HARD_DROP,
-  KEY_CODE_LEFT,
-  KEY_CODE_RIGHT,
-  KEY_CODE_ROTATE
-} from './constants';
+import * as fromGameLoopActions from './actions/game-loop.actions';
+import * as fromConstants from './constants';
 import { Store } from './store';
 
 export const gameLoopIteration: GameLoopIteration = (
@@ -15,19 +10,17 @@ export const gameLoopIteration: GameLoopIteration = (
   keyCode: number
 ): void => {
   switch (keyCode) {
-    case KEY_CODE_HARD_DROP:
-      store.dispatch(new fromTetriminoActions.HardDropAction({
-        matrixSizeY: store.getState().matrix.sizeY
-      }));
+    case fromConstants.KEY_CODE_HARD_DROP:
+      store.dispatch(new fromGameLoopActions.KeyCodeHardDropAction());
       break;
-    case KEY_CODE_LEFT:
-      store.dispatch(new fromTetriminoActions.MoveLeftAction());
+    case fromConstants.KEY_CODE_LEFT:
+      store.dispatch(new fromGameLoopActions.KeyCodeLeftAction());
       break;
-    case KEY_CODE_RIGHT:
-      store.dispatch(new fromTetriminoActions.MoveRightAction());
+    case fromConstants.KEY_CODE_RIGHT:
+      store.dispatch(new fromGameLoopActions.KeyCodeRightAction());
       break;
-    case KEY_CODE_ROTATE:
-      store.dispatch(new fromTetriminoActions.RotateAction());
+    case fromConstants.KEY_CODE_ROTATE:
+      store.dispatch(new fromGameLoopActions.KeyCodeRotateAction());
       break;
   }
 };
