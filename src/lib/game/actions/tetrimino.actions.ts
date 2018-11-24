@@ -26,7 +26,7 @@ export class MoveDownAction implements IAction {
 
   public constructor(
     public payload: {
-      yRelative: number
+      offsetY: number
     }
   ) { }
 }

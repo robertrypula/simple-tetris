@@ -26,7 +26,7 @@ const moveLeft = (state: ITetrimino, action: fromTetriminoActions.MoveLeftAction
 const moveDown = (state: ITetrimino, action: fromTetriminoActions.MoveDownAction): ITetrimino => {
   return {
     ...state,
-    y: state.y + action.payload.yRelative
+    y: state.y + action.payload.offsetY
   };
 };
 
