@@ -6,8 +6,8 @@ import { render } from './ascii-renderer';
 import * as fromGame from './game';
 
 export interface IAsciiRunnerOptions {
-  createStoreOptions: fromGame.ICreateStoreOptions;
-  domElementId: string;
+  createStoreOptions?: fromGame.ICreateStoreOptions;
+  domElementId?: string;
 }
 
 export class AsciiRunner {
