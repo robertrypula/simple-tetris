@@ -7,7 +7,7 @@ import { getTestingState } from '../utilities';
 import * as fromGameSelectors from './game.selectors';
 
 fdescribe('Game Selectors', () => {
-  describe('isAbleToMoveSelector', () => {
+  describe('isNotCollidingSelector', () => {
     let state: IState;
 
     beforeEach(() => {
@@ -21,33 +21,33 @@ fdescribe('Game Selectors', () => {
     });
 
     it('should allow to remain in the same position', () => {
-      expect(fromGameSelectors.isAbleToMoveSelector(0, 0)(state)).toEqual(true);
+      expect(fromGameSelectors.isNotCollidingSelector()(state)).toEqual(true);
     });
 
     it('should allow to move one unit in any direction', () => {
-      expect(fromGameSelectors.isAbleToMoveSelector(-1, -1)(state)).toEqual(true);
-      expect(fromGameSelectors.isAbleToMoveSelector(0, -1)(state)).toEqual(true);
-      expect(fromGameSelectors.isAbleToMoveSelector(1, -1)(state)).toEqual(true);
+      expect(fromGameSelectors.isNotCollidingSelector(-1, -1)(state)).toEqual(true);
+      expect(fromGameSelectors.isNotCollidingSelector(0, -1)(state)).toEqual(true);
+      expect(fromGameSelectors.isNotCollidingSelector(1, -1)(state)).toEqual(true);
 
-      expect(fromGameSelectors.isAbleToMoveSelector(-1, 0)(state)).toEqual(true);
-      expect(fromGameSelectors.isAbleToMoveSelector(1, 0)(state)).toEqual(true);
+      expect(fromGameSelectors.isNotCollidingSelector(-1)(state)).toEqual(true);
+      expect(fromGameSelectors.isNotCollidingSelector(1)(state)).toEqual(true);
 
-      expect(fromGameSelectors.isAbleToMoveSelector(-1, 1)(state)).toEqual(true);
-      expect(fromGameSelectors.isAbleToMoveSelector(0, 1)(state)).toEqual(true);
-      expect(fromGameSelectors.isAbleToMoveSelector(1, 1)(state)).toEqual(true);
+      expect(fromGameSelectors.isNotCollidingSelector(-1, 1)(state)).toEqual(true);
+      expect(fromGameSelectors.isNotCollidingSelector(0, 1)(state)).toEqual(true);
+      expect(fromGameSelectors.isNotCollidingSelector(1, 1)(state)).toEqual(true);
     });
 
     it('should NOT allow to move outside the matrix boundaries', () => {
-      expect(fromGameSelectors.isAbleToMoveSelector(-2, -2)(state)).toEqual(false);
-      expect(fromGameSelectors.isAbleToMoveSelector(0, -2)(state)).toEqual(false);
-      expect(fromGameSelectors.isAbleToMoveSelector(2, -2)(state)).toEqual(false);
+      expect(fromGameSelectors.isNotCollidingSelector(-2, -2)(state)).toEqual(false);
+      expect(fromGameSelectors.isNotCollidingSelector(0, -2)(state)).toEqual(false);
+      expect(fromGameSelectors.isNotCollidingSelector(2, -2)(state)).toEqual(false);
 
-      expect(fromGameSelectors.isAbleToMoveSelector(-2, 0)(state)).toEqual(false);
-      expect(fromGameSelectors.isAbleToMoveSelector(2, 0)(state)).toEqual(false);
+      expect(fromGameSelectors.isNotCollidingSelector(-2)(state)).toEqual(false);
+      expect(fromGameSelectors.isNotCollidingSelector(2)(state)).toEqual(false);
 
-      expect(fromGameSelectors.isAbleToMoveSelector(-2, 2)(state)).toEqual(false);
-      expect(fromGameSelectors.isAbleToMoveSelector(0, 2)(state)).toEqual(false);
-      expect(fromGameSelectors.isAbleToMoveSelector(2, 2)(state)).toEqual(false);
+      expect(fromGameSelectors.isNotCollidingSelector(-2, 2)(state)).toEqual(false);
+      expect(fromGameSelectors.isNotCollidingSelector(0, 2)(state)).toEqual(false);
+      expect(fromGameSelectors.isNotCollidingSelector(2, 2)(state)).toEqual(false);
     });
   });
 });

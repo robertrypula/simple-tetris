@@ -1,44 +1,58 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
 import { IState } from '..';
-import * as fromConstants from '../constants';
+import { TETRIMINO_LIST, TETRIMINO_ROTATIONS, TETRIMINO_SIZE_X, TETRIMINO_SIZE_Y } from '../constants';
 
-export const isAbleToMoveSelector = (x: number, y: number) => {
+export const isNotCollidingSelector = (
+  offsetX: number = 0,
+  offsetY: number = 0,
+  offsetRotation: number = 0
+) => {
   return (state: IState): boolean => {
+    const rotation = (state.tetrimino.rotation + TETRIMINO_ROTATIONS + offsetRotation) % TETRIMINO_ROTATIONS;
+    const tetrimino = TETRIMINO_LIST[state.tetrimino.index][rotation];
+    const { blocks, sizeX, sizeY } = state.matrix;
+
+    for (let y = 0; y < TETRIMINO_SIZE_Y; y++) {
+      for (let x = 0; x < TETRIMINO_SIZE_X; x++) {
+        const xInMatrix = state.tetrimino.x + offsetX + x;
+        const yInMatrix = state.tetrimino.y + offsetY + y;
+
+        if (
+          tetrimino[y * TETRIMINO_SIZE_X + x] && (
+            xInMatrix < 0 || sizeX <= xInMatrix ||
+            yInMatrix < 0 || sizeY <= yInMatrix ||
+            blocks[yInMatrix * sizeX + xInMatrix]
+          )
+        ) {
+          return false;
+        }
+      }
+    }
+
     return true;
-  };
-};
-
-export const isAbleToRotateSelector =
-  (state: IState): boolean => {
-    return true;
-  };
-
-export const isBlockOccupiedByTetriminoSelector = (x: number, y: number) => {
-  return (state: IState): boolean => {
-    const tetrimino = fromConstants.TETRIMINO_LIST[state.tetrimino.index][state.tetrimino.rotation];
-    const xInTetrimino = x - state.tetrimino.x;
-    const yInTetrimino = y - state.tetrimino.y;
-
-    return (
-      xInTetrimino >= 0 && xInTetrimino < fromConstants.TETRIMINO_SIZE_X &&
-      yInTetrimino >= 0 && yInTetrimino < fromConstants.TETRIMINO_SIZE_Y &&
-      tetrimino[yInTetrimino * fromConstants.TETRIMINO_SIZE_X + xInTetrimino]
-    );
   };
 };
 
 export const matrixBlocksToRenderSelector = (state: IState): number[] => {
+  const tetrimino = TETRIMINO_LIST[state.tetrimino.index][state.tetrimino.rotation];
   const { sizeX, sizeY } = state.matrix;
-  const fullMatrix = [...state.matrix.blocks];
+  const resultingBlocks = [...state.matrix.blocks];
 
-  for (let y = 0; y < sizeY; y++) {
-    for (let x = 0; x < sizeX; x++) {
-      if (isBlockOccupiedByTetriminoSelector(x, y)(state)) {
-        fullMatrix[y * sizeX + x] = 1;
+  for (let y = 0; y < TETRIMINO_SIZE_Y; y++) {
+    for (let x = 0; x < TETRIMINO_SIZE_X; x++) {
+      const xInMatrix = state.tetrimino.x + x;
+      const yInMatrix = state.tetrimino.y + y;
+
+      if (
+        0 <= xInMatrix && xInMatrix < sizeX &&
+        0 <= yInMatrix && yInMatrix < sizeY &&
+        tetrimino[y * TETRIMINO_SIZE_X + x]
+      ) {
+        resultingBlocks[yInMatrix * sizeX + xInMatrix] = 1; // TODO here implement tetrimino colors in the future
       }
     }
   }
 
-  return fullMatrix;
+  return resultingBlocks;
 };
