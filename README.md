@@ -12,7 +12,7 @@ was inspired by Redux and was written from scratch in TypeScript.
 
 **NOTE:** This project is still not finished. More details in the TODO section below.
 
-[Play online](https://cdn.rypula.pl/simple-tetris/v1.2.0-rc/api-client-browser.html) - use WSAD keys on Desktop or on-screen buttons on Mobile devices.
+[Play online](https://cdn.rypula.pl/simple-tetris/v1.2.0/api-client-browser.html) - use WSAD keys on Desktop or on-screen buttons on Mobile devices.
 
 [![Api client browser](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)
 
@@ -93,7 +93,7 @@ npm install simple-tetris
 
 If you just want to play the game and don't want to use any API you can simply use build-in Ascii Runner.
 
-[Play online](https://cdn.rypula.pl/simple-tetris/v1.2.0-rc/ascii-runner-browser.html) - use Arrows on Desktop or on-screen buttons on Mobile devices.
+[Play online](https://cdn.rypula.pl/simple-tetris/v1.2.0/ascii-runner-browser.html) - use Arrows on Desktop or on-screen buttons on Mobile devices.
 
 ```html
 <pre id="root"></pre>
@@ -126,7 +126,6 @@ that simplifies basic input and output of the text based games.
 ## Changelog
 
 ### Still TODO
-- implement hard drop and integrate it with collision detection (probably in **1.3.x**)
 - move tetrimino one line down after given interval (probably in **1.4.x**) 
 - when tetrimino will hit the 'ground' trigger new tetrimino (probably in **1.5.x**)
 - detect and remove completely filled lines (probably in **1.6.x**)
@@ -142,9 +141,13 @@ that simplifies basic input and output of the text based games.
 - next piece preview (probably in **2.x.x**)
 - ...
 
-### 1.2.0 - ?? November 2018
-- [todo] collision detection both with borders and other blocks
+### 1.3.0 - ?? ?? 2018
+- [todo] implement hard drop and integrate it with collision detection (probably in **1.3.x**)
+
+### 1.2.0 - 25 November 2018
+- collision detection both with borders and other blocks
 - updates in internal 'Simple Redux' implementation
+- small performance fix in matrixBlocksToRenderSelector
 - tetriminos now rotates clockwise
 - fields in IAsciiRunnerOptions are now optional
 - bugfix related to keyName parameter usage in ascii-runner.ts
