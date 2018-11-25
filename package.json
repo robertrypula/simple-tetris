@@ -1,6 +1,6 @@
 {
   "name": "simple-tetris",
-  "version": "1.2.0",
+  "version": "1.3.0-rc",
   "description": "This package provides API that allows you to easily create clones of the Tetris game. It handles game core - your role is to write the UI. Library was inspired by Redux and was written from scratch in TypeScript.",
   "keywords": [
     "ascii game",
@@ -38,7 +38,7 @@
     "npm-check": "npm-check --skip-unused",
     "npm-check:u": "npm-check --skip-unused -u"
   },
-  "main": "dist/simple-tetris-v1.2.0.js",
+  "main": "dist/simple-tetris-v1.3.0-rc.js",
   "types": "dist/main.d.ts",
   "files": [
     "dist/"

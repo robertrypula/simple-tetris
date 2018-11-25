@@ -12,7 +12,7 @@ was inspired by Redux and was written from scratch in TypeScript.
 
 **NOTE:** This project is still not finished. More details in the TODO section below.
 
-[Play online](https://cdn.rypula.pl/simple-tetris/v1.2.0/api-client-browser.html) - use WSAD keys on Desktop or on-screen buttons on Mobile devices.
+[Play online](https://cdn.rypula.pl/simple-tetris/v1.3.0-rc/api-client-browser.html) - use WSAD keys on Desktop or on-screen buttons on Mobile devices.
 
 [![Api client browser](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)](https://cdn.rypula.pl/simple-tetris/api-client-browser.gif)
 
@@ -93,7 +93,7 @@ npm install simple-tetris
 
 If you just want to play the game and don't want to use any API you can simply use build-in Ascii Runner.
 
-[Play online](https://cdn.rypula.pl/simple-tetris/v1.2.0/ascii-runner-browser.html) - use Arrows on Desktop or on-screen buttons on Mobile devices.
+[Play online](https://cdn.rypula.pl/simple-tetris/v1.3.0-rc/ascii-runner-browser.html) - use Arrows on Desktop or on-screen buttons on Mobile devices.
 
 ```html
 <pre id="root"></pre>
@@ -125,11 +125,10 @@ that simplifies basic input and output of the text based games.
 
 ## Changelog
 
-### Still TODO
-- move tetrimino one line down after given interval (probably in **1.4.x**) 
-- when tetrimino will hit the 'ground' trigger new tetrimino (probably in **1.5.x**)
-- detect and remove completely filled lines (probably in **1.6.x**)
-- detect game over / pause game (probably in **1.7.x**)
+### Still TODO 
+- when tetrimino will hit the 'ground' trigger new tetrimino (probably in **1.4.x**)
+- detect and remove completely filled lines (probably in **1.5.x**)
+- detect game over / pause game (probably in **1.6.x**)
 - ...   
 - (?) remove `terminal-game-io` from typescript definitions of _src/lib/ascii-runner.ts_ file and move this lib back to devDeps (breaking change, probably in **2.0.0**)
 - updates in interfaces like TetriminoRotation, TetriminoType instead of index, etc (breaking change, probably in **2.0.0**)
@@ -142,7 +141,8 @@ that simplifies basic input and output of the text based games.
 - ...
 
 ### 1.3.0 - ?? ?? 2018
-- [todo] implement hard drop and integrate it with collision detection (probably in **1.3.x**)
+- [todo] implement hard drop and integrate it with collision detection
+- [todo] move tetrimino one line down after given interval
 
 ### 1.2.0 - 25 November 2018
 - collision detection both with borders and other blocks
