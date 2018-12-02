@@ -3,15 +3,18 @@
 import * as fromGameLoopActions from './actions/game-loop.actions';
 import * as fromConstants from './constants';
 import { Store } from './store';
+import { getTimeStep } from './utilities';
 
 export const gameLoopIteration: GameLoopIteration = (
   store: Store,
   time: number,
-  keyCode: number
+  keyCode?: number
 ): void => {
+  const timeStep = getTimeStep(time);
+
   switch (keyCode) {
     case fromConstants.KEY_CODE_HARD_DROP:
-      store.dispatch(new fromGameLoopActions.KeyCodeHardDropAction());
+      store.dispatch(new fromGameLoopActions.KeyCodeHardDropAction({ timeStep }));
       break;
     case fromConstants.KEY_CODE_LEFT:
       store.dispatch(new fromGameLoopActions.KeyCodeLeftAction());
@@ -22,6 +25,8 @@ export const gameLoopIteration: GameLoopIteration = (
     case fromConstants.KEY_CODE_ROTATE:
       store.dispatch(new fromGameLoopActions.KeyCodeRotateAction());
       break;
+    default:
+      store.dispatch(new fromGameLoopActions.TimeTickAction({ timeStep }));
   }
 };
 
@@ -39,4 +44,4 @@ It look like older typescript compilers does't understand types expressed as inl
 
 TODO keep an eye on this problem
  */
-export type GameLoopIteration = (store: Store, time: number, keyCode: number) => void;
+export type GameLoopIteration = (store: Store, time: number, keyCode?: number) => void;

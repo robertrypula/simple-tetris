@@ -9,7 +9,8 @@ export {
   KEY_CODE_HARD_DROP,
   KEY_CODE_LEFT,
   KEY_CODE_RIGHT,
-  KEY_CODE_ROTATE
+  KEY_CODE_ROTATE,
+  TIME_STEP_DURATION
 } from './constants';
 
 export {

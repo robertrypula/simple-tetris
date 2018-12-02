@@ -1,7 +1,12 @@
 // Copyright (c) 2018 Robert Rypuła - https://github.com/robertrypula
 
+import { TIME_STEP_DURATION } from './constants';
 import { IState } from './models/state.model';
 import { stateReducer } from './reducers/state.reducer';
+
+export const getTimeStep = (time: number) => {
+  return Math.round(time / TIME_STEP_DURATION);
+};
 
 export const generateBlocks = (sizeX: number, sizeY: number, fillWith: number = 0): number[] => {
   const blocks = [];

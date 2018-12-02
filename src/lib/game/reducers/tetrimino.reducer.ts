@@ -2,16 +2,27 @@
 
 import { ITetrimino } from '..';
 import * as fromTetriminoActions from '../actions/tetrimino.actions';
-import { TETRIMINO_ROTATIONS, TETRIMINO_SIZE_X } from '../constants';
+import { AUTO_MOVE_DOWN_TIME_STEPS, TETRIMINO_ROTATIONS, TETRIMINO_SIZE_X } from '../constants';
 import { initialTetrimino, TetriminoRotation } from '../models/tetrimino.model';
 import { IReducerMap, Reducer } from '../simple-redux';
 
-const initNew = (state: ITetrimino, action: fromTetriminoActions.InitNewAction): ITetrimino => {
+const autoMoveDown = (state: ITetrimino, action: fromTetriminoActions.AutoMoveDownAction): ITetrimino => {
   return {
     ...state,
-    index: action.payload.index,
+    autoMoveDownAt: action.payload.timeStep + AUTO_MOVE_DOWN_TIME_STEPS,
+    y: state.y + 1
+  };
+};
+
+const createNew = (state: ITetrimino, action: fromTetriminoActions.CreateNewAction): ITetrimino => {
+  const { index, matrixSizeX, timeStep } = action.payload;
+
+  return {
+    ...state,
+    autoMoveDownAt: timeStep + AUTO_MOVE_DOWN_TIME_STEPS,
+    index,
     rotation: TetriminoRotation.DEGREE_0,
-    x: Math.round((action.payload.matrixSizeX - TETRIMINO_SIZE_X) / 2),
+    x: Math.round((matrixSizeX - TETRIMINO_SIZE_X) / 2),
     y: 0
   };
 };
@@ -37,6 +48,13 @@ const moveRight = (state: ITetrimino, action: fromTetriminoActions.MoveRightActi
   };
 };
 
+const resetAutoMoveDown = (state: ITetrimino, action: fromTetriminoActions.AutoMoveDownAction): ITetrimino => {
+  return {
+    ...state,
+    autoMoveDownAt: action.payload.timeStep + AUTO_MOVE_DOWN_TIME_STEPS
+  };
+};
+
 const rotate = (state: ITetrimino, action: fromTetriminoActions.RotateAction): ITetrimino => {
   return {
     ...state,
@@ -49,11 +67,13 @@ export const tetriminoReducer: Reducer<ITetrimino> = (
   action: fromTetriminoActions.TetriminoActionsUnion
 ): ITetrimino => {
   const reducerMap: IReducerMap<ITetrimino> = {
-    [fromTetriminoActions.INIT_NEW]: initNew,
-    [fromTetriminoActions.MOVE_DOWN]: moveDown,
-    [fromTetriminoActions.MOVE_LEFT]: moveLeft,
-    [fromTetriminoActions.MOVE_RIGHT]: moveRight,
-    [fromTetriminoActions.ROTATE]: rotate
+    [fromTetriminoActions.AUTO_MOVE_DOWN_ACTION]: autoMoveDown,
+    [fromTetriminoActions.CREATE_NEW_ACTION]: createNew,
+    [fromTetriminoActions.MOVE_DOWN_ACTION]: moveDown,
+    [fromTetriminoActions.MOVE_LEFT_ACTION]: moveLeft,
+    [fromTetriminoActions.MOVE_RIGHT_ACTION]: moveRight,
+    [fromTetriminoActions.RESET_AUTO_MOVE_DOWN_ACTION]: resetAutoMoveDown,
+    [fromTetriminoActions.ROTATE_ACTION]: rotate
   };
   const reducer = reducerMap[action.type];
 

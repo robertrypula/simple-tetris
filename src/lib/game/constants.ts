@@ -2,13 +2,28 @@
 
 import { TetriminoList } from './models/tetrimino.model';
 
+export const DEFAULT_CREATE_STORE_TIME = 0;
 export const DEFAULT_MATRIX_SIZE_X = 10;
 export const DEFAULT_MATRIX_SIZE_Y = 20;
 
-export const KEY_CODE_HARD_DROP = 0;     // TODO move all KeyCodes to 'Key' Enum (v2.0.0)
+/*
+enum Key {
+  HardDrop = 'HardDrop',
+  Left = 'Left',
+  Right = 'Right',
+  Rotate = 'Rotate',
+  SoftDrop = 'SoftDrop'
+}
+*/
+
+export const TIME_STEP_DURATION = 40;
+
+export const KEY_CODE_HARD_DROP = 0;     // TODO move all KeyCodes to 'Key' Enum (in >= v2.0.0)
 export const KEY_CODE_LEFT = 1;
 export const KEY_CODE_RIGHT = 2;
 export const KEY_CODE_ROTATE = 3;
+
+export const AUTO_MOVE_DOWN_TIME_STEPS = 20; // TODO in >= v2.0.0 here we will have different speeds depending on level
 
 export const TETRIMINO_ROTATIONS = 4;
 export const TETRIMINO_SIZE_X = 4;

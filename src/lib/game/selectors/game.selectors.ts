@@ -19,7 +19,7 @@ export const isNotCollidingSelector = (
         const yInMatrix = state.tetrimino.y + offsetY + y;
 
         if (
-          tetrimino[y * TETRIMINO_SIZE_X + x] && (
+          tetrimino[y * TETRIMINO_SIZE_X + x] && ( // TODO move to helper function with name that will explain the logic
             xInMatrix < 0 || sizeX <= xInMatrix ||
             yInMatrix < 0 || sizeY <= yInMatrix ||
             blocks[yInMatrix * sizeX + xInMatrix]
@@ -45,7 +45,7 @@ export const matrixBlocksToRenderSelector = (state: IState): number[] => {
       const yInMatrix = state.tetrimino.y + y;
 
       if (
-        0 <= xInMatrix && xInMatrix < sizeX &&
+        0 <= xInMatrix && xInMatrix < sizeX &&   // TODO move to helper function with name that will explain the logic
         0 <= yInMatrix && yInMatrix < sizeY &&
         tetrimino[y * TETRIMINO_SIZE_X + x]
       ) {

@@ -32,16 +32,18 @@ export class AsciiRunner {
   protected initializeTerminalGameIo(options: IAsciiRunnerOptions): void {
     this.terminalGameIo = createTerminalGameIo({
       domElementId: options && options.domElementId ? options.domElementId : null,
-      fps: 0.5,
+      fps: 1000 / fromGame.TIME_STEP_DURATION,
       frameHandler: this.frameHandler.bind(this),
       keypressHandler: this.keypressHandler.bind(this)
     });
   }
 
   protected frameHandler(instance: ITerminalGameIo): void {
+    fromGame.gameLoopIteration(this.store, this.terminalGameIo.getTime() * 1000);
+
     const { data, width, height } = render(this.store.getState());
 
-    instance.drawFrame(data, width, height);
+    this.terminalGameIo.drawFrame(data, width, height);
   }
 
   protected keypressHandler(instance: ITerminalGameIo, keyName: KeyName): void {
@@ -61,11 +63,11 @@ export class AsciiRunner {
         keyCode = fromGame.KEY_CODE_HARD_DROP;
         break;
       case Key.Escape:
-        instance.exit();
+        this.terminalGameIo.exit();
         break;
     }
 
-    fromGame.gameLoopIteration(this.store, this.terminalGameIo.getTime(), keyCode);
+    fromGame.gameLoopIteration(this.store, this.terminalGameIo.getTime() * 1000, keyCode);
 
     this.frameHandler(instance);
   }

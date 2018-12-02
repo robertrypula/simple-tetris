@@ -40,6 +40,9 @@ describe('Utilities', () => {
       );
 
       expect(state).toEqual({
+        game: {
+          startedAt: null
+        },
         matrix: {
           blocks: [
             0, 0, 0, 0, 0,
@@ -51,6 +54,7 @@ describe('Utilities', () => {
           sizeY: 4
         },
         tetrimino: {
+          autoMoveDownAt: null,
           index: TetriminoIndex.J,
           rotation: TetriminoRotation.DEGREE_90_CW,
           x: 3,

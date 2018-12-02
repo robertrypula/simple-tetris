@@ -78,11 +78,11 @@
   </div>
 
   <script>
-    var previousBlocks;
+    var blocksFromPreviousFrame;
     var store;
 
     function handleEvent(keyCode) {
-      SimpleTetris.gameLoopIteration(store, 0.0, keyCode);
+      SimpleTetris.gameLoopIteration(store, new Date().getTime(), keyCode);
       requestAnimationFrame(render);
     }
 
@@ -92,14 +92,14 @@
       var html = '';
       var i;
 
-      if (!previousBlocks) {
+      if (!blocksFromPreviousFrame) {
         for (i = 0; i < blocks.length; i++) {
           html += blocks[i] ? '<div class="filled"></div>' : '<div></div>';
         }
         document.getElementById('game-root').innerHTML = html;
       } else {
         for (i = 0; i < blocks.length; i++) {
-          if (blocks[i] !== previousBlocks[i]) {
+          if (blocks[i] !== blocksFromPreviousFrame[i]) {
             domElement = document.querySelector('#game-root > div:nth-child(' + (i + 1) + ')');
             blocks[i]
               ? domElement.classList.add('filled')
@@ -107,7 +107,7 @@
           }
         }
       }
-      previousBlocks = blocks;
+      blocksFromPreviousFrame = blocks;
     }
 
     function keydownHandler(event) {
@@ -120,12 +120,14 @@
     }
 
     function run() {
-      store = new SimpleTetris.createStore();
+      store = new SimpleTetris.createStore({ time: new Date().getTime() });
+      setInterval(handleEvent, SimpleTetris.TIME_STEP_DURATION);
       document.addEventListener('keydown', keydownHandler);
       requestAnimationFrame(render);
       document.querySelector('.mobile-device-buttons').classList.remove('hidden');
     }
   </script>
-  <script src="https://unpkg.com/simple-tetris"></script>
+  <script src="../../dist/simple-tetris-v1.3.0-rc.js"></script>
+  <!--<script src="https://unpkg.com/simple-tetris"></script>-->
 </body>
 </html>

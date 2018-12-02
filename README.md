@@ -126,9 +126,10 @@ that simplifies basic input and output of the text based games.
 ## Changelog
 
 ### Still TODO 
-- when tetrimino will hit the 'ground' trigger new tetrimino (probably in **1.4.x**)
+- when tetrimino will hit the 'ground' attach it to the matrix (probably in **1.4.x**)
+- add delay after hard drop before creating new tetrimino (probably in **1.4.x**)
 - detect and remove completely filled lines (probably in **1.5.x**)
-- detect game over / pause game (probably in **1.6.x**)
+- detect game over, pause game button, new game button (probably in **1.6.x**)
 - ...   
 - (?) remove `terminal-game-io` from typescript definitions of _src/lib/ascii-runner.ts_ file and move this lib back to devDeps (breaking change, probably in **2.0.0**)
 - updates in interfaces like TetriminoRotation, TetriminoType instead of index, etc (breaking change, probably in **2.0.0**)
@@ -141,8 +142,8 @@ that simplifies basic input and output of the text based games.
 - ...
 
 ### 1.3.0 - ?? ?? 2018
-- [todo] implement hard drop and integrate it with collision detection
-- [todo] move tetrimino one line down after given interval
+- move tetrimino one line down after given interval but still without attaching it to other blocks after reaching the 'ground' 
+- implement hard drop and integrate it with collision detection
 
 ### 1.2.0 - 25 November 2018
 - collision detection both with borders and other blocks

@@ -28,6 +28,7 @@ export enum TetriminoRotation { // TODO add to ITetrimino interface (v2.0.0)
 }
 
 export interface ITetrimino {
+  autoMoveDownAt: number;
   index: number;
   rotation: number;
   x: number;
@@ -35,6 +36,7 @@ export interface ITetrimino {
 }
 
 export const initialTetrimino: ITetrimino = {
+  autoMoveDownAt: null,
   index: null,
   rotation: null,
   x: null,
