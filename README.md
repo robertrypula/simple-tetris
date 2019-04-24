@@ -91,7 +91,7 @@ npm install simple-tetris
 
 ## Ascii Runner alternative
 
-If you just want to play the game and don't want to use any API you can simply use build-in Ascii Runner.
+If you just want to play the game and don't want to use any API you can simply use built-in Ascii Runner.
 
 [Play online](https://cdn.rypula.pl/simple-tetris/v1.3.0-rc/ascii-runner-browser.html) - use Arrows on Desktop or on-screen buttons on Mobile devices.
 
