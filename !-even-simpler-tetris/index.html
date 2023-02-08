@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Tetris for microcontrollers</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script>
+            // https://github.com/robertrypula/simple-tetris
+            // Robert Rypuła
+            
+            // This tetris version was made for educational purposes
+            // The game code (except simulation wrapper) has no JS syntactic sugar.
+            // There is no calls to external or even build in libraries (like JS's Math).
+            // You can easily port it to any other language like C.
+        
+            /* TODO:
+                + CSS for pixels
+                + move switches to function
+                - CSS for buttons
+                - rotation
+                - random generator
+             */
+
+            const $ports = { input: 0, output: [] };
+
+            // ---------------------------------------------------------------------------------------------------------
+
+            const INPUT_BIT_LEFT = 1 << 0;
+            const INPUT_BIT_ROTATE = 1 << 1;
+            const INPUT_BIT_NEW_GAME = 1 << 2;
+            const INPUT_BIT_DOWN = 1 << 3;
+            const INPUT_BIT_RIGHT = 1 << 4;
+            const SIZE_X = 8;
+            const SIZE_Y = 16;
+
+            let gameOver = 1;
+            let tActiveShape = 0;
+            let tXCurrent = 0;
+            let tYCurrent = 0;
+            let tRCurrent = 0;
+            let tXNext = 0;
+            let tYNext = 0;
+            let tRNext = 0;
+            let inputBits = 0;
+            let inputBitsRaw = 0;
+            let inputBitsRawPrevious = 0;
+            let repeatCounter = 0;
+            let loopCounter = 0;
+            let autoDownCounter = 0;
+            let autoDownThreshold = 0;
+            let waitForInputBitsChange = 0;
+
+            const getPortInput = () => $ports.input;
+            const getPortOutput = (i) => $ports.output[i];
+            const setPortOutput = (i, value) => ($ports.output[i] = value);
+
+            const getInputBitsRaw = () => {
+                return getPortInput();
+            };
+
+            const getPixel = (x, y) => {
+                if (x < 0 || y < 0 || x >= SIZE_X || y >= SIZE_Y) {
+                    return 1;
+                }
+
+                return getPortOutput(y) & (1 << (SIZE_X - 1 - x)) ? 1 : 0;
+            };
+
+            const setPixel = (x, y, bit) => {
+                if (x < 0 || y < 0 || x >= SIZE_X || y >= SIZE_Y) {
+                    return;
+                }
+
+                setPortOutput(
+                    y,
+                    bit ? getPortOutput(y) | (1 << (SIZE_X - 1 - x)) : getPortOutput(y) & ~(1 << (SIZE_X - 1 - x))
+                );
+            };
+
+            const getTetrominoLine = (lineIndex) => {
+                // 'I' shape
+                if (lineIndex === 0x00) return 0b0000010000000010;
+                if (lineIndex === 0x01) return 0b0000010011110010;
+                if (lineIndex === 0x02) return 0b1111010000000010;
+                if (lineIndex === 0x03) return 0b0000010000000010;
+
+                // 'J' shape
+                if (lineIndex === 0x10) return 0b0000010000000110;
+                if (lineIndex === 0x11) return 0b1110010010000100;
+                if (lineIndex === 0x12) return 0b0010110011100100;
+                if (lineIndex === 0x13) return 0b0000000000000000;
+
+                // 'L' shape
+                if (lineIndex === 0x20) return 0b0000010000000110;
+                if (lineIndex === 0x21) return 0b0010010011100010;
+                if (lineIndex === 0x22) return 0b1110011010000010;
+                if (lineIndex === 0x23) return 0b0000000000000000;
+
+                // 'T' shape
+                if (lineIndex === 0x30) return 0b0000001000001000;
+                if (lineIndex === 0x31) return 0b1110011001001100;
+                if (lineIndex === 0x32) return 0b0100001011101000;
+                if (lineIndex === 0x33) return 0b0000000000000000;
+
+                // 'O' shape
+                if (lineIndex === 0x40) return 0b0000000000000000;
+                if (lineIndex === 0x41) return 0b1100110011001100;
+                if (lineIndex === 0x42) return 0b1100110011001100;
+                if (lineIndex === 0x43) return 0b0000000000000000;
+
+                // 'S' shape
+                if (lineIndex === 0x50) return 0b0000100001101000;
+                if (lineIndex === 0x51) return 0b0110110011001100;
+                if (lineIndex === 0x52) return 0b1100010000000100;
+                if (lineIndex === 0x53) return 0b0000000000000000;
+
+                // 'Z' shape
+                if (lineIndex === 0x60) return 0b0000010011000100;
+                if (lineIndex === 0x61) return 0b1100110001101100;
+                if (lineIndex === 0x62) return 0b0110100000001000;
+                if (lineIndex === 0x63) return 0b0000000000000000;
+
+                return 0;
+            };
+
+            const getTetrominoPixel = (x, y, rotation) => {
+                if (x < 0 || y < 0 || x >= 4 || y >= 4) {
+                    return 0;
+                }
+
+                return getTetrominoLine((tActiveShape << 4) | y) & (1 << (15 - (x + (rotation << 2)))) ? 1 : 0;
+            };
+
+            const setCurrentTetrominoPixels = (bit) => {
+                for (let y = 0; y < 4; y++) {
+                    for (let x = 0; x < 4; x++) {
+                        if (getTetrominoPixel(x, y, tRCurrent)) {
+                            setPixel(tXCurrent + x, tYCurrent + y, bit);
+                        }
+                    }
+                }
+            };
+
+            const isNextTetrominoColliding = () => {
+                for (let y = 0; y < 4; y++) {
+                    for (let x = 0; x < 4; x++) {
+                        if (getTetrominoPixel(x, y, tRNext) && getPixel(tXNext + x, tYNext + y)) {
+                            return 1;
+                        }
+                    }
+                }
+
+                return 0;
+            };
+
+            const newCurrentTetromino = () => {
+                tXCurrent = 2;
+                tYCurrent = 0;
+                tRCurrent = 0;
+                tActiveShape = loopCounter % 7; // TODO get rid of division
+                waitForInputBitsChange = 1;
+            };
+
+            const setNextTetrominoToCurrent = () => {
+                tXNext = tXCurrent;
+                tYNext = tYCurrent;
+                tRNext = tRCurrent;
+            };
+
+            const setCurrentTetrominoToNext = () => {
+                tXCurrent = tXNext;
+                tYCurrent = tYNext;
+                tRCurrent = tRNext;
+            };
+
+            const startNewGame = () => {
+                for (let y = 0; y < SIZE_Y; y++) {
+                    for (let x = 0; x < SIZE_X; x++) {
+                        setPixel(x, y, 0);
+                    }
+                }
+
+                newCurrentTetromino();
+                setNextTetrominoToCurrent();
+
+                gameOver = 0;
+                loopCounter = 0;
+                autoDownCounter = 0;
+                autoDownThreshold = 60;
+                waitForInputBitsChange = 0;
+            };
+
+            const findAndRemoveFullLines = () => {
+                let fullLineFound;
+
+                for (let y = SIZE_Y - 1; y >= 0; y--) {
+                    fullLineFound = 1;
+
+                    for (let x = 0; x < SIZE_X; x++) {
+                        if (!getPixel(x, y)) {
+                            fullLineFound = 0;
+                        }
+                    }
+
+                    if (fullLineFound) {
+                        for (let yy = y; yy >= 1; yy--) {
+                            for (let x = 0; x < SIZE_X; x++) {
+                                setPixel(x, yy, getPixel(x, yy - 1));
+                            }
+                        }
+                        for (let x = 0; x < SIZE_X; x++) {
+                            setPixel(x, 0, 0);
+                        }
+
+                        y++; // if line disappears you have to check the same line again as pixels fell off one level "down"
+                        autoDownThreshold--;
+                    }
+                }
+            };
+
+            const getRepeatCounter = () => {
+                // there should be some repeat delay before key will repeat at constant rate so repeatCounter needs to 'lag' a bit
+                if (inputBitsRaw === INPUT_BIT_ROTATE) return 1;
+                if (inputBitsRaw === INPUT_BIT_RIGHT) return -9;
+                if (inputBitsRaw === INPUT_BIT_DOWN) return 1;
+                if (inputBitsRaw === INPUT_BIT_LEFT) return -9;
+                if (inputBitsRaw === INPUT_BIT_NEW_GAME) return 1;
+
+                return 0;
+            };
+
+            const getRepeatThreshold = () => {
+                // repeat the key at constant rate
+                if (inputBitsRaw === INPUT_BIT_ROTATE) return 30;
+                if (inputBitsRaw === INPUT_BIT_RIGHT) return 2;
+                if (inputBitsRaw === INPUT_BIT_DOWN) return 2;
+                if (inputBitsRaw === INPUT_BIT_LEFT) return 2;
+                if (inputBitsRaw === INPUT_BIT_NEW_GAME) return 30;
+
+                return 0;
+            };
+
+            const setProperInputBitsStateFromUserInput = () => {
+                inputBitsRaw = getInputBitsRaw();
+
+                if (inputBitsRawPrevious !== inputBitsRaw) {
+                    inputBits = inputBitsRaw;
+                    repeatCounter = getRepeatCounter();
+                    waitForInputBitsChange = 0;
+                } else {
+                    inputBits = 0;
+
+                    if (inputBitsRaw && !waitForInputBitsChange) {
+                        if (repeatCounter >= getRepeatThreshold()) {
+                            inputBits = inputBitsRaw;
+                            repeatCounter = 0;
+                        }
+
+                        repeatCounter++;
+                    }
+                }
+
+                inputBitsRawPrevious = inputBitsRaw;
+            };
+
+            const processInputBits = () => {
+                setNextTetrominoToCurrent();
+
+                if (inputBits === INPUT_BIT_ROTATE) {
+                    tRNext = (tRCurrent + 1) & 0x3;
+                } else if (inputBits === INPUT_BIT_RIGHT) {
+                    tXNext = tXCurrent + 1;
+                } else if (inputBits === INPUT_BIT_DOWN) {
+                    tYNext = tYCurrent + 1;
+                } else if (inputBits === INPUT_BIT_LEFT) {
+                    tXNext = tXCurrent - 1;
+                } else if (inputBits === INPUT_BIT_NEW_GAME) {
+                    startNewGame();
+                }
+
+                if (gameOver || !inputBits) {
+                    return;
+                }
+
+                setCurrentTetrominoPixels(0); // remove current Tetromino from the board
+
+                if (isNextTetrominoColliding()) {
+                    setCurrentTetrominoPixels(1);
+
+                    if (inputBits === INPUT_BIT_DOWN) {
+                        findAndRemoveFullLines();
+                        newCurrentTetromino();
+                        setNextTetrominoToCurrent();
+                        gameOver = isNextTetrominoColliding();
+                        setCurrentTetrominoPixels(1);
+                    }
+                } else {
+                    setCurrentTetrominoToNext(); // next becomes current and then we can draw it
+                    setCurrentTetrominoPixels(1);
+                }
+            };
+
+            const loop60Hz = () => {
+                setProperInputBitsStateFromUserInput();
+                processInputBits();
+
+                if (autoDownCounter >= autoDownThreshold) {
+                    autoDownCounter = 0;
+
+                    if (inputBits !== INPUT_BIT_DOWN) {
+                        inputBits = INPUT_BIT_DOWN;
+                        processInputBits();
+                    }
+                }
+
+                autoDownCounter++;
+                loopCounter++;
+            };
+
+            // ---------------------------------------------------------------------------------------------------------
+
+            class SimulationWrapper {
+                inputKeys;
+                outputSizeX;
+                outputSizeY;
+                ports;
+                loop;
+                frameCount = 0;
+
+                constructor(inputKeys, outputSizeX, outputSizeY, ports, loop) {
+                    this.inputKeys = inputKeys;
+                    this.outputSizeX = outputSizeX;
+                    this.outputSizeY = outputSizeY;
+                    this.ports = ports;
+                    this.loop = loop;
+                }
+
+                requestAnimationFrameHandler() {
+                    this.loop();
+                    this.renderOutput();
+                    this.renderInput();
+                    this.frameCount++;
+
+                    requestAnimationFrame(this.requestAnimationFrameHandler.bind(this));
+                }
+
+                renderOutput() {
+                    const outputPixelElements = document.querySelectorAll('#output div');
+
+                    for (let y = 0; y < this.outputSizeY; y++) {
+                        for (let x = 0; x < this.outputSizeX; x++) {
+                            const bit = this.ports.output[y] & (1 << (this.outputSizeX - 1 - x)) ? 1 : 0;
+
+                            outputPixelElements[y * this.outputSizeX + x].style.opacity = bit ? '1' : '0.05';
+                        }
+                    }
+                }
+
+                renderInput() {
+                    Object.keys(this.inputKeys).forEach((code, index) => {
+                        const isHigh = (this.ports.input >>> index) & 1;
+                        const classList = document.querySelector(`#input div[code=${code}]`).classList;
+
+                        isHigh ? classList.add('pressed') : classList.remove('pressed');
+                    });
+                }
+
+                bitSet(value, position) {
+                    return (1 << position) | value;
+                }
+                bitClear(value, position) {
+                    return ~(1 << position) & value;
+                }
+
+                inputHandler(event, code, isUp) {
+                    const position = Object.keys(this.inputKeys).indexOf(code);
+
+                    if (position !== -1) {
+                        event.preventDefault();
+                        this.ports.input = isUp
+                            ? this.bitClear(this.ports.input, position)
+                            : this.bitSet(this.ports.input, position);
+                    }
+                }
+
+                createHTMLElementsOutput() {
+                    const outputElement = document.getElementById('output');
+                    let divElement;
+
+                    for (let i = 0; i < this.outputSizeX * this.outputSizeY; i++) {
+                        divElement = document.createElement('div');
+                        divElement.style.width = `${100 / this.outputSizeX}%`;
+                        divElement.style.paddingBottom = `${100 / this.outputSizeX}%`;
+                        outputElement.append(divElement);
+                    }
+
+                    divElement = document.createElement('div');
+                    divElement.classList.add('clearfix');
+                    outputElement.append(divElement);
+
+                    this.ports.output = [];
+                    for (let y = 0; y < this.outputSizeY; y++) {
+                        this.ports.output.push(0);
+                    }
+                }
+
+                createHTMLElementsInput() {
+                    const inputElement = document.getElementById('input');
+
+                    Object.keys(this.inputKeys).forEach((code) => {
+                        const inputKeyElement = document.createElement('div');
+
+                        inputKeyElement.setAttribute('code', code);
+                        inputKeyElement.innerHTML = this.inputKeys[code];
+
+                        inputElement.append(inputKeyElement);
+                    });
+                }
+
+                registerEvents() {
+                    document.addEventListener('keydown', (event) => this.inputHandler(event, event.code, false));
+                    document.addEventListener('keyup', (event) => this.inputHandler(event, event.code, true));
+
+                    document.querySelectorAll('#input div').forEach((element) => {
+                        const code = element.getAttribute('code');
+
+                        element.addEventListener('mousedown', (event) => this.inputHandler(event, code, false));
+                        element.addEventListener('mouseup', (event) => this.inputHandler(event, code, true));
+                        element.addEventListener('touchstart', (event) => this.inputHandler(event, code, false));
+                        element.addEventListener('touchend', (event) => this.inputHandler(event, code, true));
+                    });
+                }
+
+                main() {
+                    this.createHTMLElementsOutput();
+                    this.createHTMLElementsInput();
+                    this.registerEvents();
+
+                    requestAnimationFrame(this.requestAnimationFrameHandler.bind(this));
+                }
+            }
+
+            const inputKeys = { ArrowLeft: '<', ArrowUp: 'R', Enter: 'NEW', ArrowDown: `\\/`, ArrowRight: '>' };
+            const simulationWrapper = new SimulationWrapper(inputKeys, SIZE_X, SIZE_Y, $ports, loop60Hz);
+        </script>
+
+        <style>
+            html {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                margin: 0;
+                padding: 16px 0 0 0;
+                background-color: #758c7a;
+                color: #061006;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            #output {
+                outline: 3px solid #061006;
+                width: 304px;
+                margin: 0 auto;
+                position: relative;
+            }
+
+            #output > div:not(.clearfix) {
+                position: relative;
+                float: left;
+            }
+
+            #output > div:not(.clearfix):before,
+            #output > div:not(.clearfix):after {
+                position: absolute;
+                content: ' ';
+            }
+
+            #output > div:not(.clearfix):before {
+                border: 5px solid #061006;
+                bottom: 1px;
+                left: 1px;
+                right: 1px;
+                top: 1px;
+            }
+
+            #output > div:not(.clearfix):after {
+                background-color: #061006;
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                top: 10px;
+            }
+
+            .clearfix {
+                height: 0;
+                overflow: hidden;
+                clear: both;
+            }
+
+            #input {
+                padding-top: 16px;
+                padding-bottom: 16px;
+                font-size: 0;
+                text-align: center;
+            }
+
+            #input > div {
+                box-sizing: border-box;
+                width: 40px;
+                height: 40px;
+                margin: 0 4px 4px 0;
+                background-color: #06100605;
+                font-size: 13px;
+                font-weight: bold;
+                line-height: 1em;
+                padding-top: 12px;
+                display: inline-block;
+
+                border: 1px solid #758c7a;
+                outline: 1px solid #061006;
+
+                text-align: center;
+                cursor: pointer;
+            }
+
+            #input > div.pressed {
+                background-color: #061006;
+                color: #758c7a;
+            }
+            
+            footer {
+                text-align: center;
+            }
+            
+            footer a {
+                color: black;
+            }
+        </style>
+    </head>
+
+    <body onload="simulationWrapper.main()">
+        <div id="output"></div>
+        <div id="input"></div>
+        
+        <footer>
+          <a href="https://github.com/robertrypula/simple-tetris" target="_blank">https://github.com/robertrypula/simple-tetris</a>
+        </footer>
+    </body>
+</html>
