@@ -14,8 +14,8 @@ Few highlights:
 - this Tetris game was made for educational purposes
 - the game code (except simulation wrapper) has no JS syntactic sugar
 - there are no calls to external or even build in libraries (like JS's Math)
-- you can easily port it to any other language like C just implement your own INPUT and OUTPUT ports handling and you are good to go
-- yes, that's the only file you need (linked above) from this repo to have working Tetris
+- you can easily port it to any other language like C, just implement your own INPUT and OUTPUT ports handling and you are good to go
+- yes, that's the only file you need (linked above) from this repo to have a working Tetris
 
 If you will find the code usefull please Star the project on GitHub - this really gives me a kick for making more stuff like that. Thanks in advance! :)
 
