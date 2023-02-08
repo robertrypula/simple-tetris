@@ -2,9 +2,10 @@
 
 # Update from 2023.02.08 - standalone WORKING even simpler tetris
 
-Initial project (Redux-like & TypeScript) started in 2018 and it was never finished as I lost interest in it. In the meantime I wanted to create yet another Tetris version that is totally platform independent & programming language independent. Somewhere during 2022 this finally happen but I never published it... until now! Below you will find link to fully working game:
+Initial project (Redux-like & TypeScript) started in 2018 and it was never finished as I lost interest in it. In the meantime I wanted to create yet another Tetris version that is totally platform independent & programming language independent. Somewhere in 2022 this finally happen but I never published it... until now! Below you will find link to fully working game:
 
 [Play online](https://cdn.rypula.pl/simple-tetris/v1.3.0-rc/%21-even-simpler-tetris/)
+[Source Code](https://github.com/robertrypula/simple-tetris/blob/master/!-even-simpler-tetris/index.html)
 
 Check the source code of that HTML. Everything is inside one file.
 
@@ -14,6 +15,8 @@ Few highlights:
 - there are no calls to external or even build in libraries (like JS's Math)
 - you can easily port it to any other language like C just implement your own INPUT and OUTPUT ports handling and you are good to go
 - yes, that's the only file you need (linked above) from this repo to have working Tetris
+
+If you will find the code usefull please Star the project on GitHub - this really gives me a kick for making more stuff like that. Thanks in advance! :)
 
 Below you will find old docs for the Redux-like & TypeScript version that was never finished:
 
